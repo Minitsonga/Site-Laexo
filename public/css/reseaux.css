@@ -1,0 +1,36 @@
+body {
+    color: white;
+    background: rgb(1, 0, 40);
+    background: -moz-linear-gradient(0deg, rgba(1, 0, 40, 1) 0%, rgba(0, 61, 115, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(1, 0, 40, 1) 0%, rgba(0, 61, 115, 1) 100%);
+    background: linear-gradient(0deg, rgba(1, 0, 40, 1) 0%, rgba(0, 61, 115, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#010028", endColorstr="#003d73", GradientType=1);
+}
+
+.profile-picture {
+    border-radius: 50%;
+    margin-top: 50px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links li {
+    border-radius: 3px;
+    box-shadow: 5px 5px 1px rgb(0 0 0 / 30%);
+}
+
+.links i {
+    margin-right: 7px;
+}
+
+li {
+    margin: 15px 0;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}

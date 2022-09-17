@@ -1,0 +1,89 @@
+<html lang="fr">
+
+<head>
+  <%- include('../templates/headerGlobal'); %>
+    <title>Stream - Laexo.tv</title>
+</head>
+
+<body class="bg-dark-laexo" onload="console.clear();">
+  <%- include('../templates/svgIcons'); %>
+    <%- include('../templates/navbar'); %>
+
+      <div class="mx-auto container my-5 mt-1">
+        <div class="d-flex flex-wrap justify-between" style="height: 67%;">
+          <div class="pt-2" id="stream-holder" style="width: 76%;">
+            <div id="stream"></div>
+          </div>
+          <div class="pt-2" id="chat-holder" style="width: 22%;">
+            <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/laexo/chat?parent=localhost&darkpopout"
+              height="100%" width="100%">
+            </iframe>
+          </div>
+          <div class="d-flex mb-3 mt-2" id="stream-buttons" style="width: 76%;">
+            <div class="p-2 flex-fill"></div>
+            <div class="p-2">
+              <button onclick="New_Window('https://www.twitch.tv/laexo', '1200', '800');"
+                class="btn btn-light follow-btn items-center">
+                <i class='bx bxs-heart me-2'></i>Suivre
+              </button>
+
+            </div>
+
+            <div class="p-2">
+
+              <button onclick="New_Window('https://www.twitch.tv/subs/laexo', '600', '800');"
+                class="btn btn-light sub-btn items-center">
+                <i class='bx bxs-star me-2'></i>S'abonner
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <%- include('../templates/footer'); %>
+
+        <!-- Load the Twitch embed JavaScript file -->
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+        <script type="text/javascript">
+          var embed = new Twitch.Embed("stream", {
+            width: "100%",
+            height: "100%",
+            channel: "laexo",
+            layout: "video"
+          });
+
+
+          if (window.innerWidth <= 996) {
+            document.getElementById("chat-holder").style.visibility = "hidden";
+            document.getElementById("chat-holder").style.position = "absolute";
+
+            document.getElementById("stream-holder").style.width = "100%";
+            document.getElementById("stream-buttons").style.width = "100%";
+          } else if (window.innerWidth <= 768) {
+            document.getElementById("stream-buttons").style.width = "76%";
+          } else {
+            document.getElementById("chat-holder").style.visibility = "visible";
+            document.getElementById("chat-holder").style.position = "relative";
+
+            document.getElementById("stream-holder").style.width = "76%";
+            document.getElementById("stream-buttons").style.width = "76%";
+          }
+
+          if (window.innerWidth <= 768) {
+            document.getElementById("stream-buttons").style.width = "76%";
+          }
+
+        </script>
+        <script>
+          function New_Window(url, width, height) {
+            window.open(url, "", `width=${width}, height=${height}`);
+          }
+        </script>
+</body>
+
+
+</html>

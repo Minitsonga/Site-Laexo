@@ -1,0 +1,44 @@
+.container{
+    text-align: center;
+
+}
+
+.title{
+    font-size: 5vw;
+}
+
+.date{
+    font-size: 2.5vw;
+}
+
+.footer{
+position: fixed;
+
+}
+
+.m-d{
+    font-size: large;
+}
+
+@media (max-width:940px){
+    .m-d{
+        font-size: medium;
+    }
+    
+}
+
+@media (max-width:500px){
+    .title{
+        font-size: 18px;
+    }
+    
+    .date{
+        font-size: 15px;
+    }
+    
+    .m-d{
+        font-size: 11px;
+    }
+    
+}
+

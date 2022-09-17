@@ -1,0 +1,16 @@
+<script>
+    var access_token = document.location.hash.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
+    let data = { access_token };
+    
+    fetch("redirect", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then((res) => {
+        console.log("done");
+        location.href = "/stream";
+    }); 
+</script>

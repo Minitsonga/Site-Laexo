@@ -1,0 +1,62 @@
+<html lang="fr">
+
+<head>
+  <%- include('../templates/headerGlobal'); %>
+    <link rel="stylesheet" href="css/leaderboard.css" />
+
+    <title>Classement - Laexo.tv</title>
+</head>
+
+<body class="bg-dark-laexo">
+  <%- include('../templates/svgIcons'); %>
+    <%- include('../templates/navbar'); %>
+
+
+      <div class="center">
+        <div class="choice-container">
+          <div class="w3-bar">
+            <a class="cat-link active" id="uptime" onclick="selectCat('uptime')">Visionnage</a>
+            <a class="cat-link" id="message" onclick="selectCat('message')">Messages</a>
+            <a class="cat-link" id="rank" onclick="selectCat('rank')">Expérience</a>
+          </div>
+
+          <div class="button-group" data-left="week">
+            <button onClick="buttonClick('week')">Semaine</button>
+            <button onClick="buttonClick('month')">Mois</button>
+            <button onClick="buttonClick('global')">Total</button>
+          </div>
+          <div class="list mt-4">
+          </div>
+        </div>
+
+
+
+
+        <%- include('../templates/footer'); %>
+
+          <script>
+            function New_Window(url, width, height) {
+              window.open(url, "", `width=${width}, height=${height}`);
+            }
+
+            const buttonGroup = document.querySelector('.button-group');
+
+            const setButtonLeftAttr = (value) => {
+              buttonGroup.dataset.left = value;
+            };
+            const buttonClick = (value) => {
+              buttonGroup.dataset.left = value;
+              changePeriod();
+            };
+
+            var listUser_img = JSON.parse(`<%- JSON.stringify(listUserPP)%>`);
+            var leaderboard = JSON.parse(`<%- JSON.stringify(leaderboard)%>`);
+
+          
+          </script>
+
+          <script src="js/leaderboardManager.js"></script>
+</body>
+
+
+</html>
