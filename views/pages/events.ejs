@@ -1,36 +1,39 @@
 <html lang="fr">
 
 <head>
-    <%- include('../templates/headerGlobal'); %>
-        <link rel="stylesheet" href="/css/events.css">
-        <title>Evenements - Laexo.tv</title>
+  <%- include('../templates/headerGlobal'); %>
+    <link rel="stylesheet" href="/css/events.css">
+    <title>Evenements - Laexo.tv</title>
 </head>
 
 <body class="bg-dark-laexo" onload="console.clear();">
-    <%- include('../templates/svgIcons'); %>
-        <%- include('../templates/navbar'); %>
+  <%- include('../templates/svgIcons'); %>
+    <%- include('../templates/navbar'); %>
 
-            <div class="mx-auto container my-5 mt-1">
-                <div class="title">LAEXO CUP 2v2</div>
-                <div class="date">23 Septembre 2022</div>
-                <p class="m-d">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos libero sint ratione
-                    delectus. Corrupti nostrum rem facere similique iste blanditiis iure deleniti fugiat sit. Quas ipsam
-                    maxime rerum accusantium laborum.</p>
+      <div class="mx-auto container my-5 mt-1" style="text-align: center;">
 
-
-                <button onclick="" class="btn btn-light sub-btn items-center"
-                    style="font-size: 30px;">INSCRIPTION</button>
-                <div style="margin-top: 50px;">
-                    <button onclick="" class="btn btn-light follow-btn items-center"
-                        style="font-size: 20px;">Déroulement</button>
-                    <button onclick="" class="btn btn-light follow-btn items-center"
-                        style="font-size: 20px;">Règlement</button>
-                </div>
-
+        <ul class="list-unstyled">
+          <li class="media">
+            <img src="/img/Test.png" class="w-56 lg\:w-max" >
+            <div class="media-body container">
+              <h5 class="inline-flex flex-col">List-based media object</h5>
             </div>
+          </li>
+
+          <li class="media my-4">
+            <img src="/img/Alex.jpg" class="mr-3">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">List-based media object</h5>
+            </div>
+          </li>
+
+        </ul>
+
+        
+      </div>
 
 
-            <%- include('../templates/footer'); %>
+      <%- include('../templates/footer'); %>
 
 </body>
 
