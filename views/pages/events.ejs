@@ -1,41 +1,45 @@
 <html lang="fr">
-
-<head>
-  <%- include('../templates/headerGlobal'); %>
-    <link rel="stylesheet" href="/css/events.css">
+  <head>
+    <%- include('../templates/headerGlobal'); %>
+    <link rel="stylesheet" href="/css/events.css" />
     <title>Evenements - Laexo.tv</title>
-</head>
+  </head>
 
-<body class="bg-dark-laexo" onload="console.clear();">
-  <%- include('../templates/svgIcons'); %>
-    <%- include('../templates/navbar'); %>
+  <body class="bg-dark-laexo" onload="console.clear();">
+    <%- include('../templates/svgIcons'); %> <%- include('../templates/navbar');
+    %>
 
-      <div class="mx-auto container my-5 mt-1" style="text-align: center;">
-
-        <ul class="list-unstyled">
-          <li class="media">
-            <img src="/img/Test.png" class="w-56 lg\:w-max" >
-            <div class="media-body container">
-              <h5 class="inline-flex flex-col">List-based media object</h5>
-            </div>
-          </li>
-
-          <li class="media my-4">
-            <img src="/img/Alex.jpg" class="mr-3">
-            <div class="media-body">
-              <h5 class="mt-0 mb-1">List-based media object</h5>
-            </div>
-          </li>
-
-        </ul>
-
-        
+    <div class="mx-auto container my-5 mt-1" style="text-align: center">
+      <div class="container grid grid-band">
+        <img src="/img/Test.png" class="grid-img" />
+        <div class="grid-text">
+          <h2>Simple Collapsible</h2>
+          <p>
+            Click on the button to toggle between showing and hiding content.
+          </p>
+        </div>
+        <div class="grid-info">
+          <div class="date">23 septembre 2022</div>
+          <button
+            type="button"
+            class="btn btn-info"
+            data-toggle="collapse"
+            data-target="#demo"
+          >
+            Voir plus
+          </button>
+        </div>
+        <div class="grid-description">
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </div>
+        </div>
       </div>
+    </div>
 
-
-      <%- include('../templates/footer'); %>
-
-</body>
-
-
+    <%- include('../templates/footer'); %>
+  </body>
 </html>

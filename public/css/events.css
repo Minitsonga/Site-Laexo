@@ -1,15 +1,50 @@
-.title {
-    font-size: 5vw;
-}
-
 .date {
-    font-size: 2.5vw;
+    font-size: small;
+    font-weight: 100;
+    left: 0%;
 }
 
-.footer {
+/*.footer {
     position: fixed;
 
+}*/
+
+.grid{
+    display: grid;   
+    
 }
+
+.grid-band{
+    grid-template-areas: 
+    "img text info"
+    "a a .";   
+ 
+}
+
+.grid-img
+{
+    grid-area: "img";
+}
+
+.grid-text
+{
+    grid-area: "text";
+    align-self: center;
+    justify-self: center;
+    
+}
+
+.grid-info
+{
+    grid-area: "info";
+    
+}
+
+.grid-description{
+    grid: 2/1/4/-1;
+}
+
+
 
 .m-d {
     font-size: large;
