@@ -1,100 +1,193 @@
-.date {
-    font-size: small;
-    font-weight: 100;
-    left: 0%;
-}
-
 /*.footer {
     position: fixed;
 
 }*/
 
-.grid{
-    display: grid;   
-    
+.grid {
+    display: grid;
+    margin-top: 20px;
+    row-gap: 1em;
 }
 
-.grid-band{
-    grid-template-areas: 
-    "img text info"
-    "a a .";   
- 
+.grid-band {
+    grid-template-rows: fit-content(150px) auto;
+    grid-template-columns: fit-content(350px) auto fit-content(365px);
+    grid-template-areas:
+        "img txt info"
+        "desc desc desc";
 }
 
-.grid-img
-{
-    grid-area: "img";
+.grid-band.show {
+    grid-template-rows: fit-content(150px) auto;
+    grid-template-columns: fit-content(350px) auto fit-content(365px);
+    grid-template-areas:
+        "img txt info"
+        "desc desc desc";
 }
 
-.grid-text
-{
-    grid-area: "text";
+.grid-img {
+    grid-area: img;
+
+
+}
+
+.grid-text {
+    grid-area: txt;
     align-self: center;
     justify-self: center;
-    
+
 }
 
-.grid-info
-{
-    grid-area: "info";
-    
+.grid-info {
+    grid-area: info;
+    align-self: center;
+    justify-self: center;
+
 }
 
-.grid-description{
-    grid: 2/1/4/-1;
+.date {
+    font-size: small;
+    font-weight: 100;
+    margin-bottom: 15px;
+    opacity: 0.8;
 }
 
-
-
-.m-d {
-    font-size: large;
+.grid-description {
+    grid-area: desc;
 }
 
-.media {
-    display: flex;
-    align-items: center;
+.grid-button {
+    grid-area: buttons;
 }
 
-.media-body {
-    margin: auto;
+.btn {
+    margin: 2px;
+    margin-bottom: 5px;
 }
 
-.w-56 {
-    width: 14rem;
+.expandable {
+    overflow: hidden;
+    transition: all .5s ease-in-out;
+    line-height: 0;
+    padding: 0 1em;
 }
 
-@media (min-width: 1024px) {
-    .lg\:w-max {
-        width: -webkit-max-content;
-        width: max-content;
+.expandable.show {
+    line-height: 1.5;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+@media (max-width: 1200px) {
+    .grid-img {
+        height: 110px;
+        width: 260px;
     }
 
-   
+    .grid-band {
+        grid-template-columns: fit-content(150px) auto fit-content(365px);
+        grid-template-rows: fit-content(150px) auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+    }
+
+    .grid-band.show {
+        grid-template-columns: fit-content(150px) auto fit-content(365px);
+        grid-template-rows: fit-content(150px) auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .grid-description {
+        font-size: 13px;
+    }
 }
 
-    @media (max-width:940px) {
-        .m-d {
-            font-size: medium;
-        }
+
+
+@media (max-width: 750px) {
+    .grid-img {
+        height: 75px;
+        width: 175px;
+    }
+
+    .grid-band {
+        grid-template-columns: fit-content(80px) auto fit-content(100px);
+        grid-template-rows: fit-content(150px) auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+    }
+
+    .grid-band.show {
+        grid-template-columns: fit-content(80px) auto fit-content(100px);
+        grid-template-rows: fit-content(150px) auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+    }
+
+
+    .date {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .subtitle {
+        font-size: 8px;
+    }
+
+    .grid-description {
+        font-size: 8px;
+    }
+
+
+
+}
+
+@media (max-width: 500px) {
+
+
+    .grid-band {
+        grid-template-columns: fit-content(80px) auto fit-content(100px);
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+        margin-bottom: 20px;
+    }
+
+    .grid-band.show {
+        grid-template-columns: fit-content(80px) auto fit-content(100px);
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "img txt txt"
+            "info info info"
+            "desc desc desc";
+
 
     }
 
-    @media (max-width:500px) {
-        .title {
-            font-size: 18px;
-        }
 
-        .date {
-            font-size: 15px;
-        }
 
-        .m-d {
-            font-size: 11px;
-        }
 
-        .media {
-            display: flex;
-            align-items: center;
-        }
-
-    }
+}
