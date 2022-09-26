@@ -158,9 +158,6 @@
     .grid-description {
         font-size: 8px;
     }
-
-
-
 }
 
 @media (max-width: 500px) {
@@ -183,11 +180,19 @@
             "img txt txt"
             "info info info"
             "desc desc desc";
-
-
     }
+}
 
 
+.btn-laexo {
+    background-color: #0784b5;
+    outline: #0784b5;
 
-
+    
+}
+.btn-laexo:hover, .btn-laexo:focus {
+    background-color: #0aa2de;
+    outline: #0aa2de;
+    color: black;
+    
 }

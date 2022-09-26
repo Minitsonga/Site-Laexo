@@ -6,10 +6,9 @@ const routes = require("./src/routes/routes.js");
 const axios = require("axios").default;
 
 const session = require("express-session");
-const crypto = require('crypto');
-const name = 'braitsch';
-var hash = crypto.createHash('md5').update(name).digest('hex');
-
+const crypto = require("crypto");
+const name = "braitsch";
+var hash = crypto.createHash("md5").update(name).digest("hex");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -144,7 +143,7 @@ async function getLeaderboard() {
     }
 
     //#region  Getting img user from Uptime Lists
-    console.log(leaderboard.uptime.week)
+    console.log(leaderboard.uptime.week);
     for (let i = 0; i < leaderboard.uptime.week.length; i++) {
       const member = leaderboard.uptime.week[i];
 
@@ -430,10 +429,10 @@ async function getLeaderboard() {
   console.log("Check Finished");
 }
 
-getLeaderboard(); //Initialisation
+//getLeaderboard(); //Initialisation
 
 setInterval(() => {
-  getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
+  //getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
 }, "300000");
 
 setInterval(() => {
@@ -487,8 +486,6 @@ async function getUserDatas() {
       .catch(function (error) {});
     console.log("end");
   }
-
-
 }
 
 app.get("/stream", async (req, res) => {
@@ -509,6 +506,13 @@ app.get("/event", async (req, res) => {
   res.render("pages/events", { user: user_data });
 });
 
+app.get("/event/:eventName", (req, res) => {
+  var {eventName} = req.params;
+  if(eventName === "coucou") res.json(req.params);
+  else res.redirect("error");
+});
+
+
 app.get("/planning", async (req, res) => {
   await getUserDatas();
 
@@ -528,6 +532,10 @@ app.post("/revoke", async (req, res) => {
 
 app.get("/reseaux", (req, res) => {
   res.render("pages/reseaux");
+});
+
+app.all('*', function(req, res){
+  res.send('what???');
 });
 
 app.listen(process.env.PORT, () =>
