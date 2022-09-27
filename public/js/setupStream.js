@@ -22,7 +22,7 @@ async function getData() {
   const chatOverlay = document.querySelector("#chat-holder");
   const imgOffline = document.querySelector(".img");
 
-  if (isOnline > 0) {
+  if (isOnline <= 0) {
     if (!streamOverlay.classList.contains("hide"))
       streamOverlay.classList.add("hide");
     if (!chatOverlay.classList.contains("hide"))
