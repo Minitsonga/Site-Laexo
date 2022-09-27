@@ -2,6 +2,7 @@
 
 <head>
   <%- include('../templates/headerGlobal'); %>
+
     <title>Stream - Laexo.tv</title>
 </head>
 
@@ -10,11 +11,13 @@
     <%- include('../templates/navbar'); %>
 
       <div class="mx-auto container my-5 mt-1">
-        <div class="d-flex flex-wrap justify-between" style="height: 67%;">
+        <div class="d-flex flex-wrap justify-between" id="holderTotal" style="height: 67%;">
           <div class="pt-2" id="stream-holder" style="width: 76%;">
-            <div id="stream"></div>
+            <img src="img/SceneOffline.png" class="img" alt="" width="1920" height="1080"
+              style="height: auto; width: 100%;">
+            <div id="stream" class="hide"></div>
           </div>
-          <div class="pt-2" id="chat-holder" style="width: 22%;">
+          <div class="pt-2 hide" id="chat-holder" style="width: 22%;">
             <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/laexo/chat?parent=localhost&darkpopout"
               height="100%" width="100%">
             </iframe>
@@ -48,6 +51,8 @@
         <!-- Load the Twitch embed JavaScript file -->
         <script src="https://embed.twitch.tv/embed/v1.js"></script>
         <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+
+        <script type="text/javascript" src="/js/setupStream.js"></script>
         <script type="text/javascript">
           var embed = new Twitch.Embed("stream", {
             width: "100%",
@@ -63,8 +68,6 @@
 
             document.getElementById("stream-holder").style.width = "100%";
             document.getElementById("stream-buttons").style.width = "100%";
-          } else if (window.innerWidth <= 768) {
-            document.getElementById("stream-buttons").style.width = "76%";
           } else {
             document.getElementById("chat-holder").style.visibility = "visible";
             document.getElementById("chat-holder").style.position = "relative";
@@ -73,11 +76,11 @@
             document.getElementById("stream-buttons").style.width = "76%";
           }
 
-          if (window.innerWidth <= 768) {
-            document.getElementById("stream-buttons").style.width = "76%";
-          }
 
         </script>
+
+
+
         <script>
           function New_Window(url, width, height) {
             window.open(url, "", `width=${width}, height=${height}`);

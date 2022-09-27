@@ -429,7 +429,7 @@ async function getLeaderboard() {
   console.log("Check Finished");
 }
 
-//getLeaderboard(); //Initialisation
+getLeaderboard(); //Initialisation
 
 setInterval(() => {
   //getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
@@ -506,10 +506,13 @@ app.get("/event", async (req, res) => {
   res.render("pages/events", { user: user_data });
 });
 
-app.get("/event/:eventName", (req, res) => {
+app.get("/event/:eventName", async (req, res) => {
+  await getUserDatas();
   var { eventName } = req.params;
-  if (eventName === "coucou") res.json(req.params);
-  else res.redirect("error");
+  
+  if (eventName === "coucou")
+    res.render("pages/eventInfo", { user: user_data, eventName });
+  else res.redirect("/");
 });
 
 app.get("/planning", async (req, res) => {
@@ -533,7 +536,7 @@ app.get("/reseaux", (req, res) => {
   res.render("pages/reseaux");
 });
 
-app.all("*", async (req, res) => {
+app.get("*", async (req, res) => {
   await getUserDatas();
   res.render("pages/error", { user: user_data });
 });

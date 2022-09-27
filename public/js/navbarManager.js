@@ -1,7 +1,7 @@
 //#region Get current link
 $("ul>a").each(function () {
   var linkPage = $(this).attr("href");
-  
+
   if (location.pathname == linkPage) {
     currentLink = $(this);
   }
@@ -33,30 +33,22 @@ const closeSideNav = () => {
 toggler.addEventListener("click", openSideNav);
 cross.addEventListener("click", closeSideNav);
 
-
 function resize() {
   if (window.innerWidth > 996 && mainNavigation.classList.contains("active")) {
     closeSideNav(); //Fix bug when resize and sidebar still open
   }
 
-  
   if (window.innerWidth <= 996) {
     document.getElementById("chat-holder").style.visibility = "hidden";
     document.getElementById("chat-holder").style.position = "absolute";
 
     document.getElementById("stream-holder").style.width = "100%";
     document.getElementById("stream-buttons").style.width = "100%";
-  } else if (window.innerWidth <= 768) {
-    document.getElementById("stream-buttons").style.width = "76%";
-  } else {
+  } else if(window.innerWidth > 996) {
     document.getElementById("chat-holder").style.visibility = "visible";
     document.getElementById("chat-holder").style.position = "relative";
 
     document.getElementById("stream-holder").style.width = "76%";
-    document.getElementById("stream-buttons").style.width = "76%";
-  }
-
-  if (window.innerWidth <= 768) {
     document.getElementById("stream-buttons").style.width = "76%";
   }
 }
@@ -82,7 +74,7 @@ async function getDataLive() {
   )
     .then((res) => res.json())
     .then((json_data) => (data_stream = json_data.data));
-
+    
   document.getElementById("title-stream").innerHTML =
     data_stream.current_status;
 
@@ -103,4 +95,3 @@ async function getDataLive() {
 getDataLive();
 
 //#endregion
-
