@@ -507,11 +507,10 @@ app.get("/event", async (req, res) => {
 });
 
 app.get("/event/:eventName", (req, res) => {
-  var {eventName} = req.params;
-  if(eventName === "coucou") res.json(req.params);
+  var { eventName } = req.params;
+  if (eventName === "coucou") res.json(req.params);
   else res.redirect("error");
 });
-
 
 app.get("/planning", async (req, res) => {
   await getUserDatas();
@@ -534,8 +533,9 @@ app.get("/reseaux", (req, res) => {
   res.render("pages/reseaux");
 });
 
-app.all('*', function(req, res){
-  res.send('what???');
+app.all("*", async (req, res) => {
+  await getUserDatas();
+  res.render("pages/error", { user: user_data });
 });
 
 app.listen(process.env.PORT, () =>
