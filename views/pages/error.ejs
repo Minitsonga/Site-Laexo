@@ -1,0 +1,39 @@
+<html lang="fr">
+  <head>
+    <%- include('../templates/headerGlobal'); %>
+    <link rel="stylesheet" href="css/error.css" />
+    <title>404 - Laexo.tv</title>
+  </head>
+
+  <body class="bg-dark-laexo" onload="console.clear();">
+    <%- include('../templates/svgIcons'); %> <%- include('../templates/navbar');
+    %>
+
+    <div class="mx-auto container my-5 mt-1 cent">
+      <div
+        class="space-x-0 sm:space-x-5 flex-wrap px-5"
+        style="display: flex; flex-wrap: wrap; justify-content: center"
+      >
+        <img src="img/Alex.jpg" alt="hein" height="100px" width="100px"/>
+        <div
+          class="mt-5"
+          style="display: flex; flex-direction: column; justify-content: center"
+        >
+          <div class="font-medium text-lg dark:text-white text-black-gotaga">
+            Euh. Cette endroit n'existe pas ! Sortez donc d'ici !
+          </div>
+          <a href="/"
+            ><button
+              class="bg-black-gotaga dark:bg-white text-white dark:text-black-gotaga w-full mt-2 p-3"
+              type="button"
+            >
+              Téléportation
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <%- include('../templates/footer'); %>
+  </body>
+</html>
