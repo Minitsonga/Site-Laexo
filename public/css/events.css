@@ -13,21 +13,12 @@
     grid-template-rows: fit-content(150px) auto;
     grid-template-columns: fit-content(350px) auto fit-content(365px);
     grid-template-areas:
-        "img txt info"
-        "desc desc desc";
+        "img txt info";
 }
 
-.grid-band.show {
-    grid-template-rows: fit-content(150px) auto;
-    grid-template-columns: fit-content(350px) auto fit-content(365px);
-    grid-template-areas:
-        "img txt info"
-        "desc desc desc";
-}
 
 .grid-img {
     grid-area: img;
-
 
 }
 
@@ -52,31 +43,12 @@
     opacity: 0.8;
 }
 
-.grid-description {
-    grid-area: desc;
-}
-
-.grid-button {
-    grid-area: buttons;
-}
 
 .btn {
     margin: 2px;
     margin-bottom: 5px;
 }
 
-.expandable {
-    overflow: hidden;
-    transition: all .5s ease-in-out;
-    line-height: 0;
-    padding: 0 1em;
-}
-
-.expandable.show {
-    line-height: 1.5;
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
 
 @media (max-width: 1200px) {
     .grid-img {
@@ -89,17 +61,7 @@
         grid-template-rows: fit-content(150px) auto;
         grid-template-areas:
             "img txt txt"
-            "info info info"
-            "desc desc desc";
-    }
-
-    .grid-band.show {
-        grid-template-columns: fit-content(150px) auto fit-content(365px);
-        grid-template-rows: fit-content(150px) auto;
-        grid-template-areas:
-            "img txt txt"
-            "info info info"
-            "desc desc desc";
+            "info info info";
     }
 
     .title {
@@ -110,9 +72,6 @@
         font-size: 13px;
     }
 
-    .grid-description {
-        font-size: 13px;
-    }
 }
 
 
@@ -128,19 +87,8 @@
         grid-template-rows: fit-content(150px) auto;
         grid-template-areas:
             "img txt txt"
-            "info info info"
-            "desc desc desc";
+            "info info info";
     }
-
-    .grid-band.show {
-        grid-template-columns: fit-content(80px) auto fit-content(100px);
-        grid-template-rows: fit-content(150px) auto;
-        grid-template-areas:
-            "img txt txt"
-            "info info info"
-            "desc desc desc";
-    }
-
 
     .date {
         margin-bottom: 10px;
@@ -155,9 +103,6 @@
         font-size: 8px;
     }
 
-    .grid-description {
-        font-size: 8px;
-    }
 }
 
 @media (max-width: 500px) {
@@ -168,19 +113,10 @@
         grid-template-rows: auto auto;
         grid-template-areas:
             "img txt txt"
-            "info info info"
-            "desc desc desc";
+            "info info info";
         margin-bottom: 20px;
     }
 
-    .grid-band.show {
-        grid-template-columns: fit-content(80px) auto fit-content(100px);
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            "img txt txt"
-            "info info info"
-            "desc desc desc";
-    }
 }
 
 

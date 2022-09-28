@@ -21,107 +21,18 @@
           </div>
           <div class="grid-info">
             <div class="date">23 septembre 2022</div>
-            <button type="button" class="btn btn-laexo bg-blue-laexo" onclick="showDesc('#event1', '#desc1')" href="#desc1">
+            <button type="button" class="btn btn-laexo bg-blue-laexo" href="#">
               Voir plus
             </button>
             <button type="button" class="btn btn-laexo" >
               Inscriptions
             </button>
-            <button type="button" class="btn btn-laexo">
-              Déroulement
-            </button>
-          </div>
-          <div id="desc1" class="grid-description expandable" style="position: absolute;">
-
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-    
-          </div>
-        </div>
-        <div id="event2" class="container grid grid-band">
-          <img src="/img/Test.png" class="grid-img" width="350" height="150" />
-          <div class="grid-text">
-            <h2 class="title">Simple Collapsible</h2>
-            <div class="subtitle">
-              Click on the button to toggle between showing and hiding content.
-            </div>
-          </div>
-          <div class="grid-info">
-            <div class="date">23 septembre 2022</div>
-            <button type="button" class="btn btn-info" onclick="showDesc('#event2', '#desc2')" href="#desc2">
-              Voir plus
-            </button>
-            <button type="button" class="btn btn-info" >
-              Inscriptions
-            </button>
-            <button type="button" class="btn btn-info">
-              Déroulement
-            </button>
-          </div>
-          <div id="desc2" class="grid-description expandable" style="position: absolute;">
-
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-    
-          </div>
-        </div>
-        <div id="event3" class="container grid grid-band">
-          <img src="/img/Test.png" class="grid-img" width="350" height="150" />
-          <div class="grid-text">
-            <h2 class="title">Simple Collapsible</h2>
-            <div class="subtitle">
-              Click on the button to toggle between showing and hiding content.
-            </div>
-          </div>
-          <div class="grid-info">
-            <div class="date">23 septembre 2022</div>
-            <button type="button" class="btn btn-info" onclick="showDesc('#event3', '#desc3')" href="#desc3">
-              Voir plus
-            </button>
-            <button type="button" class="btn btn-info" >
-              Inscriptions
-            </button>
-            <button type="button" class="btn btn-info">
-              Déroulement
-            </button>
-          </div>
-          <div id="desc3" class="grid-description expandable" style="position: absolute;">
-
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-    
           </div>
         </div>
       </div>
 
       <%- include('../templates/footer'); %>
-        <script>
-          function showDesc(id, de) {
-            var holderGrid = document.querySelector(id);
-            var descri = document.querySelector(de)
-            if (holderGrid.classList.contains("show")) {
-              descri.classList.remove("show");
-              setTimeout(() => {
-                holderGrid.classList.remove("show");
-                descri.style.position = "absolute";
-              }, 500);
-
-            }
-            else {
-              descri.style.position = "relative";
-              holderGrid.classList.add("show");
-              descri.classList.add("show");
-            }
-          }
-
-
-        </script>
+      
 </body>
 
 
