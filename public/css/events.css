@@ -61,7 +61,7 @@
         grid-template-rows: fit-content(150px) auto;
         grid-template-areas:
             "img txt txt"
-            "info info info";
+            ". info .";
     }
 
     .title {

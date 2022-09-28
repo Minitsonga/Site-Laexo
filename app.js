@@ -1,5 +1,6 @@
 require("dotenv").config();
 const fs = require("fs");
+const { promises: fes } = require("fs");
 const express = require("express");
 const app = express();
 const routes = require("./src/routes/routes.js");
@@ -42,13 +43,11 @@ let listUserPP = [];
 let listPP_LastUpdated = [];
 
 async function getLeaderboard() {
-  if (listUserPP.length <= 0) {
-    fs.readFile("img.json", (err, data) => {
-      if (err) throw err;
-      listUserPP = JSON.parse(data);
-      console.log("JSON data is loaded.");
-    });
-  }
+  fs.readFile("img.json", (err, data) => {
+    if (err) throw err;
+    listUserPP = JSON.parse(data);
+    console.log("JSON data is loaded.");
+  });
 
   //#region Get Setup Leaderboard List from wizebot api
 
@@ -439,6 +438,18 @@ setInterval(() => {
   listPP_LastUpdated = []; // reset list of users that we have recently update there pp
 }, "3600000");
 
+// async function getEventList(filePath, encoding = "utf-8") {
+//   if (!filePath) {
+//       throw new Error("filePath required");
+//   }
+
+//   return fes.readFile(filePath, { encoding });
+// }
+async function getEventList() {
+  const encoding = "utf-8";
+  return fes.readFile("eventList.json", { encoding });
+}
+
 async function getUserDatas() {
   if (process.env.GET_TOKEN) {
     var options_validate = {
@@ -502,16 +513,20 @@ app.get("/classement", async (req, res) => {
 
 app.get("/event", async (req, res) => {
   await getUserDatas();
+  let listEvent = JSON.parse(await getEventList());
+  
 
-  res.render("pages/events", { user: user_data });
+  res.render("pages/events", { user: user_data, listEvent });
 });
 
 app.get("/event/:eventName", async (req, res) => {
-  await getUserDatas();
   var { eventName } = req.params;
-  
-  if (eventName === "coucou")
-    res.render("pages/eventInfo", { user: user_data, eventName });
+  await getUserDatas();
+  let listEvent = JSON.parse(await getEventList());
+  let event = listEvent.find((e) => e.title == eventName);
+  console.log("event :", event);
+  if (event != undefined)
+    res.render("pages/eventInfo", { user: user_data, event });
   else res.redirect("/");
 });
 

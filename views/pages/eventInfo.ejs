@@ -1,22 +1,22 @@
 <html lang="fr">
+  <head>
+    <%- include('../templates/headerGlobal'); %>
+    <title>Evenements - Laexo.tv</title>
+  </head>
 
-<head>
-  <%- include('../templates/headerGlobal'); %>
-    <title>
-      <%- eventName %> - Laexo.tv
-    </title>
-</head>
+  <body class="bg-dark-laexo" onload="">
+    <%- include('../templates/svgIcons'); %> <%-
+    include('../templates/navbar');%>
 
-<body class="bg-dark-laexo" onload="console.clear();">
-  <%- include('../templates/svgIcons'); %>
-  <%- include('../templates/navbar');%>
-
-    <div class="mx-auto container my-5 mt-1 cent">
-      
-    </div>
+    <div class="mx-auto container my-5 mt-1" id="holder"></div>
 
     <%- include('../templates/footer'); %>
-</body>
+    <script>
+      var { title, subtitle, img, date } = JSON.parse(
+        `<%- JSON.stringify(event)%>`
+      );
+    </script>
 
-
+    <script src="/js/pageEvent.js"></script>
+  </body>
 </html>
