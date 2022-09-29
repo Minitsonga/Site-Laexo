@@ -6,33 +6,23 @@
     <title>Evenements - Laexo.tv</title>
 </head>
 
-<body class="bg-dark-laexo" onload="console.clear();">
+<body class="bg-dark-laexo" onload="">
   <%- include('../templates/svgIcons'); %>
     <%- include('../templates/navbar'); %>
 
-      <div class="mx-auto container my-5" style="text-align: center">
-        <div id="event1" class="container grid grid-band">
-          <img src="/img/Test.png" class="grid-img" width="350" height="150" />
-          <div class="grid-text">
-            <h2 class="title">Simple Collapsible</h2>
-            <div class="subtitle">
-              Click on the button to toggle between showing and hiding content.
-            </div>
-          </div>
-          <div class="grid-info">
-            <div class="date">23 septembre 2022</div>
-            <button type="button" class="btn btn-laexo bg-blue-laexo" href="#">
-              Voir plus
-            </button>
-            <button type="button" class="btn btn-laexo" >
-              Inscriptions
-            </button>
-          </div>
-        </div>
+      <div id="holder" class="mx-auto container my-5" style="text-align: center">
+
       </div>
 
       <%- include('../templates/footer'); %>
-      
+        <script>
+          var events = JSON.parse(
+            `<%- JSON.stringify(events)%>`
+          );
+        </script>
+
+        <script src="/js/loadEvents.js"></script>
+
 </body>
 
 
