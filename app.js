@@ -514,7 +514,6 @@ app.get("/classement", async (req, res) => {
 app.get("/event", async (req, res) => {
   await getUserDatas();
   let events = JSON.parse(await getEventList());
-  
 
   res.render("pages/events", { user: user_data, events });
 });
@@ -536,10 +535,10 @@ app.get("/planning", async (req, res) => {
   res.render("pages/planning", { user: user_data });
 });
 
-app.get("/conception", (req, res) => {
-  res.render("pages/conception");
+app.get("/conception", async (req, res) => {
+  await getUserDatas();
+  res.render("pages/conception", { user: user_data });
 });
-
 
 app.post("/revoke", async (req, res) => {
   await axios.post(
