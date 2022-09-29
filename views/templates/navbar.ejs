@@ -7,7 +7,7 @@
                 <use xlink:href="#justify-w" />
             </svg>
         </div>
-        <a class="navbar-brand" href="#"><img src="/img/Logotype-Laexo-Bleu.svg" alt="" width="60" height="52"></a>
+        <a class="navbar-brand" href="#"><img src="/img/Logotype-Laexo-Blanc.svg" alt="" width="60" height="52"></a>
 
         <div class="order-lg-2 bg-dark-laexo d-lg-flex w-100 sidebar pb-3 pb-lg-0">
             <button type="button" class="ms-3 mt-3 btn btn-outline-light btn-circle-sm" id="close-sidebar"
@@ -27,16 +27,6 @@
 
     </div>
 
-    <div class="items-center d-flex pe-3">
-
-        <div class="items-center px-2" style="display: inline-flex; visibility: hidden;" id="lcoins">
-            <span>0</span>
-            <i class='bx bxs-dollar-circle bx-md px-2'></i>
-        </div>
-
-        <button type="button" onclick="loginButton()" class="btn btn-outline-light btn-circle"><i
-                class='bx bx-log-in bx-sm pt-1' id="login_icon" style="padding-right: 8px;"></i></button>
-    </div>
 </nav>
 <div class="w-full h-1 bg-blue-laexo"></div>
 <div class="d-flex py-1 justify-between items-center container mx-auto inliveTitle">
@@ -55,48 +45,4 @@
 </div>
 <div class="w-full h-1 bg-blue-laexo inliveTitle"></div>
 
-<script src="js/navbarManager.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-
-
-    var user = JSON.parse(`<%- JSON.stringify(user)%>`); //parse data to real variable object
-    console.log("User Data :", user);
-    const loginTwitch = document.querySelector("#login_icon");
-
-    if (Object.keys(user).length > 0) {
-        console.log("user connected");
-
-        loginTwitch.classList.replace("bx-log-in", "bx-log-out");
-
-    } else {
-        console.log("no user");
-        if (loginTwitch.classList.contains("bx-log-out")) {
-            loginTwitch.classList.replace("bx-log-out", "bx-log-in");
-        }
-
-    }
-
-    function loginButton() {
-        if (loginTwitch.classList.contains("bx-log-in")) {
-            location.href = '/oauth/twitch';
-        }
-        else {
-
-            fetch("revoke", {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-            }).then((res) => {
-                console.log("done", res);
-                location.reload();
-            }).catch((err) => console.log(err));
-
-
-        }
-    }
-
-
-</script>
+<script src="/js/navbarManager.js" type="text/javascript"></script>

@@ -45,12 +45,6 @@
 }
 
 
-.btn {
-    margin: 2px;
-    margin-bottom: 5px;
-}
-
-
 @media (max-width: 1200px) {
     .grid-img {
         height: 110px;
@@ -120,6 +114,10 @@
 
 }
 
+.btn {
+    margin: 2px;
+    margin-bottom: 5px;
+}
 
 .btn-laexo {
     background-color: #0784b5;

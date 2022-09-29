@@ -1,7 +1,8 @@
 //#region Get current link
+var currentLink;
 $("ul>a").each(function () {
   var linkPage = $(this).attr("href");
-
+ 
   if (location.pathname == linkPage) {
     currentLink = $(this);
   }

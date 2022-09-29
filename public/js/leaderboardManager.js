@@ -49,7 +49,7 @@ async function setupTopData() {
   let cur_List = leaderboard.rank;
 
   if (category != "rank") {
-    console.log(category);
+    //console.log(category);
 
     switch (period) {
       case "week":
@@ -129,21 +129,21 @@ async function setupTopData() {
     holder.appendChild(newRow);
   }
 
-  if (Object.keys(user).length > 0) {
-    const cardUser = document.getElementById(`${user.id}`);
-    console.log(cardUser);
-    cardUser.style.background = "#dddddd";
-    cardUser.style.color = "black";
-  }
+  // if (Object.keys(user).length > 0) {
+  //   const cardUser = document.getElementById(`${user.id}`);
+  //   console.log(cardUser);
+  //   cardUser.style.background = "#dddddd";
+  //   cardUser.style.color = "black";
+  // }
 }
 
 setupTopData();
 
-if (Object.keys(user).length > 0) {
-  const cardUser = document.getElementById(`${user.id}`);
-  console.log(cardUser);
-  cardUser.style.background = "#dddddd";
-  cardUser.style.color = "black";
-} else {
-  console.log("no user");
-}
+// if (Object.keys(user).length > 0) {
+//   const cardUser = document.getElementById(`${user.id}`);
+//   console.log(cardUser);
+//   cardUser.style.background = "#dddddd";
+//   cardUser.style.color = "black";
+// } else {
+//   console.log("no user");
+// }

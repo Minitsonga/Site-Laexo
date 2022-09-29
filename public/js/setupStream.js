@@ -16,7 +16,6 @@ async function getData() {
     .then((res) => res.json())
     .then((json_data) => (isOnline = json_data.data.online));
 
-  console.log("ici " + isOnline);
 
   const streamOverlay = document.querySelector("#stream");
   const chatOverlay = document.querySelector("#chat-holder");

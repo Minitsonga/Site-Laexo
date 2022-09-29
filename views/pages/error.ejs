@@ -10,24 +10,44 @@
   <%- include('../templates/svgIcons'); %>
     <%- include('../templates/navbar');%>
 
-      <div class="mx-auto container my-5 mt-1 cent">
-        <div class="space-x-0 sm:space-x-5 flex-wrap px-5"
-          style="display: flex; flex-wrap: wrap; justify-content: center">
-          <img src="/img/Alex.jpg" alt="hein" height="100px" width="100px" />
-          <div class="mt-5" style="display: flex; flex-direction: column; justify-content: center">
-            <div class="font-medium text-lg dark:text-white text-black-gotaga">
+      <div class="mx-auto container my-5 mt-1">
+        <div class="holder">
+          <img src="/img/Triste.png" alt="sad" height="100px" width="100px" />
+          <div class="mt-5 info">
+            <div class="text">
               Euh. Cette endroit n'existe pas ! Sortez donc d'ici !
             </div>
-            <a href="/"><button class="bg-black-gotaga dark:bg-white text-white dark:text-black-gotaga w-full mt-2 p-3"
-                type="button">
-                Téléportation
+            <a href="/stream" class="">
+              <button class="btn btn-laexo" type="button">
+                Revenir a la page principale
               </button></a>
           </div>
         </div>
       </div>
 
       <%- include('../templates/footer'); %>
-      
+
+        <style>
+          .holder {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            margin: auto;
+          }
+
+          img{
+            margin-top: auto;
+            margin-right: 10px;
+          }
+
+          .info {
+            text-align: center;
+          }
+          .btn {
+            width: 100%;
+          }
+        </style>
+
 </body>
 
 
