@@ -1,14 +1,17 @@
 [
-    {
-        "title": "LCUP 2V2",
-        "subtitle": "LCUP 2V2",
-        "img": "Test.png",
-        "date": "29 octobre 2022"
-    },
-    {
-        "title": "coucou",
-        "subtitle": "j'ai peur mais t'inquiette ib est la",
-        "img": "Test.png",
-        "date": "28 octobre 2022"
-    }
+  {
+    "title": "LCUP 2V2",
+    "subtitle": "LCUP 2V2",
+    "img": "Test.png",
+    "date": "29 octobre 2022",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quod rerum error sint iste obcaecati esse? Aliquam facere voluptatibus veniam dolores quas suscipit fugit porro esse atque, maioresmagnam explicabo?"
+  },
+  {
+    "title": "coucou",
+    "subtitle": "j'ai peur mais t'inquiette ib est la",
+    "img": "Test.png",
+    "date": "28 octobre 2022",
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quod rerum error sint iste obcaecati esse? Aliquam facere voluptatibus veniam dolores quas suscipit fugit porro esse atque, maioresmagnam explicabo?"
+
+  }
 ]
