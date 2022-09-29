@@ -9,8 +9,8 @@
   <%- include('../templates/svgIcons'); %>
     <%- include('../templates/navbar');%>
 
-      <div class="mx-auto container my-5 mt-1" id="holder">
-        <div class="items-center middle" style="opacity: 1; display: flex; flex-direction: column;">
+      <div class="mx-auto container my-5 mt-1">
+        <div class="items-center middle">
           <a href="https://github.com/Minitsonga" target="_blank" class="linksLogo">
             <img src="/img/LogoMini.png" title="dev" class="rounded-full imgLogo" alt="julien vandamme">
           </a>
@@ -22,6 +22,12 @@
       <%- include('../templates/footer'); %>
 
         <style>
+          .middle {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+          }
+
           .linksLogo {
             display: flex;
             justify-content: center;
@@ -52,7 +58,7 @@
           }
 
           .text-lg {
-            font-size:  1.5rem;
+            font-size: 1.5rem;
           }
         </style>
 
