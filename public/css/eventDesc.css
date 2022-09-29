@@ -12,7 +12,9 @@
 }
 
 .subtitle {
-    font-size: 1.5vw;
+    font-size: 1vw;
+    max-width: 50%;
+    margin: auto;
    
 }
 

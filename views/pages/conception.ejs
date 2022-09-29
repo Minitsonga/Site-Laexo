@@ -14,7 +14,7 @@
           <a href="https://github.com/Minitsonga" target="_blank" class="linksLogo">
             <img src="/img/LogoMini.png" title="dev" class="rounded-full imgLogo" alt="julien vandamme">
           </a>
-          <div class="mt-3 font-medium text-lg">Julien Vandamme (Minitsonga)</div>
+          <div class="mt-3 font-large text-lg">Julien Vandamme (Minitsonga)</div>
           <div>Développeur</div>
         </div>
       </div>
@@ -22,21 +22,37 @@
       <%- include('../templates/footer'); %>
 
         <style>
-
-
           .linksLogo {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            width: 150px;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-top: 50px;
           }
 
           .rounded-full {
-            border-radius: 9999px;
+            display: inline;
+            margin: 0 auto;
+            height: 100%;
+            width: auto;
           }
 
-          .imgLogo {
-            max-width: 15%;
-            height: auto;
+          .font-medium {
+            font-weight: 500;
+          }
+
+          .text-lg,
+          .text-xl {
+            line-height: 2.5rem;
+          }
+
+          .text-lg {
+            font-size:  1.5rem;
           }
         </style>
 

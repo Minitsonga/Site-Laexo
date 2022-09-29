@@ -10,8 +10,8 @@
 }
 
 .grid-band {
-    grid-template-rows: fit-content(150px) auto;
     grid-template-columns: fit-content(350px) auto fit-content(365px);
+    grid-template-rows: fit-content(150px);
     grid-template-areas:
         "img txt info";
 }
@@ -26,6 +26,7 @@
     grid-area: txt;
     align-self: center;
     justify-self: center;
+    max-width: 80%;
 
 }
 
@@ -76,7 +77,7 @@
 
 
 
-@media (max-width: 750px) {
+@media (max-width: 780px) {
     .grid-img {
         height: 75px;
         width: 175px;
@@ -96,11 +97,11 @@
     }
 
     .title {
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .subtitle {
-        font-size: 8px;
+        font-size: 6px;
     }
 
 }
