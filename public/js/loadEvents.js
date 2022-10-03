@@ -4,27 +4,33 @@ events.forEach((e) => {
   var holderEvent = document.createElement("div");
   holderEvent.classList.add("container", "grid", "grid-band");
 
-  var imgElement = document.createElement("img");
-  imgElement.src = "/img/" + e.img;
-  imgElement.classList.add("grid-img");
-  imgElement.width = "350";
-  imgElement.height = "150";
+  if (e.img.length > 0) {
+    var imgElement = document.createElement("img");
+    imgElement.src = "/img/" + e.img;
+    imgElement.classList.add("grid-img");
+    imgElement.width = "350";
+    imgElement.height = "150";
+    holderEvent.appendChild(imgElement);
+  }
 
   //#region TEXT GRID IN MIDDLE
 
   var gridText = document.createElement("div");
   gridText.classList.add("grid-text");
 
-  var titleGrid = document.createElement("h2");
-  titleGrid.classList.add("title");
-  titleGrid.innerHTML = e.title;
+  if (e.title.length > 0) {
+    var titleGrid = document.createElement("h2");
+    titleGrid.classList.add("title");
+    titleGrid.innerHTML = e.title;
+    gridText.appendChild(titleGrid);
+  }
 
-  var subtitleGrid = document.createElement("div");
-  subtitleGrid.classList.add("subtitle");
-  subtitleGrid.innerHTML = e.subtitle;
-
-  gridText.appendChild(titleGrid);
-  gridText.appendChild(subtitleGrid);
+  if (e.subtitle.length > 0) {
+    var subtitleGrid = document.createElement("div");
+    subtitleGrid.classList.add("subtitle");
+    subtitleGrid.innerHTML = e.subtitle;
+    gridText.appendChild(subtitleGrid);
+  }
 
   //#endregion
 
@@ -33,31 +39,38 @@ events.forEach((e) => {
   var gridInfo = document.createElement("div");
   gridInfo.classList.add("grid-info");
 
-  var dateDiv = document.createElement("div");
-  dateDiv.classList.add("date");
-  dateDiv.innerHTML = e.date;
+  if (e.date.length > 0) {
+    var dateDiv = document.createElement("div");
+    dateDiv.classList.add("date");
+    dateDiv.innerHTML = e.date;
+    gridInfo.appendChild(dateDiv);
+  }
 
-  var buttonSeeMore = document.createElement("button");
-  buttonSeeMore.type = "button";
-  buttonSeeMore.classList.add("btn", "btn-laexo");
-  buttonSeeMore.setAttribute("onclick", `location.href+='/${e.title}'`);
-  buttonSeeMore.innerHTML = "Voir plus";
+  if (e.title.length > 0) {
+    var buttonSeeMore = document.createElement("button");
+    buttonSeeMore.type = "button";
+    buttonSeeMore.classList.add("btn", "btn-laexo-light");
+    buttonSeeMore.setAttribute("onclick", `location.href+='/${e.title}'`);
+    buttonSeeMore.innerHTML = "Voir plus";
+    gridInfo.appendChild(buttonSeeMore);
+  }
 
-  var buttonInscription = document.createElement("button");
-  buttonInscription.type = "button";
-  buttonInscription.classList.add("btn", "btn-laexo");
-  buttonInscription.setAttribute("onclick", `location.href+='/${e.inscription}'`);
-  buttonInscription.innerHTML = "Inscriptions";
-
-  gridInfo.appendChild(dateDiv);
-  gridInfo.appendChild(buttonSeeMore);
-  gridInfo.appendChild(buttonInscription);
+  if (e.inscription.length > 0) {
+    var buttonInscription = document.createElement("button");
+    buttonInscription.type = "button";
+    buttonInscription.classList.add("btn", "btn-laexo-light");
+    buttonInscription.setAttribute(
+      "onclick",
+      `location.href+='/${e.inscription}'`
+    );
+    buttonInscription.innerHTML = "Inscriptions";
+    gridInfo.appendChild(buttonInscription);
+  }
 
   //#endregion
 
-  holderEvent.appendChild(imgElement);
+  
   holderEvent.appendChild(gridText);
   holderEvent.appendChild(gridInfo);
-
   holder.appendChild(holderEvent);
 });

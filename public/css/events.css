@@ -143,3 +143,15 @@
     color: black;
     
 }
+
+.btn-laexo-light
+{
+    background-color: #1da2fa;
+    outline: #1da2fa;
+}
+
+.btn-laexo-light:hover, .btn-laexo-light:focus{
+    background-color: #1dbbfa;
+    outline: #1dbbfa;
+    color: black;
+}
