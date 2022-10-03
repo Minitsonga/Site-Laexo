@@ -25,7 +25,7 @@
 }
 
 .description-title {
-    padding-top: 2vh;
+    padding-top: 2.3vh;
     font-size: 1.5vw;
     display: flex;
     align-content: center;
@@ -33,7 +33,9 @@
 }
 
 .description {
-    padding-top: 2vh;
+    padding-top: 1vh;
+    /* white-space: pre; */
+    
 }
 
 @media (max-width: 1200px) {
