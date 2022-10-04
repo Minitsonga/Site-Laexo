@@ -57,7 +57,7 @@ if (cur_event.inscription.length > 0) {
     "onclick",
     `location.href+='/${cur_event.inscription}'`
   );
-  inscriptionButton.innerHTML = "S'inscrire";
+  inscriptionButton.innerHTML = "M'inscrire";
   buttonHolder.appendChild(inscriptionButton);
 }
 
