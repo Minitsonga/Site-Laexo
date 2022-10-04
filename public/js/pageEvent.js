@@ -16,7 +16,7 @@ if (cur_event.title.length > 0) {
 if (cur_event.img.length > 0) {
   var imgDiv = document.createElement("div");
   var imgElement = document.createElement("img");
-  imgElement.src = "/img/" + cur_event.img;
+  imgElement.src = "/img/" + cur_event.band_img;
   imgDiv.classList.add("pt-3", "center");
   imgDiv.appendChild(imgElement);
   holder.appendChild(imgDiv);
@@ -27,7 +27,7 @@ buttonHolder.classList.add("buttons-holder");
 if (cur_event.inscription.length > 0) {
   var inscriptionButton = document.createElement("button");
   inscriptionButton.type = "button";
-  inscriptionButton.classList.add("btn", "btn-laexo-light");
+  inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
   inscriptionButton.setAttribute(
     "onclick",
     `location.href+='/${cur_event.inscription}'`
@@ -39,8 +39,11 @@ if (cur_event.inscription.length > 0) {
 if (cur_event.reglement.length > 0) {
   var rulesButton = document.createElement("button");
   rulesButton.type = "button";
-  rulesButton.classList.add("btn", "btn-laexo-rules");
-  rulesButton.setAttribute("onclick", `location.href+='/${cur_event.reglement}'`);
+  rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
+  rulesButton.setAttribute(
+    "onclick",
+    `location.href+='/${cur_event.reglement}'`
+  );
   rulesButton.innerHTML = "Règlement";
   buttonHolder.appendChild(rulesButton);
 }
@@ -48,7 +51,7 @@ if (cur_event.reglement.length > 0) {
 holder.appendChild(buttonHolder);
 
 if (cur_event.presentation.length > 0) {
-  var presentationTitleDiv = document.createElement("h2");
+  var presentationTitleDiv = document.createElement("h3");
   presentationTitleDiv.classList.add("description-title");
   presentationTitleDiv.innerHTML = "PRESENTATION";
 
@@ -62,7 +65,7 @@ if (cur_event.presentation.length > 0) {
 holder.appendChild(document.createElement("br"));
 
 if (cur_event.deroulement.length > 0) {
-  var deroulementTitleDiv = document.createElement("h2");
+  var deroulementTitleDiv = document.createElement("h3");
   deroulementTitleDiv.classList.add("description-title");
   deroulementTitleDiv.innerHTML = "DEROULEMENT";
 
@@ -72,5 +75,3 @@ if (cur_event.deroulement.length > 0) {
   holder.appendChild(deroulementTitleDiv);
   holder.appendChild(deroulementTextDiv);
 }
-
-
