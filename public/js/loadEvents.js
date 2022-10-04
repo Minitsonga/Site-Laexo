@@ -8,8 +8,6 @@ events.forEach((e) => {
     var imgElement = document.createElement("img");
     imgElement.src = "/img/" + e.img;
     imgElement.classList.add("grid-img");
-    imgElement.width = "350";
-    imgElement.height = "150";
     holderEvent.appendChild(imgElement);
   }
 
