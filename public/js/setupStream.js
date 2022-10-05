@@ -24,16 +24,16 @@ async function getData() {
   if (isOnline <= 0) {
     if (!streamOverlay.classList.contains("hide"))
       streamOverlay.classList.add("hide");
-    if (!chatOverlay.classList.contains("hide"))
-      chatOverlay.classList.add("hide");
+    // if (!chatOverlay.classList.contains("hide"))
+    //   chatOverlay.classList.add("hide");
     if (imgOffline.classList.contains("hide"))
       imgOffline.classList.remove("hide");
     document.getElementById("holderTotal").style = "";
   } else {
     if (streamOverlay.classList.contains("hide"))
       streamOverlay.classList.remove("hide");
-    if (chatOverlay.classList.contains("hide"))
-      chatOverlay.classList.remove("hide");
+    // if (chatOverlay.classList.contains("hide"))
+    //   chatOverlay.classList.remove("hide");
     if (!imgOffline.classList.contains("hide"))
       imgOffline.classList.add("hide");
   }

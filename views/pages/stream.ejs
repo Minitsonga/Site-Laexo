@@ -12,11 +12,12 @@
       <div class="mx-auto container my-5 mt-1">
         <div class="d-flex flex-wrap justify-between" id="holderTotal" style="height: 67%;">
           <div class="pt-2" id="stream-holder" style="width: 76%;">
-            <img src="/img/SceneOffline.png" class="img" alt="" width="1920" height="1080"
-              style="height: auto; width: 100%;">
+            <a href="https://www.twitch.tv/laexo">
+              <img src="/img/SceneOffline.png" class="img" alt="" width="1920" height="1080"
+                style="height: auto; width: 100%;"></a>
             <div id="stream" class="hide"></div>
           </div>
-          <div class="pt-2 hide" id="chat-holder" style="width: 22%;">
+          <div class="pt-2" id="chat-holder" style="width: 22%;">
             <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/laexo/chat?parent=localhost&darkpopout"
               height="100%" width="100%">
             </iframe>
@@ -42,7 +43,10 @@
           </div>
 
         </div>
+        
       </div>
+
+
 
 
       <%- include('../templates/footer'); %>
@@ -74,6 +78,7 @@
             document.getElementById("stream-holder").style.width = "76%";
             document.getElementById("stream-buttons").style.width = "76%";
           }
+
 
 
         </script>

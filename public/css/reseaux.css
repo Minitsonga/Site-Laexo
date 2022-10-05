@@ -1,3 +1,8 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     color: white;
     background: rgb(1, 0, 40);
@@ -5,7 +10,10 @@ body {
     background: -webkit-linear-gradient(0deg, rgba(1, 0, 40, 1) 0%, rgba(0, 61, 115, 1) 100%);
     background: linear-gradient(0deg, rgba(1, 0, 40, 1) 0%, rgba(0, 61, 115, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#010028", endColorstr="#003d73", GradientType=1);
+    height: 100%;
 }
+
+
 
 .profile-picture {
     border-radius: 50%;
