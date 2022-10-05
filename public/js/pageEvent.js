@@ -22,33 +22,49 @@ if (cur_event.img.length > 0) {
   holder.appendChild(imgDiv);
 }
 
-var buttonHolder = document.createElement("div");
-buttonHolder.classList.add("buttons-holder");
-if (cur_event.inscription.length > 0) {
-  var inscriptionButton = document.createElement("button");
-  inscriptionButton.type = "button";
-  inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
-  inscriptionButton.setAttribute(
-    "onclick",
-    `location.href+='/${cur_event.inscription}'`
-  );
-  inscriptionButton.innerHTML = "Inscriptions";
-  buttonHolder.appendChild(inscriptionButton);
+if (cur_event.inscription.length > 0 || cur_event.reglement.length > 0) {
+  var buttonHolder = document.createElement("div");
+  buttonHolder.classList.add("buttons-holder");
+
+  if (cur_event.inscription.length > 0) {
+    var inscriptionButton = document.createElement("button");
+    inscriptionButton.type = "button";
+    inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
+    inscriptionButton.setAttribute(
+      "onclick",
+      `location.href+='/${cur_event.inscription}'`
+    );
+    inscriptionButton.innerHTML = "Inscriptions";
+    buttonHolder.appendChild(inscriptionButton);
+  }
+
+  if (cur_event.reglement.length > 0) {
+    var rulesButton = document.createElement("button");
+    rulesButton.type = "button";
+    rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
+    rulesButton.setAttribute(
+      "onclick",
+      `location.href+='/${cur_event.reglement}'`
+    );
+    rulesButton.innerHTML = "Règlement";
+    buttonHolder.appendChild(rulesButton);
+  }
+
+  holder.appendChild(buttonHolder);
 }
 
-if (cur_event.reglement.length > 0) {
-  var rulesButton = document.createElement("button");
-  rulesButton.type = "button";
-  rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
-  rulesButton.setAttribute(
-    "onclick",
-    `location.href+='/${cur_event.reglement}'`
-  );
-  rulesButton.innerHTML = "Règlement";
-  buttonHolder.appendChild(rulesButton);
+if (cur_event.alerte_msg_wlinkD.length > 0) {
+  var alerteDiv = document.createElement("div");
+  var alerteText = document.createElement("a");
+  alerteDiv.role = "alert";
+  alerteDiv.classList.add("alert", "text-center", "fw-bold");
+  alerteText.classList.add("alert-link");
+  alerteText.innerHTML = cur_event.links.discord;
+  alerteText.href = cur_event.links.discord;
+  alerteDiv.innerHTML = cur_event.alerte_msg_wlinkD + "<br>Discord : ";
+  alerteDiv.appendChild(alerteText);
+  holder.appendChild(alerteDiv);
 }
-
-holder.appendChild(buttonHolder);
 
 if (cur_event.presentation.length > 0) {
   var presentationTitleDiv = document.createElement("h3");
