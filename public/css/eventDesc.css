@@ -8,6 +8,7 @@
 }
 
 .title {
+    margin-top: 2vh;
     font-size: 70px;
 }
 
@@ -131,6 +132,11 @@ div>img {
     }
     .description-title {
         font-size: 18px;
+    }
+
+    .alert
+    {
+        font-size: 14px;
     }
 
     .description {

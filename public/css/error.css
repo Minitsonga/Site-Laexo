@@ -1,18 +1,16 @@
-
 .btn {
     margin: 2px;
     margin-bottom: 5px;
 }
 
-.btn-laexo {
-    background-color: #0784b5;
-    outline: #0784b5;
-
-    
+.btn-laexo-light {
+    background-color: #1da2fa;
+    outline: #1da2fa;
 }
-.btn-laexo:hover, .btn-laexo:focus {
-    background-color: #0aa2de;
-    outline: #0aa2de;
+
+.btn-laexo-light:hover,
+.btn-laexo-light:focus {
+    background-color: #1dbbfa;
+    outline: #1dbbfa;
     color: black;
-    
 }

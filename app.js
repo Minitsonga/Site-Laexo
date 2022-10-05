@@ -511,19 +511,19 @@ app.get("/classement", async (req, res) => {
   res.render("pages/leaderboard", { user: user_data, listUserPP, leaderboard });
 });
 
-app.get("/event", async (req, res) => {
+app.get("/events", async (req, res) => {
   await getUserDatas();
   let events = JSON.parse(await getEventList());
 
   res.render("pages/events", { user: user_data, events });
 });
 
-app.get("/event/:eventName", async (req, res) => {
+app.get("/events/:eventName", async (req, res) => {
   var { eventName } = req.params;
   await getUserDatas();
   let listEvent = JSON.parse(await getEventList());
-  let event = listEvent.find((e) => e.title == eventName);
-  console.log("event :", event);
+  let event = listEvent.find((e) => e.url_name == eventName);
+
   if (event != undefined)
     res.render("pages/eventInfo", { user: user_data, event });
   else res.redirect("/");

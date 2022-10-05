@@ -48,7 +48,7 @@ events.forEach((e) => {
     var buttonSeeMore = document.createElement("button");
     buttonSeeMore.type = "button";
     buttonSeeMore.classList.add("btn", "btn-laexo-light");
-    buttonSeeMore.setAttribute("onclick", `location.href+='/${e.title}'`);
+    buttonSeeMore.setAttribute("onclick", `location.href+='/${e.url_name}'`);
     buttonSeeMore.innerHTML = "Voir plus";
     gridInfo.appendChild(buttonSeeMore);
   }
