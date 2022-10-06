@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const routes = require("./src/routes/routes.js");
 const axios = require("axios").default;
+const http = require('http').Server(app);
 
 const session = require("express-session");
 const crypto = require("crypto");
@@ -565,6 +566,6 @@ app.get("*", async (req, res) => {
   res.render("pages/error", { user: user_data });
 });
 
-app.listen(process.env.PORT, () =>
+http.listen(process.env.PORT, 'localhost', () =>
   console.log(`Listening at http://localhost:${process.env.PORT}/stream`)
 );
