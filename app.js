@@ -95,8 +95,9 @@ async function getLeaderboard() {
 
   //#endregion
 
-  if (listPP_LastUpdated.length >= 1) {
+  if (listPP_LastUpdated.length <= 0) {
     // need to be <= 0 to work (here is to block while in dev)
+	console.log("Updating...");
 
     let lengthPP = listUserPP.length;
 
@@ -428,10 +429,10 @@ async function getLeaderboard() {
   console.log("Check Finished");
 }
 
-//getLeaderboard(); //Initialisation
+getLeaderboard(); //Initialisation
 
 setInterval(() => {
-  //getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
+  getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
 }, "300000");
 
 setInterval(() => {
@@ -499,6 +500,10 @@ async function getUserDatas() {
   }
 }
 
+app.get("/", (req,res) => {
+	res.redirect("/stream");
+});
+
 app.get("/stream", async (req, res) => {
   await getUserDatas();
 
@@ -526,7 +531,7 @@ app.get("/events/:eventName", async (req, res) => {
 
   if (event != undefined)
     res.render("pages/eventInfo", { user: user_data, event });
-  else res.redirect("/");
+  else res.redirect("/error");
 });
 
 app.get("/planning", async (req, res) => {
