@@ -96,7 +96,7 @@ async function getLeaderboard() {
 
   //#endregion
 
-  if (listPP_LastUpdated.length <= 0) {
+  if (listPP_LastUpdated.length <=0) {
     // need to be <= 0 to work (here is to block while in dev)
 	console.log("Updating...");
 
