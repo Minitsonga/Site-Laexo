@@ -502,7 +502,7 @@ async function getUserDatas() {
 }
 
 app.get("/", (req,res) => {
-	res.redirect("/stream");
+  res.redirect("/stream");
 });
 
 app.get("/stream", async (req, res) => {
