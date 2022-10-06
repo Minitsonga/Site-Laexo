@@ -149,6 +149,8 @@ html {
     width: 600px;
 }
 
+
+
 .list .item {
     position: relative;
     display: flex;
@@ -209,4 +211,17 @@ html {
 
 .list .item:hover .pos {
     opacity: 1;
+}
+
+@media (max-width: 767px) {
+    .list {
+        width: 90%;
+    }
+
+    .list .item .name , .list .item .score {
+        font-size: 15px;
+    }
+    .list .item .score {
+        margin-right: 6px;
+    }
 }
