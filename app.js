@@ -95,7 +95,7 @@ async function getLeaderboard() {
 
   //#endregion
 
-  if (listPP_LastUpdated.length >= 1) {
+  if (listPP_LastUpdated.length <=0) {
     // need to be <= 0 to work (here is to block while in dev)
 
     let lengthPP = listUserPP.length;
@@ -428,7 +428,7 @@ async function getLeaderboard() {
   console.log("Check Finished");
 }
 
-//getLeaderboard(); //Initialisation
+getLeaderboard(); //Initialisation
 
 setInterval(() => {
   //getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
