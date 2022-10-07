@@ -33,7 +33,7 @@ app.use(
 
 app.use("", routes);
 
-let user_data = {}; // user data
+//let user_data = {}; // user data
 
 let leaderboard = {
   rank: [],
@@ -447,103 +447,96 @@ setInterval(() => {
 
 //   return fes.readFile(filePath, { encoding });
 // }
+
 async function getEventList() {
   const encoding = "utf-8";
   return fes.readFile("eventList.json", { encoding });
 }
 
-async function getUserDatas() {
-  if (process.env.GET_TOKEN) {
-    var options_validate = {
-      method: "GET",
-      url: "https://id.twitch.tv/oauth2/validate",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + process.env.GET_TOKEN, // token from authentication
-      },
-    };
+// async function getUserDatas() {
+//   if (process.env.GET_TOKEN) {
+//     var options_validate = {
+//       method: "GET",
+//       url: "https://id.twitch.tv/oauth2/validate",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: "Bearer " + process.env.GET_TOKEN, // token from authentication
+//       },
+//     };
 
-    let token_validation; //get json data from token (if valide return details token) else status error 401
+//     let token_validation; //get json data from token (if valide return details token) else status error 401
 
-    await axios
-      .request(options_validate) //get all user in chat (Need to check if we are in live)
-      .then((res) => (token_validation = res.data))
-      .catch(function (error) {
-        user_data = {};
-        process.env.GET_TOKEN = "";
-      });
+//     await axios
+//       .request(options_validate) //get all user in chat (Need to check if we are in live)
+//       .then((res) => (token_validation = res.data))
+//       .catch(function (error) {
+//         user_data = {};
+//         process.env.GET_TOKEN = "";
+//       });
 
-    //Check if token is still valide (if login exist = true)
-    console.log("validate", token_validation);
-    if (token_validation == undefined || token_validation.login == undefined) {
-      user_data = {};
-      process.env.GET_TOKEN = "";
-      return;
-    }
+//     //Check if token is still valide (if login exist = true)
+//     console.log("validate", token_validation);
+//     if (token_validation == undefined || token_validation.login == undefined) {
+//       user_data = {};
+//       process.env.GET_TOKEN = "";
+//       return;
+//     }
 
-    var header = {
-      "Content-Type": "application/json",
-      "Client-ID": process.env.TWITCH_CLIENT_ID, // ID of registered app in twitch console
-      Authorization: "Bearer " + process.env.GET_TOKEN,
-    };
+//     var header = {
+//       "Content-Type": "application/json",
+//       "Client-ID": process.env.TWITCH_CLIENT_ID, // ID of registered app in twitch console
+//       Authorization: "Bearer " + process.env.GET_TOKEN,
+//     };
 
-    var options = {
-      method: "GET",
-      url: "https://api.twitch.tv/helix/users",
-      headers: header,
-    };
+//     var options = {
+//       method: "GET",
+//       url: "https://api.twitch.tv/helix/users",
+//       headers: header,
+//     };
 
-    await axios
-      .request(options)
-      .then((res) => (user_data = res.data.data[0]))
-      .catch(function (error) {});
-    console.log("end");
-  }
-}
+//     await axios
+//       .request(options)
+//       .then((res) => (user_data = res.data.data[0]))
+//       .catch(function (error) {});
+//     console.log("end");
+//   }
+// }
 
 app.get("/", (req,res) => {
   res.redirect("/stream");
 });
 
 app.get("/stream", async (req, res) => {
-  await getUserDatas();
-
-  res.render("pages/stream", { user: user_data });
+  res.render("pages/stream");
 });
 
 app.get("/classement", async (req, res) => {
-  await getUserDatas();
 
-  res.render("pages/leaderboard", { user: user_data, listUserPP, leaderboard });
+  res.render("pages/leaderboard", {listUserPP, leaderboard });
 });
 
 app.get("/events", async (req, res) => {
-  await getUserDatas();
   let events = JSON.parse(await getEventList());
 
-  res.render("pages/events", { user: user_data, events });
+  res.render("pages/events", { events });
 });
 
 app.get("/events/:eventName", async (req, res) => {
   var { eventName } = req.params;
-  await getUserDatas();
   let listEvent = JSON.parse(await getEventList());
   let event = listEvent.find((e) => e.url_name == eventName);
 
   if (event != undefined)
-    res.render("pages/eventInfo", { user: user_data, event });
+    res.render("pages/eventInfo", {event });
   else res.redirect("/error");
 });
 
 app.get("/planning", async (req, res) => {
-  await getUserDatas();
-
-  res.render("pages/planning", { user: user_data });
+  res.render("pages/planning");
 });
 
 app.get("/conception", async (req, res) => {
-  await getUserDatas();
-  res.render("pages/conception", { user: user_data });
+  res.render("pages/conception");
 });
 
 app.post("/revoke", async (req, res) => {
@@ -562,8 +555,7 @@ app.get("/reseaux", (req, res) => {
 });
 
 app.get("*", async (req, res) => {
-  await getUserDatas();
-  res.render("pages/error", { user: user_data });
+  res.render("pages/error");
 });
 
 http.listen(process.env.PORT, 'localhost', () =>
