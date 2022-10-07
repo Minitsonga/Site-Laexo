@@ -5,12 +5,15 @@ const classement = require('./mainWebSite/classement');
 const events = require('./mainWebSite/events');
 const planning = require('./mainWebSite/planning');
 
+const admin = require('./backOffice/admin');
+
 
 router.use('/oauth', oauth);
 router.use('/stream', stream);
 router.use('/classement', classement);
 router.use('/events', events);
 router.use('/planning', planning);
+router.use('/admin', admin);
 
 
 module.exports = router;
