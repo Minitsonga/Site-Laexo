@@ -1,0 +1,67 @@
+<html lang="fr">
+
+<head>
+  <%- include('../templates/headerGlobal'); %>
+    <title>Conception - Laexo.tv</title>
+</head>
+
+<body class="bg-dark-laexo" onload="">
+  <%- include('../templates/svgIcons'); %>
+    <%- include('../templates/navbar');%>
+
+      <div class="mx-auto container my-5 mt-1">
+        <div class="items-center middle">
+          <a href="https://twitter.com/Minitsonga1" target="_blank" class="linksLogo">
+            <img src="/img/LogoMini.png" title="dev" class="rounded-full imgLogo" alt="Minitsonga">
+          </a>
+          <div class="mt-3 font-large text-lg">Minitsonga</div>
+          <div>Développeur</div>
+        </div>
+      </div>
+
+      <%- include('../templates/footer'); %>
+
+        <style>
+          .middle {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .linksLogo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 150px;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-top: 50px;
+          }
+
+          .rounded-full {
+            display: inline;
+            margin: 0 auto;
+            height: 100%;
+            width: auto;
+          }
+
+          .font-medium {
+            font-weight: 500;
+          }
+
+          .text-lg,
+          .text-xl {
+            line-height: 2.5rem;
+          }
+
+          .text-lg {
+            font-size: 1.5rem;
+          }
+        </style>
+
+</body>
+
+</html>

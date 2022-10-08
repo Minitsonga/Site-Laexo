@@ -17,13 +17,15 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
-app.use(session({
+
+app.use(
+  session({
     secret: hash,
     resave: true,
     saveUninitialized: false,
     cookie: {
       secure: false,
-      maxAge: 30 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000,
     },
     rolling: true,
   })

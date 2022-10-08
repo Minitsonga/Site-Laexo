@@ -1,8 +1,9 @@
 const router = require("express").Router();
 
 router.get("/events/login", (req,res) =>{
-    let visible = false;
-    res.render("pages/login", {visible});
+   
+    console.log(req.session.loggedin);
+    res.render("pages/login");
 });
 
 router.post("/events/login", (req,res) =>{
@@ -12,7 +13,8 @@ router.post("/events/login", (req,res) =>{
     if(userName == process.env.ADMIN_ID && password == process.env.ADMIN_PASSWORD)
     {
         console.log("C bon");
-        res.redirect("/admin/events/editor");
+        req.session.loggedin = true;
+        res.redirect("/admin/events/login");
     }else
     {
         console.log("pas bon");
