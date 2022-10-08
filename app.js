@@ -22,7 +22,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie: {
-      secure: false,
+      secure: "auto", // auto set on security (http or https)
       maxAge: 30 * 60 * 1000,
     },
     rolling: true,
