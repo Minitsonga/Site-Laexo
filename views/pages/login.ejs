@@ -41,12 +41,13 @@
           // let visible = JSON.parse(`<%- JSON.stringify(visible)%>`);
           // //console.log(visible);
           const login = document.querySelector("#btnLogin");
+          const userName = document.querySelector("#userName");
           const pwd = document.querySelector("#pwd");
           const error = document.querySelector("#erroTxt");
 
           login.addEventListener("click", function (e) {
 
-            let data = {password: pwd.value };
+            let data = {userName: userName.value, password: pwd.value };
 
             fetch("login", {
               headers: {

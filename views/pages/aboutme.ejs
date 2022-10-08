@@ -1,0 +1,123 @@
+<html lang="fr">
+
+<head>
+    <%- include('../templates/headerGlobal'); %>
+        <title>Conception - Laexo.tv</title>
+</head>
+
+<body class="bg-dark-laexo" onload="console.clear()">
+    <%- include('../templates/svgIcons'); %>
+        <%- include('../templates/navbar');%>
+
+            <div class="mx-auto container my-5 mt-1">
+
+                <div class="title">
+                    <h1>Qui suis-je ?</h1>
+                    <p>Les questions les <span>plus posées</span> pour en apprendre plus sur moi !</p>
+
+                </div>
+
+                <div class="question">
+                    <h4>Comment je m'appelle</h4>
+                    <div>Je m'appelle Alex aka Laexo (ton streameur préféré)</div>
+                </div>
+
+                <div class="question">
+                    <h4>Quel âge je suis ?</h4>
+                    <div>Je suis née le 18 décembre 1999 ! (Je te laisse calculer) </div>
+                </div>
+
+
+                <div class="question">
+                    <h4>Quelle est ma profession ?</h4>
+                    <div>Je suis Maitre nageur de jour et streamer de nuit</div>
+                </div>
+
+                <div class="question">
+                    <h4>D'où vient mon pseudo ?</h4>
+                    <div>A l'origine mon pseudo était " TheXylax ", mais la consonance faisait très médicament (Ah!
+                        #denis) et mes lives ne sont pas prescris par ordonnance.<br> J'ai donc changé (heureusement) de
+                        femme. J'ai melangé les lettres de mon prénom puis " Laexo " naquît.</div>
+                </div>
+
+                <div class="question">
+                    <h4>Pourquoi j'ai commencé les lives ?</h4>
+                    <div>Tout a commencé par le confinement. Ayant du temps libre, je jouais souvent et lors d’une
+                        partie un ami m’a persuadé de débuter le stream sur twitch. Et me voilà sur le twitch game
+                        depuis le : <span>15 mai 2020</span>.</div>
+                </div>
+
+                <div class="question">
+                    <h4>Quel contenu je fais sur twitch ?</h4>
+                    <div>J'ai commencé par faire du rocket league. Je cherche actuellement à me diversifier en jouant à
+                        differents jeux.</div>
+                </div>
+
+            </div>
+
+            <%- include('../templates/footer'); %>
+
+                <style>
+                    .title {
+                        text-align: center;
+                        margin-top: 15px;
+                    }
+
+                    h1 {
+
+                        font-size: 70px;
+                    }
+
+                    .title>p {
+                        margin-top: 10px;
+                        font-size: 20px;
+
+                    }
+
+                    span {
+                        color: #39ace7;
+                        font-weight: bold;
+
+                    }
+
+                    .question {
+                        margin-top: 40px;
+                        text-align: start;
+                    }
+
+                    .question>div {
+                        font-size: 20px;
+                    }
+
+                    h4 {
+                        font-size: 30px;
+                        color: #ffffff;
+                        margin-bottom: 25px;
+                        font-weight: 500;
+                        position: relative;
+                        text-decoration: underline solid 1.5px #39ace7;
+                        text-underline-offset: 12px;
+                    }
+
+                    @media (max-width: 996px) {
+                        h1 {
+                            font-size: 40px;
+                        }
+
+                        h4 {
+                            font-size: 20px;
+                        }
+
+                        .question>div {
+                            font-size: 12px;
+                        }
+
+                        .title>p {
+                            font-size: 15px;
+                        }
+                    }
+                </style>
+
+</body>
+
+</html>
