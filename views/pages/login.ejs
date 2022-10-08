@@ -2,78 +2,72 @@
 
 <head>
   <%- include('../templates/headerGlobal'); %>
+    <link rel="stylesheet" href="/css/login.css">
     <title>Login - Laexo.tv</title>
 </head>
 
-<body class="bg-dark-laexo" onload="">
+<body class="bg-dark-laexo">
   <%- include('../templates/svgIcons'); %>
     <%- include('../templates/navbar');%>
 
-      <div class="mx-auto container my-5 mt-1">
-        <form>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="form2Example1" class="form-control" />
-              <label class="form-label" for="form2Example1">Email address</label>
-            </div>
-          
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="form2Example2" class="form-control" />
-              <label class="form-label" for="form2Example2">Password</label>
-            </div>
-          
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me </label>
-                </div>
-              </div>
-          
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-          
-            <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-          
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="#!">Register</a></p>
-              <p>or sign up with:</p>
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-              </button>
-          
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-google"></i>
-              </button>
-          
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-              </button>
-          
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-github"></i>
-              </button>
-            </div>
-          </form>
+
+      <div class="wrapper">
+        <div class="logo">
+          <img src="/img/PP.png" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+          Administrateur
+        </div>
+        <div action="/admin/events/login" method="POST" class="p-3 mt-3">
+          <div class="form-field d-flex align-items-center">
+            <span class="far fa-user" style="color: black;"></span>
+            <input type="text" name="userName" id="userName" placeholder="Username">
+          </div>
+          <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key " style="color: black;"></span>
+            <input type="password" name="password" id="pwd" placeholder="Password">
+          </div>
+          <button id="btnLogin" class="btn mt-3">Login</button>
+        </div>
+        <p id="erroTxt" style="color: red; font-weight: bold; text-align: center; visibility: hidden;">Mauvais mot de
+          passe ou identifiant</p>
       </div>
+
+
 
       <%- include('../templates/footer'); %>
 
-      <style>
-        form{
-            margin: auto;
-            margin-top: 10vh;
-            width: 40%;
-        }
-      </style>
+        <script>
+          // let visible = JSON.parse(`<%- JSON.stringify(visible)%>`);
+          // //console.log(visible);
+          const login = document.querySelector("#btnLogin");
+          const pwd = document.querySelector("#pwd");
+          const error = document.querySelector("#erroTxt");
+
+          login.addEventListener("click", function (e) {
+
+            let data = {password: pwd.value };
+
+            fetch("login", {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              body: JSON.stringify(data)
+            }).then((res) => {
+              console.log("done", res);
+
+              if(res.status == 400)
+              {
+                error.style.visibility = "visible";
+              }
+
+            });
+          });
+    
+
+        </script>
 
 </body>
 
