@@ -15,7 +15,7 @@ router.use("/classement", classement);
 router.use("/events", events);
 router.use("/planning", planning);
 router.use("/conception", conception);
-//router.use('/admin', admin);
+router.use('/admin', admin);
 router.use("/quisuisje", aboutme);
 
 module.exports = router;
