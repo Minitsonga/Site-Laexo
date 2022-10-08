@@ -24,7 +24,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      secure: false,
+      secure: "auto",
       maxAge: 24 * 60 * 60 * 1000,
     },
     rolling: true,
