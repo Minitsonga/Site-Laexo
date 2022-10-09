@@ -84,7 +84,6 @@ async function setupTopData() {
     let user = listUser_img.find((element) => element.user_uid == id);
 
     if (user != undefined) {
-      console.log("user:", user);
       let img = user.img;
 
       let val;
