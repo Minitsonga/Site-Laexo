@@ -218,10 +218,17 @@ html {
         width: 90%;
     }
 
-    .list .item .name , .list .item .score {
+    .list .item .name,
+    .list .item .score {
         font-size: 15px;
     }
+
     .list .item .score {
         margin-right: 6px;
+    }
+
+    .container {
+        margin-right: 0.5rem !important;
+        margin-left: 0.5rem !important;
     }
 }

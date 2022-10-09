@@ -81,38 +81,42 @@ async function setupTopData() {
     const name = category == "rank" ? member.viewer_name : member.user_name;
     const pos = category == "rank" ? member.rank : i + 1;
 
-    let { img } = listUser_img.find((element) => element.user_uid == id);
+    let user = listUser_img.find((element) => element.user_uid == id);
 
-    let val;
+    if (user != undefined) {
+      console.log("user:", user);
+      let img = user.img;
 
-    switch (category) {
-      case "uptime":
-        let sec = member.value / 3600;
-        let hour = Math.trunc(sec);
+      let val;
 
-        sec -= hour;
-        sec *= 60;
+      switch (category) {
+        case "uptime":
+          let sec = member.value / 3600;
+          let hour = Math.trunc(sec);
 
-        let min = Math.trunc(sec);
-        sec -= min;
+          sec -= hour;
+          sec *= 60;
 
-        sec = Math.round(sec * 60);
+          let min = Math.trunc(sec);
+          sec -= min;
 
-        val = `${hour}h ${min}m ${sec}s`;
+          sec = Math.round(sec * 60);
 
-        break;
-      case "message":
-        val = member.value + " msg";
-        break;
-      case "rank":
-        val = member.exp + " xp";
-        break;
-    }
+          val = `${hour}h ${min}m ${sec}s`;
 
-    let newRow = document.createElement("div");
-    newRow.classList = "item";
-    newRow.id = id;
-    newRow.innerHTML = `
+          break;
+        case "message":
+          val = member.value + " msg";
+          break;
+        case "rank":
+          val = member.exp + " xp";
+          break;
+      }
+
+      let newRow = document.createElement("div");
+      newRow.classList = "item";
+      newRow.id = id;
+      newRow.innerHTML = `
         <div class="pos">
           ${pos}
         </div>
@@ -126,9 +130,9 @@ async function setupTopData() {
         </div>
         </div>
         `;
-    holder.appendChild(newRow);
+      holder.appendChild(newRow);
+    }
   }
-
   // if (Object.keys(user).length > 0) {
   //   const cardUser = document.getElementById(`${user.id}`);
   //   console.log(cardUser);
