@@ -18,7 +18,7 @@
         <div class="text-center mt-4 name">
           Administrateur
         </div>
-        <div action="/admin/events/login" method="POST" class="p-3 mt-3">
+        <form action="/admin/events/login" method="POST" class="p-3 mt-3">
           <div class="form-field d-flex align-items-center">
             <span class="far fa-user" style="color: black;"></span>
             <input type="text" name="userName" id="userName" placeholder="Username">
@@ -28,7 +28,7 @@
             <input type="password" name="password" id="pwd" placeholder="Password">
           </div>
           <button id="btnLogin" class="btn mt-3">Login</button>
-        </div>
+        </form>
         <p id="erroTxt" style="color: red; font-weight: bold; text-align: center; visibility: hidden;">Mauvais mot de
           passe ou identifiant</p>
       </div>
@@ -38,34 +38,10 @@
       <%- include('../templates/footer'); %>
 
         <script>
-          const login = document.querySelector("#btnLogin");
-          const userName = document.querySelector("#userName");
-          const pwd = document.querySelector("#pwd");
           const error = document.querySelector("#erroTxt");
+          var visible = JSON.parse(`<%-JSON.stringify(visible)%>`);
 
-          login.addEventListener("click", function (e) {
-
-            let data = {userName: userName.value, password: pwd.value };
-
-            fetch("login", {
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              body: JSON.stringify(data)
-            }).then((res) => {
-              console.log("done", res);
-
-              if(res.status == 400)
-              {
-                error.style.visibility = "visible";
-              }
-
-            });
-          });
-    
-
+          if (visible) error.style.visibility = "visible";
         </script>
 
 </body>
