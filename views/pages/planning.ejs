@@ -5,21 +5,32 @@
         <title>Planning - Laexo.tv</title>
 </head>
 
-<body class="bg-dark-laexo" onload="console.clear();">
+<body class="bg-dark-laexo">
     <%- include('../templates/svgIcons'); %>
         <%- include('../templates/navbar'); %>
 
             <div class="mx-auto container my-5 mt-1">
-                <a href="/img/planning.png" target="_blank">
-                    <img src="/img/planning.png" alt="" width="1920" height="1080"
-                        style="height: auto; width: 100%">
+                <a id="planningLink" href="/img/planning.png" target="_blank">
+                    <img id="planning" src="/img/planning.png" style="height: auto; width: 100%;" />
                 </a>
             </div>
 
-
             <%- include('../templates/footer'); %>
 
+                <script>
+                    resizeWindow(); //Init page
+                    
+                    window.onresize = resizeWindow; // When resize the window
+                    function resizeWindow() {
+                        if (window.innerWidth <= 768) {
+                            document.querySelector("#planningLink").href = "/img/planning2.png";
+                            document.querySelector("#planning").src = "/img/planning2.png";
+                        } else {
+                            document.querySelector("#planningLink").href = "/img/planning.png";
+                            document.querySelector("#planning").src = "/img/planning.png";
+                        }
+                    }
+                </script>
 </body>
-
 
 </html>

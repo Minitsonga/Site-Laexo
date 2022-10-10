@@ -2,7 +2,7 @@
 
 creer page admin (voir comment login)
 
-planning modulable en fonction du device
+<!-- planning modulable en fonction du device  -->
 
 Programmer parussion evenenement 
 Trier les evenements en fonctions de la date
