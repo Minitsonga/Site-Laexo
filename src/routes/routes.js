@@ -17,6 +17,6 @@ router.use("/planning", planning);
 router.use("/conception", conception);
 router.use("/quisuisje", aboutme);
 
-router.use('/admin', admin);
+//router.use('/admin', admin);
 
 module.exports = router;
