@@ -7,8 +7,8 @@ document.querySelectorAll("ul>a").forEach((element) => {
   }
 });
 
-$(document).ready(function () {
-  currentLink.addClass("selected");
+window.addEventListener("DOMContentLoaded", function () {
+  currentLink.classList.add("selected");
 });
 
 //#endregion
