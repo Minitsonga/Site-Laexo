@@ -408,8 +408,6 @@ setInterval(() => {
 
 
 router.get("/", async (req, res) => {
-  console.log(listUserPP);
-  console.log(leaderboard);
   res.render("pages/leaderboard", { listUserPP, leaderboard });
 });
 
