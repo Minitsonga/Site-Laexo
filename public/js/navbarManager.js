@@ -1,15 +1,15 @@
 //#region Get current link
 var currentLink;
-$("ul>a").each(function () {
-  var linkPage = $(this).attr("href");
-
-  if (location.pathname == linkPage) {
-    currentLink = $(this);
+var currentLink;
+document.querySelectorAll("ul>a").forEach((element) => {
+  var path = "/" + location.pathname.split("/")[1];
+  if (path == element.attributes["href"].value) {
+    currentLink = element;
   }
 });
 
-$(document).ready(function () {
-  currentLink.addClass("selected");
+window.addEventListener("DOMContentLoaded", function () {
+  currentLink.classList.add("selected");
 });
 //#endregion
 
