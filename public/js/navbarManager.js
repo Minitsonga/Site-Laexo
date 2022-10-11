@@ -1,6 +1,5 @@
 //#region Get current link
 var currentLink;
-var currentLink;
 document.querySelectorAll("ul>a").forEach((element) => {
   var path = "/" + location.pathname.split("/")[1];
   if (path == element.attributes["href"].value) {
@@ -8,9 +7,10 @@ document.querySelectorAll("ul>a").forEach((element) => {
   }
 });
 
-window.addEventListener("DOMContentLoaded", function () {
-  currentLink.classList.add("selected");
+$(document).ready(function () {
+  currentLink.addClass("selected");
 });
+
 //#endregion
 
 //#region Open and close sidebar
