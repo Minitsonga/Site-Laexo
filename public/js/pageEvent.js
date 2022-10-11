@@ -32,7 +32,7 @@ if (cur_event.inscription.length > 0 || cur_event.reglement.length > 0) {
     inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
     inscriptionButton.setAttribute(
       "onclick",
-      `location.href+='/${cur_event.inscription}'`
+      `window.open('${cur_event.inscription}', '_blank');`
     );
     inscriptionButton.innerHTML = "Inscriptions";
     buttonHolder.appendChild(inscriptionButton);
@@ -44,7 +44,7 @@ if (cur_event.inscription.length > 0 || cur_event.reglement.length > 0) {
     rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
     rulesButton.setAttribute(
       "onclick",
-      `location.href+='/${cur_event.reglement}'`
+      `window.open('${cur_event.reglement}', '_blank');`
     );
     rulesButton.innerHTML = "Règlement";
     buttonHolder.appendChild(rulesButton);
@@ -61,6 +61,8 @@ if (cur_event.alerte_msg_wlinkD.length > 0) {
   alerteText.classList.add("alert-link");
   alerteText.innerHTML = cur_event.links.discord;
   alerteText.href = cur_event.links.discord;
+  alerteText.target = "_blank";
+
   alerteDiv.innerHTML = cur_event.alerte_msg_wlinkD + "<br>Discord : ";
   alerteDiv.appendChild(alerteText);
   holder.appendChild(alerteDiv);
