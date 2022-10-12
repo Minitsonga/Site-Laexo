@@ -69,7 +69,7 @@ nav {
 
 }
 
-@media (max-width: 2000px) {
+@media (min-width: 1800px) {
   .container {
     max-width: 1536px;
   }
