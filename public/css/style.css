@@ -58,8 +58,6 @@ nav{
     z-index: auto;
   }
 
-
-
   .toggle-nav {
     visibility: hidden;
     position: absolute;
@@ -72,11 +70,11 @@ nav{
 
 }
 
-@media (min-width: 1536px) {
+/* @media (min-width: 1536px) {
   .container {
     max-width: 1536px;
   }
-}
+} */
 
 .btn-circle {
   display: inline-flex;
