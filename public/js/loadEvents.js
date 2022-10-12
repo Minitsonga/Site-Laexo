@@ -59,7 +59,7 @@ events.forEach((e) => {
     buttonInscription.classList.add("btn", "btn-laexo-light");
     buttonInscription.setAttribute(
       "onclick",
-      `location.href+='/${e.inscription}'`
+      `window.open('${e.inscription}', '_blank');`
     );
     buttonInscription.innerHTML = "Inscriptions";
     gridInfo.appendChild(buttonInscription);
@@ -67,7 +67,6 @@ events.forEach((e) => {
 
   //#endregion
 
-  
   holderEvent.appendChild(gridText);
   holderEvent.appendChild(gridInfo);
   holder.appendChild(holderEvent);

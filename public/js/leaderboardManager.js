@@ -90,6 +90,7 @@ async function setupTopData() {
 
       switch (category) {
         case "uptime":
+          if(member.value <= 0) return;
           let sec = member.value / 3600;
           let hour = Math.trunc(sec);
 
