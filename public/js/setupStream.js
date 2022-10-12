@@ -18,7 +18,6 @@ async function getData() {
 
 
   const streamOverlay = document.querySelector("#stream");
-  const chatOverlay = document.querySelector("#chat-holder");
   const imgOffline = document.querySelector(".img");
 
   if (isOnline <= 0) {
