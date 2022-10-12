@@ -11,7 +11,7 @@
 
       <div class="mx-auto container my-5 mt-1">
         <div class="d-flex flex-wrap justify-between" id="holderTotal" style="height: 67%;">
-          <div class="pt-2" id="stream-holder" style="width: 76%;">
+          <div class="pt-2" id="stream-holder" style="width: 76%; height: 100%;">
             <a href="https://www.twitch.tv/laexo">
               <img src="/img/SceneOffline.png" class="img" alt="" width="1920" height="1080"
                 style="height: auto; width: 100%;"></a>
@@ -19,7 +19,7 @@
           </div>
           <div class="pt-2" id="chat-holder" style="width: 22%;">
             <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/laexo/chat?parent=localhost&darkpopout"
-              height="100%" width="100%">
+              height="100%" width="110%">
             </iframe>
           </div>
           <div class="d-flex mb-3 mt-2" id="stream-buttons" style="width: 76%;">
@@ -43,11 +43,8 @@
           </div>
 
         </div>
-        
+
       </div>
-
-
-
 
       <%- include('../templates/footer'); %>
 
@@ -64,8 +61,7 @@
             layout: "video"
           });
 
-
-          if (window.innerWidth <= 996) {
+          if (window.innerWidth <= 1400) {
             document.getElementById("chat-holder").style.visibility = "hidden";
             document.getElementById("chat-holder").style.position = "absolute";
 
@@ -79,13 +75,6 @@
             document.getElementById("stream-buttons").style.width = "76%";
           }
 
-
-
-        </script>
-
-
-
-        <script>
           function New_Window(url, width, height) {
             window.open(url, "", `width=${width}, height=${height}`);
           }
