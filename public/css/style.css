@@ -1,6 +1,6 @@
-nav{
+nav {
   font-size: medium;
-  
+
 }
 
 .sidebar,
@@ -58,8 +58,6 @@ nav{
     z-index: auto;
   }
 
-
-
   .toggle-nav {
     visibility: hidden;
     position: absolute;
@@ -69,10 +67,9 @@ nav{
     width: 100%;
   }
 
-
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1800px) {
   .container {
     max-width: 1536px;
   }
@@ -131,7 +128,7 @@ nav{
   content: '';
   position: absolute;
   transform: scale(0);
-	transform-origin: center;
+  transform-origin: center;
   bottom: 0;
   left: 20%;
   width: 60%;
@@ -142,7 +139,7 @@ nav{
 
 .main-navigation .nav-link:not(.selected):hover:after {
   transform: scale(1);
- 
+
 }
 
 /* .main-navigation:not(.active) .nav-link.selected {
