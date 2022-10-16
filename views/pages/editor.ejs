@@ -19,27 +19,34 @@
 
 
                 <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label class="form-control-label px-3">
-                      Nom de l'URL<span class="text-danger"> *</span>
-                    </label>
-                    <input type="text" id="fname" name="fname" placeholder="Entrer le nom de la page">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="urlName" name="urlName"
+                        placeholder="Entrer le nom de la page">
+                      <label class="form-control-label px-3" for="urlName">
+                        Nom de l'URL<span class="text-danger"> *</span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label class="form-control-label px-3">
-                      Titre de l'évènement<span class="text-danger"> *</span>
-                    </label>
-                    <input type="text" id="fname" name="fname" placeholder="Entrer un titre">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="TitleMain" name="TitleMain"
+                        placeholder="Entrer le Titre de l'évènement">
+                      <label class="form-control-label px-3" for="TitleMain">
+                        Titre de l'évènement<span class="text-danger"> *</span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label for="selectType" class="form-label">
-                      Type de l'évènement<span class="text-danger"> *</span>
-                    </label>
-                    <select id="selectType" class="form-select">
-                      <option selected>Tournoi</option>
-                      <option>Live</option>
-                    </select>
-                  </div>
+                  <!-- <div class="form-group col-sm-4 flex-column d-flex">
+                    <div class="form-floating">
+                      <select id="selectType" class="form-select" id="floatingSelect" aria-label="Type d'évènement">
+                        <option selected>Tournoi</option>
+                        <option>Live</option>
+                      </select>
+                      <label for="selectType" class="form-label">Type de l'évènement<span class="text-danger">
+                          *</span></label>
+                    </div>
+                  </div> -->
                 </div>
 
                 <div class="row justify-content-between">
@@ -56,18 +63,48 @@
 
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Nouvel élément</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              ...
+              <div class="row justify-content-between">
+                <div class="form-group col-sm-4 flex-column d-flex justify-content-center">
+                  <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid">
+                      <option selected value="img_mini">Image Miniature</option>
+                      <option selected value="img_band">Image Bande</option>
+                      <option value="title">Titre</option>
+                      <option value="subtitle">Petit Texte</option>
+                      <option value="3">Grand Texte</option>
+                    </select>
+                    <label for="floatingSelectGrid">Works with selects</label>
+                  </div>
+
+                </div>
+                <!-- <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                  <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
+                  <input class="form-control custom-input" type="file" id="formFile">
+                </div>  -->
+                <!-- <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto" >
+                  <label class="form-control-label px-3">Titre</label>
+                  <input type="text" id="fname" name="fname" placeholder="Entrer un titre">
+                </div> -->
+                <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
+                      style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Grand Texte</label>
+                  </div>
+
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
             </div>
           </div>
         </div>
@@ -81,14 +118,8 @@
             margin-bottom: 20px;
           }
 
-          .label-file {
-            cursor: pointer;
-            color: #00b1ca;
-            font-weight: bold;
-          }
-
-          .label-file:hover {
-            color: #25a5c4;
+          .modal {
+            color: black;
           }
         </style>
 
