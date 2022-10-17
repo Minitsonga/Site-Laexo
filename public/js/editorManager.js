@@ -1,8 +1,8 @@
 const select = document.querySelector("#floatingSelectGrid");
 let prevValue;
-select.addEventListener("change", function handleChange(event) {
+select.addEventListener("change", (event) => {
   const value = event.target.value;
-
+  console.log(event.target.attributes);
   if (prevValue != value && prevValue != undefined) {
     ToggleElement(prevValue, true);
   }
@@ -12,17 +12,15 @@ select.addEventListener("change", function handleChange(event) {
 });
 
 function GetElementFromValue(selectValue) {
-    if(selectValue == "img_mini")
-    {
-      return "img";
-    }
-  
+  if (selectValue == "img_mini") {
+    return "img";
+  }
 }
 
 function ToggleElement(selectValue, elementID, hide) {
-    if(selectValue == "img_mini" || selectValue == "img_band") elementID = "img";
-    if(selectValue == "title" || selectValue == "subtitle") elementID = "img";
-    if(selectValue == "img_mini" || selectValue == "img_band") elementID = "img";
+  if (selectValue == "img_mini" || selectValue == "img_band") elementID = "img";
+  if (selectValue == "title" || selectValue == "subtitle") elementID = "img";
+  if (selectValue == "img_mini" || selectValue == "img_band") elementID = "img";
   const element = document.querySelector(`"${elementID}`);
 
   if (hide) {
