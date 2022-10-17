@@ -24,13 +24,13 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/editor", (req, res) => {
-  if (req.session.loggedin) {
+  //if (req.session.loggedin) {
     console.log("Editor");
     res.render("pages/editor");
-  } else {
-    console.log("dommage");
-    res.redirect("/admin/login");
-  }
+  // } else {
+  //   console.log("dommage");
+  //   res.redirect("/admin/login");
+  // }
 });
 
 module.exports = router;
