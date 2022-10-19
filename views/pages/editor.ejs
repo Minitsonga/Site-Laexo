@@ -74,51 +74,56 @@
                 <div class="form-group col-sm-4 flex-column d-flex justify-content-center">
                   <div class="form-floating">
                     <select class="form-select" id="floatingSelectGrid">
-                      <option selected value="img_mini" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Image
+                      <option selected value="img_mini" for="imgSelect" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">Image
                         Miniature (7:3)</option>
-                      <option value="img_band">Image Bande (7:3)</option>
-                      <option value="title">Titre</option>
-                      <option value="subtitle">Petit Texte</option>
-                      <option value="textZone">Grand Texte</option>
-                      <option value="alerteTxt">Texte important</option>
-                      <option value="inscription">Lien inscription</option>
-                      <option value="reglement">Lien règlement</option>
-                      <option value="date">Date</option>
+                      <option value="img_band" for="imgSelect">Image Bande (7:3)</option>
+                      <option value="title" for="textSelect">Titre</option>
+                      <option value="subtitle" for="textSelect">Petit Texte</option>
+                      <option value="textZone" for="textZoneSelect">Grand Texte</option>
+                      <option value="alerteTxt" for="textSelect">Texte important</option>
+                      <option value="inscription" for="urlButtonSelect">Lien inscription</option>
+                      <option value="reglement" for="urlButtonSelect">Lien règlement</option>
+                      <option value="date" for="dateSelect">Date</option>
                     </select>
                     <label for="floatingSelectGrid">Type d'élément</label>
                   </div>
                 </div>
 
 
-                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto" id="img">
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="imgSelect">
                   <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
                   <input class="form-control custom-input" type="file" id="formFile">
                 </div>
 
-                <!-- <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto" id="text">
-                   <div class="form-floating">
-                  <label class="form-control-label px-3">Titre</label>
-                  <input type="text" id="fname" name="fname" placeholder="Entrer un titre">
-                </div> -->
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="textSelect">
+                  <div class="form-floating">
+                    <input class="form-control" type="text" id="fname" name="fname" placeholder="Titre">
+                    <label for="fname">Titre</label>
 
-                <!-- <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto" id="textZone">
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
+                  id="textZoneSelect">
                   <div class="form-floating">
                     <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
                       style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Grand Texte</label>
+                    <label for="floatingTextarea2">Entrer un grand Texte</label>
                   </div>
-                </div> -->
+                </div>
 
-                <!-- <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto" id="urlButton">
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
+                  id="urlButtonSelect">
                   <div class="form-floating">
                     <input type="url" name="url" class="form-control" placeholder="Entrer une url"
                       id="urlInput"></input>
                     <label for="urlInput">Entrer une url</label>
                   </div>
-                </div> -->
+                </div>
 
 
-                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto" id="date">
+                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide" id="dateSelect">
                   <div class="row justify-content-between">
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
