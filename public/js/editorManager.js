@@ -37,33 +37,37 @@ select.addEventListener("change", () => {
 
 function SetupElement(selectValue, element) {
   if (selectValue == "img_mini") {
-    //console.log(element.querySelector("label"));
+    element.querySelector("input").setAttribute("name", "img");
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
   if (selectValue == "img_band") {
-    //console.log(element.querySelector("label"));
+    element.querySelector("input").setAttribute("name", "band_img");
     element.querySelector("label").innerHTML = "Image Bande (7:3)";
   }
 
   if (selectValue == "title") {
-    console.log(element.querySelector("label"));
+    element.querySelector("input").setAttribute("name", "title");
     element.querySelector("label").innerHTML = "Titre";
   }
 
   if (selectValue == "subtitle") {
+    element.querySelector("input").setAttribute("name", "subtitle");
     element.querySelector("label").innerHTML = "Entrer un petit texte";
   }
 
   if (selectValue == "alerteTxt") {
+    element.querySelector("input").setAttribute("name", "alerte_msg");
     element.querySelector("label").innerHTML = "Entrer un texte important";
   }
 
   if (selectValue == "inscription") {
+    element.querySelector("input").setAttribute("name", "inscription");
     element.querySelector("label").innerHTML = "Entrer le lien d'inscription";
   }
 
   if (selectValue == "reglement") {
+    element.querySelector("input").setAttribute("name", "reglement");
     element.querySelector("label").innerHTML = "Entrer le lien du règlement";
   }
 }
@@ -79,4 +83,50 @@ function ToggleElement(targetID, hide) {
   return element;
 }
 
+let validateBtn = document.querySelector(".validate");
+validateBtn.addEventListener("click", () => {
+  let curElement = ToggleElement(targetID, false).cloneNode(true);
+  curElement.removeAttribute("class");
+  curElement.removeAttribute("id");
+  curElement.classList.add("form-group", "flex-column", "d-flex");
+  if (value == "img_mini" || value == "img_band")
+    curElement.style = "align-items:start;";
+  console.log("Validation : ", validateBtn, " Current element : ", curElement);
+
+  let div = document.createElement("div");
+  div.id = "reduce";
+  div.classList.add("row", "justify-content-between", "parent");
+
+  div.appendChild(curElement);
+
+  let form = document.querySelector(".form-card");
+
+  form.insertBefore(div, form.children[form.children.length - 2]);
+});
+
 // console.log((2100/900 == 1200/450)); Check if 2 resolution have the same ratio
+
+function deleteElement(element) {
+  element.closest(".parent").remove();
+}
+
+//Submit preview + validation (confirmation avant le post des données)
+// preview = post des données et affichage de la page sur un nouvel onglet;
+
+async function previewForm(button) {
+  const form = button.closest("#mainForm");
+  const data = JSON.stringify(Object.fromEntries(new FormData(form).entries()));
+  fetch("/admin/editor/preview", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: data,
+  })
+    .then((res) => {
+      console.log("done", res);
+      // window.open(location.href+="/preview");
+    })
+    .catch((err) => console.log(err));
+}

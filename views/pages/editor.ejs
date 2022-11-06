@@ -15,13 +15,13 @@
           <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             <div class="card">
               <h5 class="text-center mb-4">Crée ta propre page d'évènement</h5>
-              <form class="form-card" onsubmit="event.preventDefault()">
+              <form class="form-card" action="/" method="post" id="mainForm">
 
 
                 <div class="row justify-content-between text-left">
                   <div class="form-group col-sm-6 flex-column d-flex">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="urlName" name="urlName"
+                      <input type="text" class="form-control" id="urlName" name="url_name"
                         placeholder="Entrer le nom de la page">
                       <label class="form-control-label px-3" for="urlName">
                         Nom de l'URL<span class="text-danger"> *</span>
@@ -30,7 +30,7 @@
                   </div>
                   <div class="form-group col-sm-6 flex-column d-flex">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="TitleMain" name="TitleMain"
+                      <input type="text" class="form-control" id="TitleMain" name="title"
                         placeholder="Entrer le Titre de l'évènement">
                       <label class="form-control-label px-3" for="TitleMain">
                         Titre de l'évènement<span class="text-danger"> *</span>
@@ -49,10 +49,19 @@
                   </div> -->
                 </div>
 
-                <div class="row justify-content-between">
-                  <div class="form-group col-sm-1 flex-column d-flex" style="margin: auto; width: 70px;">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                <div class="row justify-content-center">
+                  <div class="form-group col-sm-1 flex-column d-flex">
+                    <button type="button" class="btn btn-success" style="width: 45px;" data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"><strong>+</strong></button>
+                  </div>
+                </div>
+
+                <div class="row justify-content-center">
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <button type="button" class="btn btn-secondary" onclick="previewForm(this)">Preview</button>
+                  </div>
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <button type="submit" class="btn btn-primary">Valider</button>
                   </div>
                 </div>
               </form>
@@ -92,67 +101,88 @@
 
 
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="imgSelect">
+
                   <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
-                  <input class="form-control custom-input" type="file" id="formFile">
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <input class="form-control custom-input" type="file" id="formFile" name="img">
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; transform: scale(0.5);"><strong>X</strong></button>
+                  </div>
                 </div>
 
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="textSelect">
-                  <div class="form-floating">
-                    <input class="form-control" type="text" id="fname" name="fname" placeholder="Titre">
-                    <label for="fname">Titre</label>
-
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <input class="form-control" type="text" id="fname" name="fname" placeholder="Titre">
+                      <label for="fname" style="margin-left: 10px;">Titre</label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
                   </div>
                 </div>
 
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
                   id="textZoneSelect">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
-                      style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Entrer un grand Texte</label>
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
+                        style="height: 100px"></textarea>
+                      <label for="floatingTextarea2">Entrer un grand Texte</label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
                   </div>
                 </div>
 
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
                   id="urlButtonSelect">
-                  <div class="form-floating">
-                    <input type="url" name="url" class="form-control" placeholder="Entrer une url"
-                      id="urlInput"></input>
-                    <label for="urlInput">Entrer une url</label>
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <input type="url" name="url" class="form-control" placeholder="Entrer une url"
+                        id="urlInput"></input>
+                      <label for="urlInput">Entrer une url</label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
                   </div>
                 </div>
 
 
                 <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide" id="dateSelect">
-                  <div class="row justify-content-between">
+                  <div class="row justify-content-between" id="reduce">
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
-                        <input type="date" name="date" class="form-control" placeholder="Date de debut"
+                        <input type="date" name="dateStart" class="form-control" placeholder="Date de debut"
                           id="dateBegin"></input>
                         <label for="dateBegin">Date de debut</label>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
-                        <input type="date" name="date" class="form-control" placeholder="Date de fin"
+                        <input type="date" name="dateEnd" class="form-control" placeholder="Date de fin"
                           id="dateEnd"></input>
                         <label for="dateEnd">Date de fin</label>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+
                       <div class="form-floating">
-                        <input type="date" name="date" class="form-control" placeholder="Date de lancement"
+                        <input type="date" name="launchDate" class="form-control" placeholder="Date de lancement"
                           id="dateLaunch"></input>
                         <label for="dateLaunch">Date de lancement</label>
                       </div>
+
+
                     </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+              <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary validate" data-bs-dismiss="modal">Valider</button>
             </div>
           </div>
         </div>
@@ -168,6 +198,10 @@
 
           .modal {
             color: black;
+          }
+
+          .form-floating>label {
+            margin-left: 5px;
           }
         </style>
 
