@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const open = require("open");
+const multer = require("multer");
 
 let visible = false;
 
@@ -37,16 +38,35 @@ router.get("/editor", (req, res) => {
   // }
 });
 
-router.post("/editor/preview", async (req, res) => {
-  const data = JSON.stringify(req.body);
-  console.log(JSON.parse(data));
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/img/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.originalname);
+  },
+});
 
-  await open("http://localhost:3000/admin/editor/preview", {data});
+const upload = multer({ storage: storage });
+
+const cpUpload = upload.fields([{ name: "img"},{name: "band_img" }]);
+
+router.post("/editor/preview", cpUpload, async (req, res) => {
+  const data = JSON.parse(JSON.stringify(req.body));
+  console.log(req.files);
+
+  for(let image in req.files)
+  {
+    //data.push({});
+  }
+
+  //await open("http://localhost:3000/admin/editor/preview", {data});
   res.send("Ok");
 });
 
 router.get("/editor/preview", (req, res) => {
-  res.render("pages/preview")
+  //res.render("pages/preview")
 });
 
 module.exports = router;

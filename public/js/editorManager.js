@@ -115,18 +115,23 @@ function deleteElement(element) {
 
 async function previewForm(button) {
   const form = button.closest("#mainForm");
-  const data = JSON.stringify(Object.fromEntries(new FormData(form).entries()));
+  // const img_mini = form.querySelector('[name="img"]');
+  // const img_band = form.querySelectorAll('[name="band_img"]');
+  const data = new FormData(form);
+
+  // let fd = new FormData();
+  // fd.append("img", img_mini.files[0]);
+  // for (const file of img_band) {
+  //   fd.append("band_img", file[0]);
+  // }
+
   fetch("/admin/editor/preview", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
     method: "POST",
     body: data,
   })
     .then((res) => {
       console.log("done", res);
-      // window.open(location.href+="/preview");
+      
     })
     .catch((err) => console.log(err));
 }

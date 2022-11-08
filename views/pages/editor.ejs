@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -15,9 +16,8 @@
           <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             <div class="card">
               <h5 class="text-center mb-4">Crée ta propre page d'évènement</h5>
-              <form class="form-card" action="/" method="post" id="mainForm">
-
-
+              <form class="form-card" action="/admin/editor/preview" method="post" enctype="multipart/form-data"
+                id="mainForm">
                 <div class="row justify-content-between text-left">
                   <div class="form-group col-sm-6 flex-column d-flex">
                     <div class="form-floating">
@@ -104,7 +104,8 @@
 
                   <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
-                    <input class="form-control custom-input" type="file" id="formFile" name="img">
+                    <input class="form-control custom-input" type="file" accept="image/png, image/jpg, image/jpeg"
+                      id="formFile" name="img">
                     <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
                       style="width : 50px; transform: scale(0.5);"><strong>X</strong></button>
                   </div>
