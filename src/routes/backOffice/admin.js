@@ -60,7 +60,6 @@ router.post("/editor/preview", cpUpload, async (req, res) => {
   {
     //data.push({});
   }
-
   //await open("http://localhost:3000/admin/editor/preview", {data});
   res.send("Ok");
 });
