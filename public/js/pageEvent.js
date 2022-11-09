@@ -93,3 +93,5 @@ if (cur_event.deroulement.length > 0) {
   holder.appendChild(deroulementTitleDiv);
   holder.appendChild(deroulementTextDiv);
 }
+
+
