@@ -76,6 +76,7 @@ router.get("/editor/preview", (req, res) => {
   console.log(data);
   if (data.length <= 0) return res.redirect("/admin/editor");
   res.render("pages/preview", { data });
+  //TODO afficher la page avec script js 
   data = [];
 });
 
