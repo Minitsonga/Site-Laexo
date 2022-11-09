@@ -47,7 +47,7 @@ function SetupElement(selectValue, element) {
   }
 
   if (selectValue == "title") {
-    element.querySelector("input").setAttribute("name", "title");
+    element.querySelector("input").setAttribute("name", "small_Title");
     element.querySelector("label").innerHTML = "Titre";
   }
 

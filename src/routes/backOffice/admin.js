@@ -50,22 +50,33 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const cpUpload = upload.fields([{ name: "img"},{name: "band_img" }]);
-
+const cpUpload = upload.fields([{ name: "img" }, { name: "band_img" }]);
+let data = [];
 router.post("/editor/preview", cpUpload, async (req, res) => {
-  const data = JSON.parse(JSON.stringify(req.body));
-  console.log(req.files);
+  data = JSON.parse(JSON.stringify(req.body));
+  data.url_name = data.url_name.split(" ").join("");
 
-  for(let image in req.files)
-  {
-    //data.push({});
+  if (data.url_name.length <= 2) return res.send("Ok");
+
+  if (req.files["img"] != undefined) data.img = req.files["img"][0].path;
+  if (req.files["band_img"] != undefined) {
+    data.band_img = [];
+    req.files["band_img"].forEach((element) => {
+      data.band_img.push(element.path);
+    });
   }
-  //await open("http://localhost:3000/admin/editor/preview", {data});
+
+  console.log(data);
+
+  await open("http://localhost:3000/admin/editor/preview");
   res.send("Ok");
 });
 
 router.get("/editor/preview", (req, res) => {
-  //res.render("pages/preview")
+  console.log(data);
+  if (data.length <= 0) return res.redirect("/admin/editor");
+  res.render("pages/preview", { data });
+  data = [];
 });
 
 module.exports = router;
