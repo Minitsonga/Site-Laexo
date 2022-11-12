@@ -68,7 +68,8 @@
             </div>
           </div>
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="planningForm">Modifier Planning</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#planningForm">Modifier
+              Planning</button>
           </div>
         </div>
       </div>
@@ -193,23 +194,36 @@
       </div>
 
       <div class="modal fade" id="planningForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="planningFormLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content bg-dark-laexo">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="planningFormLabel">Modifier le planning</h1>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="planningForm"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="" method="post">
-                <input type="button" value="">
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="planningForm">Annuler</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="planningForm">Modifier</button>
-            </div>
+        aria-labelledby="planningFormLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <form action="/admin/editor/planning" method="post" id="planningModif">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="planningFormLabel">Modifier le planning</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                    <label class="custom-file" for="planningFile">Planning PC</label>
+                    <input class="form-control custom-input" type="file" accept="image/png" id="planningFile"
+                      name="planning" onchange="fileValidation(this)">
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                    <label class="custom-file" for="planning2File">Planning Mobile</label>
+                    <input class="form-control custom-input" type="file" accept="image/png" id="planning2File"
+                      name="planning2" onchange="fileValidation(this)">
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    onclick="planningSubmit(this)">Modifier</button>
+                </div>
+            </form>
           </div>
         </div>
       </div>
@@ -231,9 +245,8 @@
           }
         </style>
 
-        git
         <script src="/js/editorManager.js"></script>
-
+        
 </body>
 
 </html>

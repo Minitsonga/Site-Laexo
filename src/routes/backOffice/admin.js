@@ -48,6 +48,17 @@ const storage = multer.diskStorage({
   },
 });
 
+const planningStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if (file.mimetype != "image/png") return null;
+    cb(null, "public/img/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + ".png");
+  },
+});
+
+
 const upload = multer({ storage: storage });
 
 const cpUpload = upload.fields([{ name: "img" }, { name: "band_img" }]);
@@ -58,6 +69,8 @@ router.post("/editor/preview", cpUpload, async (req, res) => {
 
   if (data.url_name.length <= 2) return res.send("Ok");
 
+  console.log(data);
+  
   if (req.files["img"] != undefined) data.img = req.files["img"][0].path;
   if (req.files["band_img"] != undefined) {
     data.band_img = [];
@@ -73,11 +86,22 @@ router.post("/editor/preview", cpUpload, async (req, res) => {
 });
 
 router.get("/editor/preview", (req, res) => {
-  console.log(data);
   if (data.length <= 0) return res.redirect("/admin/editor");
   res.render("pages/preview", { data });
-  //TODO afficher la page avec script js 
+  //TODO afficher la page avec script js
   data = [];
+});
+
+
+const planningUpload = multer({ storage: planningStorage });
+const plannings = planningUpload.fields([
+  { name: "planning" },
+  { name: "planning2" },
+]);
+router.post("/editor/planning", plannings, async (req, res) => {
+  console.log(req.files);
+  await open("http://localhost:3000/planning");
+  res.send("Ok");
 });
 
 module.exports = router;

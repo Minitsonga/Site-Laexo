@@ -1,5 +1,8 @@
 const select = document.querySelector("#floatingSelectGrid");
 
+let count = 0;
+
+
 let prev_targetID;
 let prev_value;
 
@@ -84,10 +87,13 @@ function ToggleElement(targetID, hide) {
 }
 
 let validateBtn = document.querySelector(".validate");
+
 validateBtn.addEventListener("click", () => {
+  count++;
   let curElement = ToggleElement(targetID, false).cloneNode(true);
   curElement.removeAttribute("class");
-  curElement.removeAttribute("id");
+  curElement.querySelector("input").setAttribute("value", count);
+  curElement.setAttribute("id", count);
   curElement.classList.add("form-group", "flex-column", "d-flex");
   if (value == "img_mini" || value == "img_band")
     curElement.style = "align-items:start;";
@@ -113,17 +119,18 @@ function deleteElement(element) {
 //Submit preview + validation (confirmation avant le post des données)
 // preview = post des données et affichage de la page sur un nouvel onglet;
 
-async function previewForm(button) {
-  const form = button.closest("#mainForm");
-  // const img_mini = form.querySelector('[name="img"]');
-  // const img_band = form.querySelectorAll('[name="band_img"]');
-  const data = new FormData(form);
+function fileValidation(button) {
+  const allowedExtensions = /\.png$/i;
+  if (!allowedExtensions.exec(button.value)) {
+    alert("Mauvais format d'image. Il faut des images en png");
+    button.value = "";
+    return false;
+  }
+}
 
-  // let fd = new FormData();
-  // fd.append("img", img_mini.files[0]);
-  // for (const file of img_band) {
-  //   fd.append("band_img", file[0]);
-  // }
+function previewForm(button) {
+  const form = button.closest("#mainForm");
+  const data = new FormData(form);
 
   fetch("/admin/editor/preview", {
     method: "POST",
@@ -131,7 +138,20 @@ async function previewForm(button) {
   })
     .then((res) => {
       console.log("done", res);
-      
+    })
+    .catch((err) => console.log(err));
+}
+
+function planningSubmit() {
+  const form = document.querySelector("#planningModif");
+
+  const img = new FormData(form);
+  fetch("/admin/editor/planning", {
+    method: "POST",
+    body: img,
+  })
+    .then((res) => {
+      console.log("done", res);
     })
     .catch((err) => console.log(err));
 }
