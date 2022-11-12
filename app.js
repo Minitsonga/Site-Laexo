@@ -9,7 +9,7 @@ const http = require("http").Server(app);
 const session = require("express-session");
 const crypto = require("crypto");
 const name = "braitsch";
-let hash = crypto.createHash("md5").update(name).digest("hex");
+let hash = crypto.createHash("sha512").update(name).digest("hex");
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ extended: false , limit: '50mb'}));

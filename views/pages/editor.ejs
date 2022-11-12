@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="row justify-content-center">
-                  <div class="form-group col-sm-1 flex-column d-flex">
+                  <div class="form-group col-sm-1 flex-column d-flex items-center">
                     <button type="button" class="btn btn-success" style="width: 45px;" data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"><strong>+</strong></button>
                   </div>
@@ -66,6 +66,9 @@
                 </div>
               </form>
             </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="planningForm">Modifier Planning</button>
           </div>
         </div>
       </div>
@@ -126,8 +129,8 @@
                   id="textZoneSelect">
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
                     <div class="form-floating">
-                      <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2" name="description"
-                        style="height: 100px"></textarea>
+                      <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
+                        name="description" style="height: 100px"></textarea>
                       <label for="floatingTextarea2">Entrer un grand Texte</label>
                     </div>
                     <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
@@ -189,6 +192,28 @@
         </div>
       </div>
 
+      <div class="modal fade" id="planningForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="planningFormLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-dark-laexo">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="planningFormLabel">Modifier le planning</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="planningForm"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <input type="button" value="">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="planningForm">Annuler</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="planningForm">Modifier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <%- include('../templates/footer'); %>
 
         <style>
@@ -206,7 +231,8 @@
           }
         </style>
 
-git        <script src="/js/editorManager.js"></script>
+        git
+        <script src="/js/editorManager.js"></script>
 
 </body>
 
