@@ -1,97 +1,89 @@
 const holder = document.querySelector("#holder");
 
-if (cur_event.title.length > 0) {
-  var titleDiv = document.createElement("h1");
-  titleDiv.classList.add("title");
-  titleDiv.innerHTML = cur_event.title;
-  holder.appendChild(titleDiv);
-}
-// if (cur_event.subtitle.length > 0) {
-// var subtitleDiv = document.createElement("div");
-// subtitleDiv.classList.add("subtitle");
-// subtitleDiv.innerHTML = cur_event.subtitle;
-// holder.appendChild(subtitleDiv);
-// }
-
-if (cur_event.img.length > 0) {
-  var imgDiv = document.createElement("div");
-  var imgElement = document.createElement("img");
-  imgElement.src = "/img/" + cur_event.band_img;
-  imgDiv.classList.add("pt-3", "center");
-  imgDiv.appendChild(imgElement);
-  holder.appendChild(imgDiv);
-}
-
-if (cur_event.inscription.length > 0 || cur_event.reglement.length > 0) {
-  var buttonHolder = document.createElement("div");
-  buttonHolder.classList.add("buttons-holder");
-
-  if (cur_event.inscription.length > 0) {
-    var inscriptionButton = document.createElement("button");
-    inscriptionButton.type = "button";
-    inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
-    inscriptionButton.setAttribute(
-      "onclick",
-      `window.open('${cur_event.inscription}', '_blank');`
-    );
-    inscriptionButton.innerHTML = "Inscriptions";
-    buttonHolder.appendChild(inscriptionButton);
+cur_event.forEach((element) => {
+  if (element["title"]?.length > 0) {
+    var titleDiv = document.createElement("h1");
+    titleDiv.classList.add("title");
+    titleDiv.innerHTML = element["title"];
+    holder.appendChild(titleDiv);
   }
 
-  if (cur_event.reglement.length > 0) {
-    var rulesButton = document.createElement("button");
-    rulesButton.type = "button";
-    rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
-    rulesButton.setAttribute(
-      "onclick",
-      `window.open('${cur_event.reglement}', '_blank');`
-    );
-    rulesButton.innerHTML = "Règlement";
-    buttonHolder.appendChild(rulesButton);
+  if (element["subtitle"]?.length > 0) {
+    var subtitleDiv = document.createElement("div");
+    subtitleDiv.classList.add("subtitle");
+    subtitleDiv.innerHTML = element["subtitle"];
+    holder.appendChild(subtitleDiv);
   }
 
-  holder.appendChild(buttonHolder);
-}
+  if (element["band_img"]?.length > 0) {
+    var imgDiv = document.createElement("div");
+    var imgElement = document.createElement("img");
+    imgElement.src = "/img/" + element["band_img"];
+    imgDiv.classList.add("pt-3", "center");
+    imgDiv.appendChild(imgElement);
+    holder.appendChild(imgDiv);
+    holder.appendChild(document.createElement("br"));
+  }
 
-if (cur_event.alerte_msg_wlinkD.length > 0) {
-  var alerteDiv = document.createElement("div");
-  var alerteText = document.createElement("a");
-  alerteDiv.role = "alert";
-  alerteDiv.classList.add("alert", "text-center", "fw-bold");
-  alerteText.classList.add("alert-link");
-  alerteText.innerHTML = cur_event.links.discord;
-  alerteText.href = cur_event.links.discord;
-  alerteText.target = "_blank";
+  if (element["inscription"]?.length > 0 || element["reglement"]?.length > 0) {
+    var buttonHolder = document.createElement("div");
+    buttonHolder.classList.add("buttons-holder");
 
-  alerteDiv.innerHTML = cur_event.alerte_msg_wlinkD + "<br>Discord : ";
-  alerteDiv.appendChild(alerteText);
-  holder.appendChild(alerteDiv);
-}
+    if (element["inscription"]?.length > 0) {
+      var inscriptionButton = document.createElement("button");
+      inscriptionButton.type = "button";
+      inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
+      inscriptionButton.setAttribute(
+        "onclick",
+        `window.open('${element["inscription"]}', '_blank');`
+      );
+      inscriptionButton.innerHTML = "Inscriptions";
+      buttonHolder.appendChild(inscriptionButton);
+    }
 
-if (cur_event.presentation.length > 0) {
-  var presentationTitleDiv = document.createElement("h3");
-  presentationTitleDiv.classList.add("description-title");
-  presentationTitleDiv.innerHTML = "PRESENTATION";
+    if (element["reglement"]?.length > 0) {
+      var rulesButton = document.createElement("button");
+      rulesButton.type = "button";
+      rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
+      rulesButton.setAttribute(
+        "onclick",
+        `window.open('${element["reglement"]}', '_blank');`
+      );
+      rulesButton.innerHTML = "Règlement";
+      buttonHolder.appendChild(rulesButton);
+    }
 
-  var presentationDiv = document.createElement("div");
-  presentationDiv.classList.add("description");
-  presentationDiv.innerHTML = cur_event.presentation;
-  holder.appendChild(presentationTitleDiv);
-  holder.appendChild(presentationDiv);
-}
+    holder.appendChild(buttonHolder);
+  }
 
-holder.appendChild(document.createElement("br"));
+  if (element["alerte_msg"]?.length > 0) {
+    var alerteDiv = document.createElement("div");
+    var alerteText = document.createElement("a");
+    alerteDiv.role = "alert";
+    alerteDiv.classList.add("alert", "text-center", "fw-bold");
+    alerteText.classList.add("alert-link");
+    alerteText.innerHTML = element["alerte_msg"];
+    //alerteText.href = element["alerte_msg"];
+    alerteText.target = "_blank";
 
-if (cur_event.deroulement.length > 0) {
-  var deroulementTitleDiv = document.createElement("h3");
-  deroulementTitleDiv.classList.add("description-title");
-  deroulementTitleDiv.innerHTML = "DEROULEMENT";
+    alerteDiv.innerHTML = element["alerte_msg"] + "<br>Discord : ";
+    alerteDiv.appendChild(alerteText);
+    holder.appendChild(alerteDiv);
+  }
 
-  var deroulementTextDiv = document.createElement("div");
-  deroulementTextDiv.classList.add("description");
-  deroulementTextDiv.innerHTML = cur_event.deroulement;
-  holder.appendChild(deroulementTitleDiv);
-  holder.appendChild(deroulementTextDiv);
-}
+  if (element["small_Title"]?.length > 0) {
+    var presentationTitleDiv = document.createElement("h3");
+    presentationTitleDiv.classList.add("description-title");
+    presentationTitleDiv.innerHTML = element["small_Title"];
+    holder.appendChild(presentationTitleDiv);
+    holder.appendChild(document.createElement("br"));
+  }
 
-
+  if (element["description"]?.length > 0) {
+    var deroulementTextDiv = document.createElement("div");
+    deroulementTextDiv.classList.add("description");
+    deroulementTextDiv.innerHTML = element["description"];
+    holder.appendChild(deroulementTextDiv);
+    holder.appendChild(document.createElement("br"));
+  }
+});

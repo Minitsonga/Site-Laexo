@@ -21,7 +21,7 @@
                 <div class="row justify-content-between text-left">
                   <div class="form-group col-sm-6 flex-column d-flex">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="urlName" name="url_name"
+                      <input type="text" class="form-control inputData" id="urlName" name="url_name"
                         placeholder="Entrer le nom de la page">
                       <label class="form-control-label px-3" for="urlName">
                         Nom de l'URL<span class="text-danger"> *</span>
@@ -30,7 +30,7 @@
                   </div>
                   <div class="form-group col-sm-6 flex-column d-flex">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="TitleMain" name="title"
+                      <input type="text" class="form-control inputData" id="TitleMain" name="title"
                         placeholder="Entrer le Titre de l'évènement">
                       <label class="form-control-label px-3" for="TitleMain">
                         Titre de l'évènement<span class="text-danger"> *</span>
@@ -108,7 +108,7 @@
 
                   <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
-                    <input class="form-control custom-input" type="file" accept="image/png, image/jpg, image/jpeg"
+                    <input class="form-control inputData custom-input" type="file" accept="image/png, image/jpg, image/jpeg"
                       id="formFile" name="img">
                     <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
                       style="width : 50px; transform: scale(0.5);"><strong>X</strong></button>
@@ -118,7 +118,7 @@
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="textSelect">
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
                     <div class="form-floating">
-                      <input class="form-control" type="text" id="fname" name="fname" placeholder="Titre">
+                      <input class="form-control inputData" type="text" id="fname" name="fname" placeholder="Titre">
                       <label for="fname" style="margin-left: 10px;">Titre</label>
                     </div>
                     <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
@@ -130,7 +130,7 @@
                   id="textZoneSelect">
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
                     <div class="form-floating">
-                      <textarea class="form-control" placeholder="Entre un paragraphe" id="floatingTextarea2"
+                      <textarea class="form-control inputData" placeholder="Entre un paragraphe" id="floatingTextarea2"
                         name="description" style="height: 100px"></textarea>
                       <label for="floatingTextarea2">Entrer un grand Texte</label>
                     </div>
@@ -143,7 +143,7 @@
                   id="urlButtonSelect">
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
                     <div class="form-floating">
-                      <input type="url" name="url" class="form-control" placeholder="Entrer une url"
+                      <input type="url" name="url" class="form-control inputData" placeholder="Entrer une url"
                         id="urlInput"></input>
                       <label for="urlInput">Entrer une url</label>
                     </div>
@@ -157,14 +157,14 @@
                   <div class="row justify-content-between" id="reduce">
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
-                        <input type="date" name="dateStart" class="form-control" placeholder="Date de debut"
+                        <input type="date" name="dateStart" class="form-control inputData" placeholder="Date de debut"
                           id="dateBegin"></input>
                         <label for="dateBegin">Date de debut</label>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
-                        <input type="date" name="dateEnd" class="form-control" placeholder="Date de fin"
+                        <input type="date" name="dateEnd" class="form-control inputData" placeholder="Date de fin"
                           id="dateEnd"></input>
                         <label for="dateEnd">Date de fin</label>
                       </div>
@@ -172,7 +172,7 @@
                     <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
 
                       <div class="form-floating">
-                        <input type="date" name="launchDate" class="form-control" placeholder="Date de lancement"
+                        <input type="date" name="launchDate" class="form-control inputData" placeholder="Date de lancement"
                           id="dateLaunch"></input>
                         <label for="dateLaunch">Date de lancement</label>
                       </div>

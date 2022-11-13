@@ -1,8 +1,5 @@
 const select = document.querySelector("#floatingSelectGrid");
 
-let count = 0;
-
-
 let prev_targetID;
 let prev_value;
 
@@ -89,11 +86,10 @@ function ToggleElement(targetID, hide) {
 let validateBtn = document.querySelector(".validate");
 
 validateBtn.addEventListener("click", () => {
-  count++;
   let curElement = ToggleElement(targetID, false).cloneNode(true);
   curElement.removeAttribute("class");
-  curElement.querySelector("input").setAttribute("value", count);
-  curElement.setAttribute("id", count);
+  curElement.removeAttribute("id");
+
   curElement.classList.add("form-group", "flex-column", "d-flex");
   if (value == "img_mini" || value == "img_band")
     curElement.style = "align-items:start;";
@@ -128,13 +124,43 @@ function fileValidation(button) {
   }
 }
 
-function previewForm(button) {
+async function previewForm(button) {
   const form = button.closest("#mainForm");
-  const data = new FormData(form);
+  const listInputs = form.querySelectorAll(".inputData");
+
+  const myDATA = [];
+  for (let i = 0; i < listInputs.length; i++) {
+    const element = listInputs[i];
+    const nameInput = element.name;
+    let value;
+    if (nameInput == "img" || nameInput == "band_img") {
+      value = element.value.replaceAll("C:\\fakepath\\", "");
+    } else {
+      value = element.value.replaceAll("\n", "<br>");
+    }
+
+    myDATA.push({ [nameInput]: value });
+  }
+
+  console.log(JSON.stringify(myDATA));
+
+  if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+
+  await fetch("/admin/editor/preview/images", {
+    method: "POST",
+    body: new FormData(form),
+  })
+    .then((res) => {
+      console.log("imageUploaded", res);
+    })
+    .catch((err) => console.log(err));
 
   fetch("/admin/editor/preview", {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
     method: "POST",
-    body: data,
+    body: JSON.stringify(myDATA),
   })
     .then((res) => {
       console.log("done", res);

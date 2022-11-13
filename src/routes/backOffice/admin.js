@@ -58,28 +58,20 @@ const planningStorage = multer.diskStorage({
   },
 });
 
-
 const upload = multer({ storage: storage });
 
 const cpUpload = upload.fields([{ name: "img" }, { name: "band_img" }]);
 let data = [];
-router.post("/editor/preview", cpUpload, async (req, res) => {
+router.post("/editor/preview/images", cpUpload, async (req, res) => {
+  res.send("Ok");
+});
+
+router.post("/editor/preview", async (req, res) => {
   data = JSON.parse(JSON.stringify(req.body));
-  data.url_name = data.url_name.split(" ").join("");
 
-  if (data.url_name.length <= 2) return res.send("Ok");
+  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
 
-  console.log(data);
-  
-  if (req.files["img"] != undefined) data.img = req.files["img"][0].path;
-  if (req.files["band_img"] != undefined) {
-    data.band_img = [];
-    req.files["band_img"].forEach((element) => {
-      data.band_img.push(element.path);
-    });
-  }
-
-  console.log(data);
+  if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
   await open("http://localhost:3000/admin/editor/preview");
   res.send("Ok");
@@ -87,11 +79,11 @@ router.post("/editor/preview", cpUpload, async (req, res) => {
 
 router.get("/editor/preview", (req, res) => {
   if (data.length <= 0) return res.redirect("/admin/editor");
+  console.log(data);
   res.render("pages/preview", { data });
   //TODO afficher la page avec script js
   data = [];
 });
-
 
 const planningUpload = multer({ storage: planningStorage });
 const plannings = planningUpload.fields([
