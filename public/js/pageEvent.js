@@ -76,7 +76,6 @@ cur_event.forEach((element) => {
     presentationTitleDiv.classList.add("description-title");
     presentationTitleDiv.innerHTML = element["small_Title"];
     holder.appendChild(presentationTitleDiv);
-    holder.appendChild(document.createElement("br"));
   }
 
   if (element["description"]?.length > 0) {
