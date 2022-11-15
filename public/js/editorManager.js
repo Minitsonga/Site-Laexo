@@ -133,28 +133,38 @@ async function previewForm(button) {
     const element = listInputs[i];
     const nameInput = element.name;
     let value;
-    if (nameInput == "img" || nameInput == "band_img") {
+    if (nameInput === "img" || nameInput === "band_img") {
       value = element.value.replaceAll("C:\\fakepath\\", "");
     } else {
       value = element.value.replaceAll("\n", "<br>");
     }
 
-    if (nameInput == "inscription" || nameInput == "reglement") {
+    if (nameInput === "inscription" || nameInput === "reglement") {
       console.log(nameInput);
       let count = 0;
-      myDATA.forEach((element) => {
-        if(element.buttons != undefined && element.buttons.length >= 2)
-        if (element.buttons == undefined) count++;
-      });
-      //Voir comment faire si on veut mettre plusieur boutons dans une page / voir si on oblige a mettre que 1 bouton de chaque (inscription + reglement)
-      if (count >= myDATA.length) {
-        myDATA.push({ buttons: [{ [nameInput]: value }] });
-      } else {
-        for (let i = 0; i < myDATA.length; i++) {
-          if (myDATA[i].buttons == undefined) continue;
-          myDATA[i].buttons.push({ [nameInput]: value });
-        }
-      }
+
+      // 1 regrouper seulement les premier buttons inscription et reglement dans primBtn[]
+      // 2 pour tous les autres bouttons les ajouté comme avant avec des doublons du tableau boutons
+      // (prcq les autres boutons serons dynamique donc butons aura un name et un lien (value) )
+
+      // Verfier si i + 1 est reglement pour les ajouter ensemble 
+      // si oui on les mets ensemble sinon on l'ajoute solo.
+      // refaire les bouttons pour tous avec 3 options nom, lien, coolor;
+
+      // myDATA.forEach((element) => {
+      //   if (element.buttons != undefined && element.buttons.length >= 2) return;
+      //   if (element.buttons === undefined) count++;
+      // });
+      // //Voir comment faire si on veut mettre plusieur boutons dans une page / voir si on oblige a mettre que 1 bouton de chaque (inscription + reglement)
+      // if (count >= myDATA.length) {
+      //   myDATA.push({ buttons: { [nameInput]: value } });
+      // } else {
+      //   for (let i = 0; i < myDATA.length; i++) {
+      //     if (myDATA[i].buttons === undefined) continue;
+      //     console.log("info: " + myDATA[i].buttons.inscription.length >= 2);
+      //     myDATA[i].buttons[nameInput] =  value;
+      //   }
+      // }
     } else {
       myDATA.push({ [nameInput]: value });
     }
