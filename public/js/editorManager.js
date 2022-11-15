@@ -140,16 +140,24 @@ async function previewForm(button) {
     }
 
     if (nameInput == "inscription" || nameInput == "reglement") {
+      console.log(nameInput);
+      let count = 0;
       myDATA.forEach((element) => {
-        console.log(element.buttons);
-        //Check comment verifier si il y a deja le buttons (marche pas la parceque on est dans foreach peut etre utiliser temp liste de myData)
-        if (element.buttons == undefined) {
-          myDATA.push({ buttons: [{ [nameInput]: value }] });
-        } else {
-          element.buttons.push({ [nameInput]: value });
-        }
+        if(element.buttons != undefined && element.buttons.length >= 2)
+        if (element.buttons == undefined) count++;
       });
-    } else myDATA.push({ [nameInput]: value });
+      //Voir comment faire si on veut mettre plusieur boutons dans une page / voir si on oblige a mettre que 1 bouton de chaque (inscription + reglement)
+      if (count >= myDATA.length) {
+        myDATA.push({ buttons: [{ [nameInput]: value }] });
+      } else {
+        for (let i = 0; i < myDATA.length; i++) {
+          if (myDATA[i].buttons == undefined) continue;
+          myDATA[i].buttons.push({ [nameInput]: value });
+        }
+      }
+    } else {
+      myDATA.push({ [nameInput]: value });
+    }
   }
 
   console.log(myDATA);
