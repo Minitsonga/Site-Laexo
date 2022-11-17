@@ -25,32 +25,75 @@ cur_event.forEach((element) => {
     holder.appendChild(document.createElement("br"));
   }
 
-  if (element["inscription"]?.length > 0 || element["reglement"]?.length > 0) {
+  if (element["buttons"]) {
+    console.log(element["buttons"]);
     var buttonHolder = document.createElement("div");
     buttonHolder.classList.add("buttons-holder");
 
-    if (element["inscription"]?.length > 0) {
+    if (element["buttons"]["inscription"]?.length > 0) {
       var inscriptionButton = document.createElement("button");
       inscriptionButton.type = "button";
+
+      if (
+        element["buttons"]["reglement"]?.length === undefined ||
+        element["buttons"]["reglement"]?.length <= 0
+      ) {
+        inscriptionButton.style.margin = "auto";
+      }
       inscriptionButton.classList.add("btn", "btn-event", "btn-laexo-light");
       inscriptionButton.setAttribute(
         "onclick",
-        `window.open('${element["inscription"]}', '_blank');`
+        `window.open('${element["buttons"]["inscription"]}', '_blank');`
       );
       inscriptionButton.innerHTML = "Inscriptions";
       buttonHolder.appendChild(inscriptionButton);
     }
 
-    if (element["reglement"]?.length > 0) {
+    if (element["buttons"]["reglement"]?.length > 0) {
       var rulesButton = document.createElement("button");
       rulesButton.type = "button";
+
+      if (
+        element["buttons"]["inscription"]?.length === undefined ||
+        element["buttons"]["inscription"]?.length <= 0
+      ) {
+        rulesButton.style.margin = "auto";
+      }
+
       rulesButton.classList.add("btn", "btn-event", "btn-laexo-rules");
       rulesButton.setAttribute(
         "onclick",
-        `window.open('${element["reglement"]}', '_blank');`
+        `window.open('${element["buttons"]["reglement"]}', '_blank');`
       );
       rulesButton.innerHTML = "Règlement";
       buttonHolder.appendChild(rulesButton);
+    }
+
+    holder.appendChild(buttonHolder);
+  }
+
+  if (element["customBtn"] != undefined) {
+    var buttonHolder = document.createElement("div");
+    buttonHolder.classList.add("buttons-holder");
+    console.log(element["customBtn"]["url"].length);
+    if (
+      element["customBtn"]["name"].length > 0 &&
+      element["customBtn"]["url"].length > 0
+    ) {
+      var customButton = document.createElement("button");
+      customButton.type = "button";
+      customButton.style.margin = "auto";
+      customButton.style.color = element["customBtn"]["colorText"];
+      customButton.style.backgroundColor = element["customBtn"]["colorBg"];
+      customButton.style.outline = element["customBtn"]["colorBg"];
+
+      customButton.classList.add("btn", "btn-event");
+      customButton.setAttribute(
+        "onclick",
+        `window.open('${element["customBtn"]["url"]}', '_blank');`
+      );
+      customButton.innerHTML = element["customBtn"]["name"];
+      buttonHolder.appendChild(customButton);
     }
 
     holder.appendChild(buttonHolder);

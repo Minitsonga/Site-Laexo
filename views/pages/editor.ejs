@@ -84,7 +84,7 @@
             </div>
             <div class="modal-body">
               <div class="row justify-content-between">
-                <div class="form-group col-sm-4 flex-column d-flex justify-content-center">
+                <div class="form-group col-sm-3 flex-column d-flex justify-content-center">
                   <div class="form-floating">
                     <select class="form-select" id="floatingSelectGrid">
                       <option selected value="img_mini" for="imgSelect" data-bs-toggle="modal"
@@ -95,8 +95,10 @@
                       <option value="subtitle" for="textSelect">Petit Texte</option>
                       <option value="textZone" for="textZoneSelect">Grand Texte</option>
                       <option value="alerteTxt" for="textSelect">Texte important</option>
+                      <option value="customButton" for="customButtonSelect">Bouton Personnalisé</option>
                       <option value="inscription" for="urlButtonSelect">Lien inscription</option>
                       <option value="reglement" for="urlButtonSelect">Lien règlement</option>
+
                       <option value="date" for="dateSelect">Date</option>
                     </select>
                     <label for="floatingSelectGrid">Type d'élément</label>
@@ -139,17 +141,17 @@
                   </div>
                 </div>
 
-                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide"
-                  id="urlButtonSelect">
+                <div class="form-group col-sm-12 flex-column d-flex justify-content-center mx-auto hide"
+                  id="customButtonSelect">
                   <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
-                    <div class="form-group col-sm-5 flex-column d-flex justify-content-center mx-auto">
+                    <div class="form-group col-sm-3 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
                         <input type="text" name="name" class="form-control inputData"
                           placeholder="Entrer le titre du bouton" id="btnName"></input>
                         <label for="btnName">Entrer le titre du bouton</label>
                       </div>
                     </div>
-                    <div class="form-group col-sm-5 flex-column d-flex justify-content-center mx-auto">
+                    <div class="form-group col-sm-3 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
                         <input type="url" name="url" class="form-control inputData" placeholder="Entrer une url"
                           id="urlInput"></input>
@@ -158,9 +160,16 @@
                     </div>
                     <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
-                        <input type="color" name="color" class="form-control inputData" placeholder="Entrer la couleur"
-                          id="colorInput"></input>
-                        <label for="colorInput">Couleur</label>
+                        <input type="color" name="colorText" class="form-control inputData" placeholder="Couleur du text"
+                          id="colorTxtInput"></input>
+                        <label for="colorTxtInput">Text</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="color" name="colorBg" class="form-control inputData" placeholder="Couleur du fond"
+                          id="colorBgInput"></input>
+                        <label for="colorInput">Fond</label>
                       </div>
                     </div>
 
@@ -169,6 +178,19 @@
                   </div>
                 </div>
 
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
+                  id="urlButtonSelect">
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <input type="url" name="name" class="form-control inputData"
+                        placeholder="Entrer le titre du bouton" id="btnName"></input>
+                      <label for="btnName">Entrer le titre du bouton</label>
+                    </div>
+
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
 
                 <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide" id="dateSelect">
                   <div class="row justify-content-between" id="reduce">

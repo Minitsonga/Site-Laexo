@@ -93,7 +93,9 @@ validateBtn.addEventListener("click", () => {
   curElement.classList.add("form-group", "flex-column", "d-flex");
   if (value == "img_mini" || value == "img_band")
     curElement.style = "align-items:start;";
-  console.log("Validation : ", validateBtn, " Current element : ", curElement);
+
+  if (value == "customButton")
+    curElement.setAttribute("id", "customButtonHolder");
 
   let div = document.createElement("div");
   div.id = "reduce";
@@ -139,33 +141,46 @@ async function previewForm(button) {
       value = element.value.replaceAll("\n", "<br>");
     }
 
-    if (nameInput === "inscription" || nameInput === "reglement") {
+    if (
+      nameInput === "name" &&
+      listInputs[i + 1].name === "url" &&
+      listInputs[i + 2].name === "colorText" &&
+      listInputs[i + 3].name === "colorBg"
+    ) {
+      myDATA.push({
+        customBtn: {
+          [listInputs[i].name]: listInputs[i].value,
+          [listInputs[i + 1].name]: listInputs[i + 1].value,
+          [listInputs[i + 2].name]: listInputs[i + 2].value,
+          [listInputs[i + 3].name]: listInputs[i + 3].value,
+        },
+      });
+      i += 3;
+      continue;
+    }
+
+    if (
+      (nameInput === "inscription" &&
+        i + 1 < listInputs.length &&
+        listInputs[i + 1].name === "reglement") ||
+      (nameInput === "reglement" &&
+        i + 1 < listInputs.length &&
+        listInputs[i + 1].name === "inscription")
+    ) {
       console.log(nameInput);
-      let count = 0;
+      if (myDATA.find((element) => element.buttons) != undefined) continue;
 
-      // 1 regrouper seulement les premier buttons inscription et reglement dans primBtn[]
-      // 2 pour tous les autres bouttons les ajouté comme avant avec des doublons du tableau boutons
-      // (prcq les autres boutons serons dynamique donc butons aura un name et un lien (value) )
+      myDATA.push({
+        buttons: {
+          [nameInput]: value,
+          [listInputs[i + 1].name]: listInputs[i + 1].value,
+        },
+      });
 
-      // Verfier si i + 1 est reglement pour les ajouter ensemble 
-      // si oui on les mets ensemble sinon on l'ajoute solo.
-      // refaire les bouttons pour tous avec 3 options nom, lien, coolor;
-
-      // myDATA.forEach((element) => {
-      //   if (element.buttons != undefined && element.buttons.length >= 2) return;
-      //   if (element.buttons === undefined) count++;
-      // });
-      // //Voir comment faire si on veut mettre plusieur boutons dans une page / voir si on oblige a mettre que 1 bouton de chaque (inscription + reglement)
-      // if (count >= myDATA.length) {
-      //   myDATA.push({ buttons: { [nameInput]: value } });
-      // } else {
-      //   for (let i = 0; i < myDATA.length; i++) {
-      //     if (myDATA[i].buttons === undefined) continue;
-      //     console.log("info: " + myDATA[i].buttons.inscription.length >= 2);
-      //     myDATA[i].buttons[nameInput] =  value;
-      //   }
-      // }
+      i += 1;
     } else {
+      if (nameInput === "inscription" || nameInput === "reglement") continue;
+
       myDATA.push({ [nameInput]: value });
     }
   }
