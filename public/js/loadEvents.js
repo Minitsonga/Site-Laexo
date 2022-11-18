@@ -4,9 +4,9 @@ events.forEach((e) => {
   var holderEvent = document.createElement("div");
   holderEvent.classList.add("container", "grid", "grid-band");
 
-  if (e.img.length > 0) {
+  if (e["img"].length > 0) {
     var imgElement = document.createElement("img");
-    imgElement.src = "/img/" + e.img;
+    imgElement.src = "/img/" + e["img"];
     imgElement.classList.add("grid-img");
     holderEvent.appendChild(imgElement);
   }
@@ -16,19 +16,20 @@ events.forEach((e) => {
   var gridText = document.createElement("div");
   gridText.classList.add("grid-text");
 
-  if (e.title.length > 0) {
+  if (e["title"].length > 0) {
     var titleGrid = document.createElement("h2");
     titleGrid.classList.add("title");
-    titleGrid.innerHTML = e.title;
+    titleGrid.innerHTML = e["title"];
     gridText.appendChild(titleGrid);
   }
 
-  if (e.subtitle.length > 0) {
-    var subtitleGrid = document.createElement("div");
-    subtitleGrid.classList.add("subtitle");
-    subtitleGrid.innerHTML = e.subtitle;
-    gridText.appendChild(subtitleGrid);
-  }
+  if (e["subtitle"]?.length > 0) {
+      var subtitleGrid = document.createElement("div");
+      subtitleGrid.classList.add("subtitle");
+      subtitleGrid.innerHTML = element["subtitle"];
+      holder.appendChild(subtitleGrid);
+    }
+
 
   //#endregion
 

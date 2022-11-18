@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const open = require("open");
 const multer = require("multer");
+const fs = require("fs");
 
 let visible = false;
 
@@ -63,6 +64,20 @@ const upload = multer({ storage: storage });
 const cpUpload = upload.fields([{ name: "img" }, { name: "band_img" }]);
 let data = [];
 router.post("/editor/preview/images", cpUpload, async (req, res) => {
+  res.send("Ok");
+});
+
+router.post("/editor", (req, res) => {
+  data = JSON.parse(JSON.stringify(req.body));
+
+  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+
+  if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+
+  fs.writeFile("eventList2.json", JSON.stringify(data), (err) => {
+    if (err) throw err;
+    console.log("JSON data editor is saved.");
+  });
   res.send("Ok");
 });
 

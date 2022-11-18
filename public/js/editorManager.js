@@ -126,8 +126,7 @@ function fileValidation(button) {
   }
 }
 
-async function previewForm(button) {
-  const form = button.closest("#mainForm");
+function dataFormat(form) {
   const listInputs = form.querySelectorAll(".inputData");
 
   const myDATA = [];
@@ -185,6 +184,43 @@ async function previewForm(button) {
     }
   }
 
+  return myDATA;
+}
+
+async function previewForm(button) {
+
+  const form = button.closest("#mainForm");
+  const myDATA = dataFormat(form);
+  
+  if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+
+  await fetch("/admin/editor/preview/images", {
+    method: "POST",
+    body: new FormData(form),
+  })
+    .then((res) => {
+      console.log("imageUploaded", res);
+    })
+    .catch((err) => console.log(err));
+
+  fetch("/admin/editor/preview", {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    method: "POST",
+    body: JSON.stringify(myDATA),
+  })
+    .then((res) => {
+      console.log("done", res);
+    })
+    .catch((err) => console.log(err));
+}
+
+async function submitForm(button)
+{
+  const form = button.closest("#mainForm");
+  const myDATA = dataFormat(form);
+
   console.log(myDATA);
 
   if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
@@ -198,7 +234,7 @@ async function previewForm(button) {
     })
     .catch((err) => console.log(err));
 
-  fetch("/admin/editor/preview", {
+  fetch("/admin/editor", {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },

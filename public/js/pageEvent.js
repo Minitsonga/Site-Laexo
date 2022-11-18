@@ -8,12 +8,12 @@ cur_event.forEach((element) => {
     holder.appendChild(titleDiv);
   }
 
-  if (element["subtitle"]?.length > 0) {
-    var subtitleDiv = document.createElement("div");
-    subtitleDiv.classList.add("subtitle");
-    subtitleDiv.innerHTML = element["subtitle"];
-    holder.appendChild(subtitleDiv);
-  }
+  // if (element["subtitle"]?.length > 0) {
+  //   var subtitleDiv = document.createElement("div");
+  //   subtitleDiv.classList.add("subtitle");
+  //   subtitleDiv.innerHTML = element["subtitle"];
+  //   holder.appendChild(subtitleDiv);
+  // }
 
   if (element["band_img"]?.length > 0) {
     var imgDiv = document.createElement("div");
