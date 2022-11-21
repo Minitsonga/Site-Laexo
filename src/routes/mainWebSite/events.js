@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   let result = [];
   let dates = [];
   events.forEach((e, i) => {
-    dates.push(e.find((a) => a["dateStart"]));
+    dates.push(e.find((a) => a["dateStart"]).dateStart);
     e.forEach((item) => {
       if (new Date(item["launchDate"]).getTime() < Date.now()) {
         result.push(e);
@@ -14,33 +14,31 @@ router.get("/", async (req, res) => {
     });
   });
 
-  // result.forEach((e,i) => {
-  //   e.forEach((item) => {
-
-  //   let prevDate;
-  //     if (new Date(item["launchDate"]).getTime() < Date.now()) temp.push(i);
-  //   });
-  // });
 
   console.log(result);
 
   console.log(dates);
 
-  //Faire marcher le events car element["truc"] marche pas (la il faut sort la liste result)
+  dates.sort((a,b) => {
+    return new Date(a) - new Date(b);
+  })
 
-  // events.sort((a, b) => {
-  //   return new Date(a.date) - new Date(b.date);
-  // });
+  let sortedEvents = [];
+  
+  dates.forEach(date => {
+    result.forEach(element => {
+      if(date === element.find((a) => a["dateStart"]).dateStart)
+      {
+        sortedEvents.push(element);
+      }
+      
+    });
+  });
 
-  // let events = [];
-  // datas.forEach((e) => {
-  //   console.log(e);
-  //   if (new Date(e["launchDate"]).getTime() < Date.now()) events.push(e);
-  // });
+  console.log(sortedEvents);
 
-  // new Date(element["launchDate"]).getTime() < Date.now()
 
-  res.render("pages/events", { events });
+  res.render("pages/events", { events:sortedEvents });
 });
 
 router.get("/:eventName", async (req, res) => {
