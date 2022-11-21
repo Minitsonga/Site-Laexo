@@ -28,13 +28,10 @@
     { "dateEnd": "2022-11-30" },
     { "launchDate": "2022-11-17" }
   ],
-
   [
     { "url_name": "react" },
     { "title": "LIVE REACT" },
-    {
-      "subtitle": "CACA"
-    },
+    { "subtitle": "CACA" },
     { "img": "LCUP-mini.jpg" },
     { "band_img": "LCUP-Affiche-3000x1000.jpg" },
     {

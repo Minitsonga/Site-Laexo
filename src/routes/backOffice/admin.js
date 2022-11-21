@@ -2,6 +2,7 @@ const router = require("express").Router();
 const open = require("open");
 const multer = require("multer");
 const fs = require("fs");
+const getEventsList = require("../../functions/getEventsList");
 
 let visible = false;
 
@@ -67,20 +68,6 @@ router.post("/editor/preview/images", cpUpload, async (req, res) => {
   res.send("Ok");
 });
 
-router.post("/editor", (req, res) => {
-  data = JSON.parse(JSON.stringify(req.body));
-
-  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
-
-  if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
-
-  fs.writeFile("eventList2.json", JSON.stringify(data), (err) => {
-    if (err) throw err;
-    console.log("JSON data editor is saved.");
-  });
-  res.send("Ok");
-});
-
 router.post("/editor/preview", async (req, res) => {
   data = JSON.parse(JSON.stringify(req.body));
 
@@ -100,6 +87,23 @@ router.get("/editor/preview", (req, res) => {
   data = [];
 });
 
+router.post("/editor", async (req, res) => {
+  const savedData = JSON.parse(await getEventsList());
+  console.log(savedData);
+  data = JSON.parse(JSON.stringify(req.body));
+  savedData.push(data);
+
+  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+
+  if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+
+  fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
+    if (err) throw err;
+    console.log("JSON data editor is saved.");
+  });
+  res.send("Ok");
+});
+
 const planningUpload = multer({ storage: planningStorage });
 const plannings = planningUpload.fields([
   { name: "planning" },
@@ -109,6 +113,10 @@ router.post("/editor/planning", plannings, async (req, res) => {
   console.log(req.files);
   await open("http://localhost:3000/planning");
   res.send("Ok");
+});
+
+router.get("/editor/eventsManager", plannings, async (req, res) => {
+  res.render("pages/preview", { data });
 });
 
 module.exports = router;

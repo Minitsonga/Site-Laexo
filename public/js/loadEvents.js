@@ -54,19 +54,19 @@ events.forEach((list) => {
       gridInfo.appendChild(dateDiv);
     }
 
-    if (e.buttons.url_name?.length > 0) {
+    if (e.url_name?.length > 0) {
       var buttonSeeMore = document.createElement("button");
       buttonSeeMore.type = "button";
       buttonSeeMore.classList.add("btn", "btn-laexo-light");
       buttonSeeMore.setAttribute(
         "onclick",
-        `location.href+='/${btn.url_name}'`
+        `location.href+='/${e.url_name}'`
       );
       buttonSeeMore.innerHTML = "Voir plus";
       gridInfo.appendChild(buttonSeeMore);
     }
 
-    if (e.buttons.inscription?.length > 0) {
+    if (e.buttons?.inscription?.length > 0) {
       var buttonInscription = document.createElement("button");
       buttonInscription.type = "button";
       buttonInscription.classList.add("btn", "btn-laexo-light");
