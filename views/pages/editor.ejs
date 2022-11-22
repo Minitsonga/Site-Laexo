@@ -72,7 +72,7 @@
           </div>
 
           <div class="d-flex justify-content-center mt-4">
-            <button type="button" class="btn btn-primary" id="managedEvents" onclick="location.href+='/eventsManager'">Gérer
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventsManager">Gérer
               les évènements</button>
           </div>
         </div>
@@ -236,6 +236,36 @@
         </div>
       </div>
 
+      <div class="modal fade" id="eventsManager" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="eventsManagerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <form action="/admin/editor/eventsManager" method="delete" id="eventToDelete">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eventsManagerLabel">Choisissez l'évènement a supprimer</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                  <label class="custom-file" for="floatingSelectGridEvents">Choix de l'évènements</label>
+                  <select class="form-select" id="floatingSelectGridEvents">
+                    <option value="lcup2v2">LCUP</option>
+                    <option value="react">REACT</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Supprimer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
       <div class="modal fade" id="planningForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="planningFormLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -247,7 +277,6 @@
                   aria-label="close"></button>
               </div>
               <div class="modal-body">
-
                 <div class="row justify-content-between text-left">
                   <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
                     <label class="custom-file" for="planningFile">Planning PC</label>
@@ -271,22 +300,8 @@
         </div>
       </div>
 
+
       <%- include('../templates/footer'); %>
-
-        <style>
-          .row {
-            margin-top: 20px;
-            margin-bottom: 20px;
-          }
-
-          .modal {
-            color: black;
-          }
-
-          .form-floating>label {
-            margin-left: 5px;
-          }
-        </style>
 
         <script src="/js/editorManager.js"></script>
 

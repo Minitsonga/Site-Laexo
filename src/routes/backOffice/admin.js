@@ -3,6 +3,7 @@ const open = require("open");
 const multer = require("multer");
 const fs = require("fs");
 const getEventsList = require("../../functions/getEventsList");
+const e = require("express");
 
 let visible = false;
 
@@ -30,10 +31,25 @@ router.post("/login", (req, res) => {
   res.end();
 });
 
-router.get("/editor", (req, res) => {
+router.get("/editor", async (req, res) => {
   //if (req.session.loggedin) {
+  const dataEvents = JSON.parse(await getEventsList());
+  let data = [];
+  dataEvents.forEach((element) => {
+    let url_name = "";
+    let title = "";
+    element.forEach((e) => {
+      if (e["url_name"]?.length > 0) url_name = e["url_name"];
+      if (e["title"]?.length > 0) title = e["title"];
+    });
 
-  res.render("pages/editor");
+    data.push({url_name, title});
+
+  });
+
+  console.log(data);
+
+  res.render("pages/editor", { dataEvents });
   // } else {
   //   console.log("dommage");
   //   res.redirect("/admin/login");
