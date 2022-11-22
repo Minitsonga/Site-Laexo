@@ -1,5 +1,16 @@
 const select = document.querySelector("#floatingSelectGrid");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const selectEvents = document.querySelector("#floatingSelectGridEvents");
+
+  listEvents.forEach((element) => {
+    const option = document.createElement("option");
+    option.setAttribute("value", element.url_name);
+    option.innerHTML = element.title;
+    selectEvents.appendChild(option);
+  });
+});
+
 let prev_targetID;
 let prev_value;
 
@@ -108,14 +119,9 @@ validateBtn.addEventListener("click", () => {
   form.insertBefore(div, form.children[form.children.length - 2]);
 });
 
-// console.log((2100/900 == 1200/450)); Check if 2 resolution have the same ratio
-
 function deleteElement(element) {
   element.closest(".parent").remove();
 }
-
-//Submit preview + validation (confirmation avant le post des données)
-// preview = post des données et affichage de la page sur un nouvel onglet;
 
 function fileValidation(button) {
   const allowedExtensions = /\.png$/i;
@@ -188,10 +194,9 @@ function dataFormat(form) {
 }
 
 async function previewForm(button) {
-
   const form = button.closest("#mainForm");
   const myDATA = dataFormat(form);
-  
+
   if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
   await fetch("/admin/editor/preview/images", {
@@ -216,8 +221,7 @@ async function previewForm(button) {
     .catch((err) => console.log(err));
 }
 
-async function submitForm(button)
-{
+async function submitForm(button) {
   const form = button.closest("#mainForm");
   const myDATA = dataFormat(form);
 
@@ -259,4 +263,14 @@ function planningSubmit() {
       console.log("done", res);
     })
     .catch((err) => console.log(err));
+}
+
+function deleteEvent(button) {
+  if (window.confirm("Es-tu sur de vouloir supprimer cette évènement ?")) {
+    // Validate = delete selected option
+    const selectEvent = document.querySelector("#floatingSelectGridEvents");
+    let value = selectEvent.options[selectEvent.selectedIndex].value;
+
+    
+  }
 }

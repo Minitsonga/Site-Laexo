@@ -49,7 +49,7 @@ router.get("/editor", async (req, res) => {
 
   console.log(data);
 
-  res.render("pages/editor", { dataEvents });
+  res.render("pages/editor", { data });
   // } else {
   //   console.log("dommage");
   //   res.redirect("/admin/login");

@@ -5,6 +5,11 @@
   <%- include('../templates/headerGlobal'); %>
     <link rel="stylesheet" href="/css/editor.css">
     <title>editor - Laexo.tv</title>
+    <script>
+      let listEvents = JSON.parse(
+        `<%- JSON.stringify(data)%>`
+      );
+    </script>
 </head>
 
 <body class="bg-dark-laexo" onload="">
@@ -250,15 +255,13 @@
                 <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
                   <label class="custom-file" for="floatingSelectGridEvents">Choix de l'évènements</label>
                   <select class="form-select" id="floatingSelectGridEvents">
-                    <option value="lcup2v2">LCUP</option>
-                    <option value="react">REACT</option>
                   </select>
                 </div>
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Supprimer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="deleteEvent(this)">Supprimer</button>
               </div>
             </form>
           </div>
