@@ -4,6 +4,7 @@ const multer = require("multer");
 const fs = require("fs");
 const getEventsList = require("../../functions/getEventsList");
 const e = require("express");
+const { ok } = require("assert");
 
 let visible = false;
 
@@ -43,8 +44,7 @@ router.get("/editor", async (req, res) => {
       if (e["title"]?.length > 0) title = e["title"];
     });
 
-    data.push({url_name, title});
-
+    data.push({ url_name, title });
   });
 
   console.log(data);
@@ -107,16 +107,28 @@ router.post("/editor", async (req, res) => {
   const savedData = JSON.parse(await getEventsList());
   console.log(savedData);
   data = JSON.parse(JSON.stringify(req.body));
-  savedData.push(data);
 
-  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+  if (data.value != undefined) {
+    savedData.forEach((element) => {
+      element.forEach((e) => {
+        if (e["url_name"] == data.value) savedData.pop(element);
+      });
+    });
+  }
 
-  if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+  if (data.length > 0) {
+    data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+
+    if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+
+    savedData.push(data);
+  }
 
   fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
     if (err) throw err;
     console.log("JSON data editor is saved.");
   });
+
   res.send("Ok");
 });
 
@@ -129,10 +141,6 @@ router.post("/editor/planning", plannings, async (req, res) => {
   console.log(req.files);
   await open("http://localhost:3000/planning");
   res.send("Ok");
-});
-
-router.get("/editor/eventsManager", plannings, async (req, res) => {
-  res.render("pages/preview", { data });
 });
 
 module.exports = router;

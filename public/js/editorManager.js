@@ -271,6 +271,18 @@ function deleteEvent(button) {
     const selectEvent = document.querySelector("#floatingSelectGridEvents");
     let value = selectEvent.options[selectEvent.selectedIndex].value;
 
-    
+    console.log(value);
+
+    fetch("/admin/editor", {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({value}),
+    })
+      .then((res) => {
+        console.log("done", res);
+      })
+      .catch((err) => console.log(err));
   }
 }
