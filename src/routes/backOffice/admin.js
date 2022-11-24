@@ -99,7 +99,6 @@ router.get("/editor/preview", (req, res) => {
   if (data.length <= 0) return res.redirect("/admin/editor");
   console.log(data);
   res.render("pages/preview", { data });
-  //TODO afficher la page avec script js
   data = [];
 });
 
@@ -109,11 +108,17 @@ router.post("/editor", async (req, res) => {
   data = JSON.parse(JSON.stringify(req.body));
 
   if (data.value != undefined) {
+    let founded = false;
     savedData.forEach((element) => {
       element.forEach((e) => {
-        if (e["url_name"] == data.value) savedData.pop(element);
+        if (e["url_name"] == data.value) {
+          savedData.pop(element);
+          founded = true;
+        }
       });
     });
+
+    if(!founded) return res.sendStatus(404);
   }
 
   if (data.length > 0) {

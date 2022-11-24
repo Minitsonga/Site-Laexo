@@ -278,11 +278,12 @@ function deleteEvent(button) {
         "Content-Type": "application/json; charset=utf-8",
       },
       method: "POST",
-      body: JSON.stringify({value}),
+      body: JSON.stringify({ value }),
     })
       .then((res) => {
-        console.log("done", res);
+        if (!res.ok) alert("Aucun évènement n'a été trouvé !");
+        else alert("Évènement correctement supprimé !");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error la " + err));
   }
 }

@@ -5,11 +5,23 @@ router.get("/", async (req, res) => {
   let events = JSON.parse(await getEventsList());
   let result = [];
   let dates = [];
-  events.forEach((e, i) => {
-    dates.push(e.find((a) => a["dateStart"])?.dateStart);
-    e.forEach((item) => {
+  let archivedEvents = [];
+  events.forEach((event) => {
+    dates.push(event.find((a) => a["dateStart"])?.dateStart);
+    event.forEach((item) => {
       if (new Date(item["launchDate"]).getTime() < Date.now()) {
-        result.push(e);
+        event.forEach((element) => {
+          if (element["dateEnd"] == undefined) return;
+
+          if (
+            new Date(element["dateEnd"]).getTime() + 604800000 <=
+            Date.now()
+          ) {
+            archivedEvents.push(event);
+          } else {
+            result.push(event);
+          }
+        });
       }
     });
   });
@@ -23,6 +35,7 @@ router.get("/", async (req, res) => {
   });
 
   let sortedEvents = [];
+  let sortedArchivedEvents = [];
 
   dates.forEach((date) => {
     result.forEach((element) => {
@@ -30,11 +43,20 @@ router.get("/", async (req, res) => {
         sortedEvents.push(element);
       }
     });
+
+    archivedEvents.forEach((element) => {
+      if (date === element.find((a) => a["dateStart"])?.dateStart) {
+        sortedArchivedEvents.push(element);
+      }
+    });
   });
 
   console.log(sortedEvents);
 
-  res.render("pages/events", { events: sortedEvents });
+  res.render("pages/events", {
+    events: sortedEvents,
+    archivedEvents: sortedArchivedEvents,
+  });
 });
 
 router.get("/:eventName", async (req, res) => {
