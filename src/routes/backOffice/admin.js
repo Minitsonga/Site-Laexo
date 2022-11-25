@@ -36,15 +36,15 @@ router.get("/editor", async (req, res) => {
   //if (req.session.loggedin) {
   const dataEvents = JSON.parse(await getEventsList());
   let data = [];
-  dataEvents.forEach((element) => {
-    let url_name = "";
+  dataEvents.forEach((element, i) => {
     let title = "";
     element.forEach((e) => {
-      if (e["url_name"]?.length > 0) url_name = e["url_name"];
-      if (e["title"]?.length > 0) title = e["title"];
+      if (element[0]["url_name"]?.length > 0) {
+        if (e["title"]?.length > 0) title = e["title"];
+      }
     });
 
-    data.push({ url_name, title });
+    data.push({ id: i, title });
   });
 
   console.log(data);
@@ -108,31 +108,23 @@ router.post("/editor", async (req, res) => {
   data = JSON.parse(JSON.stringify(req.body));
 
   if (data.value != undefined) {
-    let founded = false;
-    savedData.forEach((element) => {
-      element.forEach((e) => {
-        if (e["url_name"] == data.value) {
-          savedData.pop(element);
-          founded = true;
-        }
-      });
-    });
-
-    if(!founded) return res.sendStatus(404);
+    if (!savedData[data.value]) return res.sendStatus(404);
+    savedData.pop(savedData[data.value]);
   }
 
   if (data.length > 0) {
     data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
 
     if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+    //before pushing check if any element has de same url_name
 
     savedData.push(data);
   }
 
-  fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
-    if (err) throw err;
-    console.log("JSON data editor is saved.");
-  });
+  // fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
+  //   if (err) throw err;
+  //   console.log("JSON data editor is saved.");
+  // });
 
   res.send("Ok");
 });

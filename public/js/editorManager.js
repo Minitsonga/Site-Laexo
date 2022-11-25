@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   listEvents.forEach((element) => {
     const option = document.createElement("option");
-    option.setAttribute("value", element.url_name);
+    option.setAttribute("value", element.id);
     option.innerHTML = element.title;
     selectEvents.appendChild(option);
   });
