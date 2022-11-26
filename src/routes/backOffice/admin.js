@@ -3,8 +3,7 @@ const open = require("open");
 const multer = require("multer");
 const fs = require("fs");
 const getEventsList = require("../../functions/getEventsList");
-const e = require("express");
-const { ok } = require("assert");
+
 
 let visible = false;
 
@@ -104,29 +103,45 @@ router.get("/editor/preview", (req, res) => {
 
 router.post("/editor", async (req, res) => {
   const savedData = JSON.parse(await getEventsList());
-  console.log(savedData);
+
   data = JSON.parse(JSON.stringify(req.body));
 
   if (data.value != undefined) {
-    if (!savedData[data.value]) return res.sendStatus(404);
+    // if data the id of an event)
+    if (!savedData[data.value]) return res.status(404).send("value");
     savedData.pop(savedData[data.value]);
   }
-
+  let canSend = true;
   if (data.length > 0) {
+    // if data is a list of item (= event)
     data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
 
     if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
-    //before pushing check if any element has de same url_name
 
-    savedData.push(data);
+    savedData.every((element) => {
+      console.log(canSend);
+      if (element[0]["url_name"] === data[0]["url_name"]) {
+        canSend = false;
+        res.status(404).send({message:"URL"});
+        return false;
+      }
+
+      return true;
+    });
+
+    if (canSend) {
+      console.log("Data added");
+      savedData.push(data);
+    }
   }
-
-  // fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
-  //   if (err) throw err;
-  //   console.log("JSON data editor is saved.");
-  // });
-
-  res.send("Ok");
+  console.log("la :" + canSend);
+  if (canSend) {
+    fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
+      if (err) throw err;
+      console.log("JSON data editor is saved.");
+    });
+    res.send("Ok");
+  }
 });
 
 const planningUpload = multer({ storage: planningStorage });

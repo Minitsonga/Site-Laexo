@@ -65,10 +65,12 @@ router.get("/:eventName", async (req, res) => {
   let listEvent = JSON.parse(await getEventsList());
 
   let event = [];
-  listEvent.forEach((element) => {
-    if (eventName === element.find((e) => e["url_name"])?.url_name) {
+  listEvent.every((element) => {
+    if (eventName === element[0]["url_name"]) {
       event = element;
+      return false;
     }
+    return true;
   });
 
   console.log(event);

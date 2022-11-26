@@ -222,33 +222,42 @@ async function previewForm(button) {
 }
 
 async function submitForm(button) {
-  const form = button.closest("#mainForm");
-  const myDATA = dataFormat(form);
+  if (
+    window.confirm(
+      "Es-tu sur de vouloir valider cette évènement ? \n AUCUNES MODIFCATIONS POURRONT ÊTRE APPORTÉES"
+    )
+  ) {
+    const form = button.closest("#mainForm");
+    const myDATA = dataFormat(form);
 
-  console.log(myDATA);
+    console.log(myDATA);
 
-  if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+    if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
-  await fetch("/admin/editor/preview/images", {
-    method: "POST",
-    body: new FormData(form),
-  })
-    .then((res) => {
-      console.log("imageUploaded", res);
+    await fetch("/admin/editor/preview/images", {
+      method: "POST",
+      body: new FormData(form),
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        console.log("imageUploaded", res);
+      })
+      .catch((err) => console.log(err));
 
-  fetch("/admin/editor", {
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-    method: "POST",
-    body: JSON.stringify(myDATA),
-  })
-    .then((res) => {
-      console.log("done", res);
+    fetch("/admin/editor", {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify(myDATA),
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        if (!res.ok) {
+          //TODO get the res message to make different anser when error
+          alert("L'URL de l'évènenement éxiste déjà!");
+        } else alert("Évènement correctement ajouté !");
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 function planningSubmit() {
