@@ -4,7 +4,6 @@ const multer = require("multer");
 const fs = require("fs");
 const getEventsList = require("../../functions/getEventsList");
 
-
 let visible = false;
 
 router.get("/login", (req, res) => {
@@ -46,7 +45,6 @@ router.get("/editor", async (req, res) => {
     data.push({ id: i, title });
   });
 
-  console.log(data);
 
   res.render("pages/editor", { data });
   // } else {
@@ -96,7 +94,6 @@ router.post("/editor/preview", async (req, res) => {
 
 router.get("/editor/preview", (req, res) => {
   if (data.length <= 0) return res.redirect("/admin/editor");
-  console.log(data);
   res.render("pages/preview", { data });
   data = [];
 });
@@ -108,10 +105,12 @@ router.post("/editor", async (req, res) => {
 
   if (data.value != undefined) {
     // if data the id of an event)
-    if (!savedData[data.value]) return res.status(404).send("value");
+    if (!savedData[data.value]) return res.sendStatus(404);
     savedData.pop(savedData[data.value]);
   }
+  
   let canSend = true;
+
   if (data.length > 0) {
     // if data is a list of item (= event)
     data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
@@ -119,22 +118,19 @@ router.post("/editor", async (req, res) => {
     if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
     savedData.every((element) => {
-      console.log(canSend);
       if (element[0]["url_name"] === data[0]["url_name"]) {
         canSend = false;
-        res.status(404).send({message:"URL"});
+        res.sendStatus(403);
         return false;
       }
 
       return true;
     });
 
-    if (canSend) {
-      console.log("Data added");
-      savedData.push(data);
-    }
+    if (canSend)  savedData.push(data);
+    
   }
-  console.log("la :" + canSend);
+
   if (canSend) {
     fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
       if (err) throw err;
@@ -150,7 +146,7 @@ const plannings = planningUpload.fields([
   { name: "planning2" },
 ]);
 router.post("/editor/planning", plannings, async (req, res) => {
-  console.log(req.files);
+
   await open("http://localhost:3000/planning");
   res.send("Ok");
 });

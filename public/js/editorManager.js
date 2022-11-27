@@ -253,7 +253,9 @@ async function submitForm(button) {
       .then((res) => {
         if (!res.ok) {
           //TODO get the res message to make different anser when error
-          alert("L'URL de l'évènenement éxiste déjà!");
+          if (res.status === 403) alert("L'URL de l'évènenement éxiste déjà!");
+          if (res.status === 404)
+            alert("Évènement inconnu ! Impossible de le supprimer.");
         } else alert("Évènement correctement ajouté !");
       })
       .catch((err) => console.log(err));
@@ -261,26 +263,26 @@ async function submitForm(button) {
 }
 
 function planningSubmit() {
-  const form = document.querySelector("#planningModif");
+  if (window.confirm("Es-tu sur de vouloir modifier le planning ?")) {
+    const form = document.querySelector("#planningModif");
 
-  const img = new FormData(form);
-  fetch("/admin/editor/planning", {
-    method: "POST",
-    body: img,
-  })
-    .then((res) => {
-      console.log("done", res);
+    const img = new FormData(form);
+    fetch("/admin/editor/planning", {
+      method: "POST",
+      body: img,
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        console.log("done", res);
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
-function deleteEvent(button) {
+function deleteEvent() {
   if (window.confirm("Es-tu sur de vouloir supprimer cette évènement ?")) {
     // Validate = delete selected option
     const selectEvent = document.querySelector("#floatingSelectGridEvents");
     let value = selectEvent.options[selectEvent.selectedIndex].value;
-
-    console.log(value);
 
     fetch("/admin/editor", {
       headers: {
@@ -295,4 +297,9 @@ function deleteEvent(button) {
       })
       .catch((err) => console.log("error la " + err));
   }
+}
+
+function modifyEvent()
+{
+  
 }

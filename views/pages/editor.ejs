@@ -261,7 +261,8 @@
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="deleteEvent(this)">Supprimer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteEvent()">Supprimer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="modifyEvent()">Modifier</button>
               </div>
             </form>
           </div>
@@ -296,7 +297,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    onclick="planningSubmit(this)">Modifier</button>
+                    onclick="planningSubmit()">Modifier</button>
                 </div>
             </form>
           </div>
