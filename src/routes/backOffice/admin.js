@@ -45,7 +45,6 @@ router.get("/editor", async (req, res) => {
     data.push({ id: i, title });
   });
 
-
   res.render("pages/editor", { data });
   // } else {
   //   console.log("dommage");
@@ -108,7 +107,7 @@ router.post("/editor", async (req, res) => {
     if (!savedData[data.value]) return res.sendStatus(404);
     savedData.pop(savedData[data.value]);
   }
-  
+
   let canSend = true;
 
   if (data.length > 0) {
@@ -127,8 +126,7 @@ router.post("/editor", async (req, res) => {
       return true;
     });
 
-    if (canSend)  savedData.push(data);
-    
+    if (canSend) savedData.push(data);
   }
 
   if (canSend) {
@@ -140,13 +138,24 @@ router.post("/editor", async (req, res) => {
   }
 });
 
+router.post("/editor/getevent", async (req, res) => {
+  const eventData = JSON.parse(await getEventsList());
+
+  data = JSON.parse(JSON.stringify(req.body));
+
+  if (data.value != undefined) {
+    // if data the id of an event)
+    console.log(eventData[data.value]);
+    res.send(eventData[data.value]);
+  }
+});
+
 const planningUpload = multer({ storage: planningStorage });
 const plannings = planningUpload.fields([
   { name: "planning" },
   { name: "planning2" },
 ]);
 router.post("/editor/planning", plannings, async (req, res) => {
-
   await open("http://localhost:3000/planning");
   res.send("Ok");
 });

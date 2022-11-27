@@ -299,7 +299,51 @@ function deleteEvent() {
   }
 }
 
-function modifyEvent()
-{
-  
+async function modifyEvent() {
+  // envoyé nom de l'event recherché et renvoi l'event
+
+  const selectEvent = document.querySelector("#floatingSelectGridEvents");
+  let value = selectEvent.options[selectEvent.selectedIndex].value;
+  let event = [];
+  await fetch("/admin/editor/getevent", {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    method: "POST",
+    body: JSON.stringify({ value }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      event = res;
+    })
+    .catch((err) => console.log("error la " + err));
+
+  console.log(event);
+
+  setupFormEvent(event);
+}
+
+function setupFormEvent(event) {
+  const form = document.querySelector(".form-card");
+
+  // let curElement = ToggleElement(targetID, false).cloneNode(true);
+  // curElement.removeAttribute("class");
+  // curElement.removeAttribute("id");
+
+  // curElement.classList.add("form-group", "flex-column", "d-flex");
+  // if (value == "img_mini" || value == "img_band")
+  //   curElement.style = "align-items:start;";
+
+  // if (value == "customButton")
+  //   curElement.setAttribute("id", "customButtonHolder");
+
+  // let div = document.createElement("div");
+  // div.id = "reduce";
+  // div.classList.add("row", "justify-content-between", "parent");
+
+  // div.appendChild(curElement);
+
+  // form.insertBefore(div, form.children[form.children.length - 2]);
+
+
 }
