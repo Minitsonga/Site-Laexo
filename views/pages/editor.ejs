@@ -96,7 +96,7 @@
                 <div class="form-group col-sm-3 flex-column d-flex justify-content-center">
                   <div class="form-floating">
                     <select class="form-select" id="floatingSelectGrid">
-                      <option selected value="img_mini" for="imgSelect" data-bs-toggle="modal"
+                      <option selected value="img" for="imgSelect" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">Image
                         Miniature (7:3)</option>
                       <option value="img_band" for="imgSelect">Image Bande (7:3)</option>
@@ -261,8 +261,10 @@
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteEvent()">Supprimer</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="modifyEvent()">Modifier</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                  onclick="deleteEvent()">Supprimer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  onclick="modifyEvent()">Modifier</button>
               </div>
             </form>
           </div>

@@ -47,7 +47,7 @@ select.addEventListener("change", () => {
 });
 
 function SetupElement(selectValue, element) {
-  if (selectValue == "img_mini") {
+  if (selectValue == "img") {
     element.querySelector("input").setAttribute("name", "img");
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
@@ -102,7 +102,7 @@ validateBtn.addEventListener("click", () => {
   curElement.removeAttribute("id");
 
   curElement.classList.add("form-group", "flex-column", "d-flex");
-  if (value == "img_mini" || value == "img_band")
+  if (value == "img" || value == "img_band")
     curElement.style = "align-items:start;";
 
   if (value == "customButton")
@@ -305,6 +305,7 @@ async function modifyEvent() {
   const selectEvent = document.querySelector("#floatingSelectGridEvents");
   let value = selectEvent.options[selectEvent.selectedIndex].value;
   let event = [];
+
   await fetch("/admin/editor/getevent", {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -313,37 +314,195 @@ async function modifyEvent() {
     body: JSON.stringify({ value }),
   })
     .then((res) => res.json())
-    .then((res) => {
-      event = res;
-    })
+    .then((res) => (event = res))
     .catch((err) => console.log("error la " + err));
 
   console.log(event);
+  console.log(select.options[0].getAttribute("for"));
 
-  setupFormEvent(event);
+  event.forEach((item) => getIdElement(item));
 }
 
-function setupFormEvent(event) {
+//Get the id of the form element form the name of each item in event.
+async function getIdElement(item) {
+  let element;
+  let value = "";
+  if (item["url_name"]) {
+    const textUrl = document.querySelector("#urlName");
+    textUrl.value = item["url_name"];
+  }
+
+  if (item["title"]) {
+    const textTitle = document.querySelector("#TitleMain");
+    textTitle.value = item["title"];
+  }
+
+  if (item["subtitle"]) {
+    element = document.querySelector("#textSelect");
+  }
+
+  if (item["img"]) {
+    element = document.querySelector("#imgSelect");
+    value = "img";
+  }
+
+  if (item["bang_img"]) {
+    element = document.querySelector("#imgSelect");
+    value = "bang_img";
+  }
+
+  if (item.buttons != undefined) {
+    if (item.buttons["inscription"]) {
+      element = document.querySelector("#urlButtonSelect");
+    }
+
+    if (item.buttons["reglement"]) {
+      element = document.querySelector("#urlButtonSelect");
+    }
+  }
+
+  if (item["small_Title"]) {
+    element = document.querySelector("#textSelect");
+  }
+
+  if (item["alerte_msg"]) {
+    element = document.querySelector("#textSelect");
+  }
+
+  if (item["description"]) {
+    element = document.querySelector("#textZoneSelect");
+  }
+
+  if (item.customBtn != undefined) {
+    value = "customButton";
+    element = document.querySelector("#customButtonSelect");
+  }
+
+  if (item["dateStart"] || item["dateEnd"] || item["launchDate"]) {
+    element = document.querySelector("#dateSelect");
+  }
+
+  console.log(element);
+  await InitElement(copyElement(element, value), item);
+}
+
+async function getImage(pathName) {
+  const img = fetch("/img/" + pathName, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    method: "GET",
+  })
+    .then((res) => res.blob())
+    .then((img) => {
+      const myFile = new File(["imgdata"], pathName, { type: img.type });
+      console.log(myFile);
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(myFile);
+      return dataTransfer.files;
+    });
+
+  return img;
+}
+
+function copyElement(element, value) {
+  let curElement = element.cloneNode(true);
+  curElement.removeAttribute("class");
+  curElement.removeAttribute("id");
+
+  curElement.classList.add("form-group", "flex-column", "d-flex");
+  if (value == "img" || value == "band_img")
+    curElement.style = "align-items:start;";
+
+  if (value == "customButton")
+    curElement.setAttribute("id", "customButtonHolder");
+
+  return curElement;
+}
+
+async function InitElement(element, item) {
+  if (item["img"]) {
+    element.querySelector("input").setAttribute("name", "img");
+    element.querySelector("input").files = await getImage(item["img"]);
+    element.querySelector("label").innerHTML = "Image Miniature (7:3)";
+  }
+
+  if (item["bang_img"]) {
+    element.querySelector("input").setAttribute("name", "band_img");
+    element.querySelector("input").files = await getImage(item["bang_img"]);
+    element.querySelector("label").innerHTML = "Image Bande (7:3)";
+  }
+
+  if (item["small_Title"]) {
+    element.querySelector("input").setAttribute("name", "small_Title");
+    element.querySelector("input").value = item["small_Title"];
+    element.querySelector("label").innerHTML = "Titre";
+  }
+
+  if (item["subtitle"]) {
+    element.querySelector("input").setAttribute("name", "subtitle");
+    element.querySelector("input").value = item["subtitle"];
+    element.querySelector("label").innerHTML = "Entrer un petit texte";
+  }
+
+  if (item["alerte_msg"]) {
+    element.querySelector("input").setAttribute("name", "alerte_msg");
+    element.querySelector("input").value = item["alerte_msg"];
+    element.querySelector("label").innerHTML = "Entrer un texte important";
+  }
+
+  if (item.buttons != undefined) {
+    if (item.buttons["inscription"]) {
+      element.querySelector("input").setAttribute("name", "inscription");
+      element.querySelector("input").value = item.buttons["inscription"];
+      element.querySelector("label").innerHTML = "Entrer le lien d'inscription";
+    }
+
+    if (item.buttons["reglement"]) {
+      element.querySelector("input").setAttribute("name", "reglement");
+      element.querySelector("input").value = item.buttons["reglement"];
+      element.querySelector("label").innerHTML = "Entrer le lien du règlement";
+    }
+  }
+
+  if (item.customBtn != undefined) {
+    if (item.customBtn["colorBg"]) {
+      const input = element.querySelector("#colorBgInput");
+      input.value = item.customBtn["colorBg"];
+    }
+
+    if (item.customBtn["colorText"]) {
+      const input = element.querySelector("#colorTxtInput");
+      input.value = item.customBtn["colorText"];
+    }
+
+    if (item.customBtn["name"]) {
+      const input = element.querySelector("#btnName");
+      input.value = item.customBtn["name"];
+    }
+
+    if (item.customBtn["url"]) {
+      const input = element.querySelector("#urlInput");
+      input.value = item.customBtn["url"];
+    }
+  }
+  // item["dateStart"] || item["dateEnd"] || item["launchDate"]
+  // if (item["dateStart"]) {
+  //   element.querySelector("input").setAttribute("name", "alerte_msg");
+  //   element.querySelector("input").value = item["alerte_msg"];
+  //   element.querySelector("label").innerHTML = "Entrer un texte important";
+  // }
+
+  // j'ai l'elelement mais recup les 3 input en meme temps grace a value == "date"
+  // setup chaque input en fonction de dateStart / dateEnd / LaunchDate 
+
+
   const form = document.querySelector(".form-card");
+  let div = document.createElement("div");
+  div.id = "reduce";
+  div.classList.add("row", "justify-content-between", "parent");
 
-  // let curElement = ToggleElement(targetID, false).cloneNode(true);
-  // curElement.removeAttribute("class");
-  // curElement.removeAttribute("id");
+  div.appendChild(element);
 
-  // curElement.classList.add("form-group", "flex-column", "d-flex");
-  // if (value == "img_mini" || value == "img_band")
-  //   curElement.style = "align-items:start;";
-
-  // if (value == "customButton")
-  //   curElement.setAttribute("id", "customButtonHolder");
-
-  // let div = document.createElement("div");
-  // div.id = "reduce";
-  // div.classList.add("row", "justify-content-between", "parent");
-
-  // div.appendChild(curElement);
-
-  // form.insertBefore(div, form.children[form.children.length - 2]);
-
-
+  form.insertBefore(div, form.children[form.children.length - 2]);
 }
