@@ -380,6 +380,7 @@ async function getIdElement(item) {
 
   if (item["dateStart"] || item["dateEnd"] || item["launchDate"]) {
     element = document.querySelector("#dateSelect");
+    value = "date";
   }
 
   console.log(element);
@@ -486,16 +487,28 @@ async function InitElement(element, item) {
       input.value = item.customBtn["url"];
     }
   }
-  // item["dateStart"] || item["dateEnd"] || item["launchDate"]
-  // if (item["dateStart"]) {
-  //   element.querySelector("input").setAttribute("name", "alerte_msg");
-  //   element.querySelector("input").value = item["alerte_msg"];
-  //   element.querySelector("label").innerHTML = "Entrer un texte important";
-  // }
+  item["dateStart"] || item["dateEnd"] || item["launchDate"];
+
+  if (value === "date") {
+    if (item["dateStart"]) {
+      element.querySelector("input").setAttribute("name", "alerte_msg");
+      element.querySelector("input").value = item["alerte_msg"];
+      element.querySelector("label").innerHTML = "Entrer un texte important";
+    }
+    if (item["dateStart"]) {
+      element.querySelector("input").setAttribute("name", "alerte_msg");
+      element.querySelector("input").value = item["alerte_msg"];
+      element.querySelector("label").innerHTML = "Entrer un texte important";
+    }
+    if (item["dateStart"]) {
+      element.querySelector("input").setAttribute("name", "alerte_msg");
+      element.querySelector("input").value = item["alerte_msg"];
+      element.querySelector("label").innerHTML = "Entrer un texte important";
+    }
+  }
 
   // j'ai l'elelement mais recup les 3 input en meme temps grace a value == "date"
-  // setup chaque input en fonction de dateStart / dateEnd / LaunchDate 
-
+  // setup chaque input en fonction de dateStart / dateEnd / LaunchDate
 
   const form = document.querySelector(".form-card");
   let div = document.createElement("div");
