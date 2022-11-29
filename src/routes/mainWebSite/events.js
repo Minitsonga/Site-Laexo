@@ -4,49 +4,47 @@ const getEventsList = require("../../functions/getEventsList");
 router.get("/", async (req, res) => {
   let events = JSON.parse(await getEventsList());
   let result = [];
-  let dates = [];
+  let datesList = [];
   let archivedEvents = [];
-  events.forEach((event) => {
-    dates.push(event.find((a) => a["dateStart"])?.dateStart);
-    event.forEach((item) => {
-      if (new Date(item["launchDate"]).getTime() < Date.now()) {
-        event.forEach((element) => {
-          if (element["dateEnd"] == undefined) return;
 
-          if (
-            new Date(element["dateEnd"]).getTime() + 604800000 <=
-            Date.now()
-          ) {
-            archivedEvents.push(event);
-          } else {
-            result.push(event);
-          }
-        });
+  events.forEach((event) => {
+    let { dates } = event.find((item) => item.dates != undefined);
+    datesList.push(dates["dateStart"]);
+
+    if (new Date(dates["launchDate"]).getTime() < Date.now()) {
+      if (dates["dateEnd"] == undefined) return;
+
+      if (new Date(dates["dateEnd"]).getTime() + 604800000 <= Date.now()) {
+        archivedEvents.push(event);
+      } else {
+        result.push(event);
       }
-    });
+    }
   });
 
   console.log(result);
 
-  console.log(dates);
+  console.log(datesList);
 
-  dates.sort((a, b) => {
+  datesList.sort((a, b) => {
     return new Date(a) - new Date(b);
   });
 
   let sortedEvents = [];
   let sortedArchivedEvents = [];
 
-  dates.forEach((date) => {
+  datesList.forEach((cur_date) => {
     result.forEach((element) => {
-      if (date === element.find((a) => a["dateStart"])?.dateStart) {
+      let { dates } = element.find((item) => item.dates != undefined);
+      if (cur_date === dates["dateStart"]) {
         sortedEvents.push(element);
       }
     });
 
-    archivedEvents.forEach((element) => {
-      if (date === element.find((a) => a["dateStart"])?.dateStart) {
-        sortedArchivedEvents.push(element);
+    archivedEvents.forEach((archivedElement) => {
+      let { dates } = archivedElement.find((item) => item.dates != undefined);
+      if (cur_date === dates["dateStart"]) {
+        sortedArchivedEvents.push(archivedElement);
       }
     });
   });

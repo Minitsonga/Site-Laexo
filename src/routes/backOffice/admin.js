@@ -116,7 +116,7 @@ router.post("/editor", async (req, res) => {
 
     if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
-    savedData.every((element) => {
+    savedData.every((element, i) => {
       if (element[0]["url_name"] === data[0]["url_name"]) {
         canSend = false;
         res.sendStatus(403);
@@ -136,6 +136,45 @@ router.post("/editor", async (req, res) => {
     });
     res.send("Ok");
   }
+});
+
+router.post("/editor/updateEvent", async (req, res) => {
+  const savedData = JSON.parse(await getEventsList());
+
+  data = JSON.parse(JSON.stringify(req.body));
+
+  if (data.length > 0) {
+    // if data is a list of item (= event)
+    data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+
+    if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+
+    const updatedEvents = savedData;
+
+    savedData.every((element, i) => {
+      if (element[0]["url_name"] === data[0]["url_name"]) {
+        updatedEvents[i] = data;
+        canSend = false;
+        res.sendStatus(403);
+        return false;
+      }
+
+      return true;
+    });
+
+    console.log(savedData);
+    console.log(updatedEvents);
+  }
+
+  // if (canSend) {
+  //   fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
+  //     if (err) throw err;
+  //     console.log("JSON data editor is saved.");
+  //   });
+  //   res.send("Ok");
+  // }
+
+  res.send("Ok");
 });
 
 router.post("/editor/getevent", async (req, res) => {

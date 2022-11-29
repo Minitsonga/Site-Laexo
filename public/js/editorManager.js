@@ -165,6 +165,22 @@ function dataFormat(form) {
     }
 
     if (
+      nameInput === "dateStart" &&
+      listInputs[i + 1].name === "dateEnd" &&
+      listInputs[i + 2].name === "launchDate"
+    ) {
+      myDATA.push({
+        dates: {
+          [listInputs[i].name]: listInputs[i].value,
+          [listInputs[i + 1].name]: listInputs[i + 1].value,
+          [listInputs[i + 2].name]: listInputs[i + 2].value,
+        },
+      });
+      i += 2;
+      continue;
+    }
+
+    if (
       (nameInput === "inscription" &&
         i + 1 < listInputs.length &&
         listInputs[i + 1].name === "reglement") ||
@@ -222,43 +238,73 @@ async function previewForm(button) {
 }
 
 async function submitForm(button) {
-  if (
-    window.confirm(
-      "Es-tu sur de vouloir valider cette évènement ? \n AUCUNES MODIFCATIONS POURRONT ÊTRE APPORTÉES"
-    )
-  ) {
+  if (window.confirm("Es-tu sur de vouloir valider cette évènement ?")) {
     const form = button.closest("#mainForm");
     const myDATA = dataFormat(form);
 
-    console.log(myDATA);
+    if (
+      window.confirm("Veux tu modifier cette évènement si il existe déjà ?")
+    ) {
+      console.log(myDATA);
 
-    if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+      if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
-    await fetch("/admin/editor/preview/images", {
-      method: "POST",
-      body: new FormData(form),
-    })
-      .then((res) => {
-        console.log("imageUploaded", res);
+      await fetch("/admin/editor/preview/images", {
+        method: "POST",
+        body: new FormData(form),
       })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          console.log("imageUploaded", res);
+        })
+        .catch((err) => console.log(err));
 
-    fetch("/admin/editor", {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify(myDATA),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          //TODO get the res message to make different anser when error
-          if (res.status === 403) alert("L'URL de l'évènenement éxiste déjà!");
-          if (res.status === 404)
-            alert("Évènement inconnu ! Impossible de le supprimer.");
-        } else alert("Évènement correctement ajouté !");
+      fetch("/admin/editor/updateEvent", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify(myDATA),
       })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          if (!res.ok) {
+            //TODO get the res message to make different anser when error
+            if (res.status === 404)
+              alert("Évènement inconnu ! Impossible de le modifier.");
+          } else alert("Évènement correctement modifié !");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log(myDATA);
+
+      if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+
+      await fetch("/admin/editor/preview/images", {
+        method: "POST",
+        body: new FormData(form),
+      })
+        .then((res) => {
+          console.log("imageUploaded", res);
+        })
+        .catch((err) => console.log(err));
+
+      fetch("/admin/editor", {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        method: "POST",
+        body: JSON.stringify(myDATA),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            //TODO get the res message to make different anser when error
+            if (res.status === 403)
+              alert("L'URL de l'évènenement éxiste déjà!");
+            if (res.status === 404)
+              alert("Évènement inconnu ! Impossible de le supprimer.");
+          } else alert("Évènement correctement ajouté !");
+        })
+        .catch((err) => console.log(err));
+    }
   }
 }
 
@@ -320,11 +366,11 @@ async function modifyEvent() {
   console.log(event);
   console.log(select.options[0].getAttribute("for"));
 
-  event.forEach((item) => getIdElement(item));
+  event.forEach((item) => getIdElement(item, event));
 }
 
 //Get the id of the form element form the name of each item in event.
-async function getIdElement(item) {
+async function getIdElement(item, cur_Event) {
   let element;
   let value = "";
   if (item["url_name"]) {
@@ -378,13 +424,12 @@ async function getIdElement(item) {
     element = document.querySelector("#customButtonSelect");
   }
 
-  if (item["dateStart"] || item["dateEnd"] || item["launchDate"]) {
+  if (item.dates != undefined) {
     element = document.querySelector("#dateSelect");
-    value = "date";
   }
 
-  console.log(element);
-  await InitElement(copyElement(element, value), item);
+  if (!element) return;
+  await InitElement(copyElement(element, value, cur_Event), item);
 }
 
 async function getImage(pathName) {
@@ -487,23 +532,16 @@ async function InitElement(element, item) {
       input.value = item.customBtn["url"];
     }
   }
-  item["dateStart"] || item["dateEnd"] || item["launchDate"];
 
-  if (value === "date") {
-    if (item["dateStart"]) {
-      element.querySelector("input").setAttribute("name", "alerte_msg");
-      element.querySelector("input").value = item["alerte_msg"];
-      element.querySelector("label").innerHTML = "Entrer un texte important";
+  if (item.dates != undefined) {
+    if (item.dates["dateStart"]) {
+      element.querySelector("#dateBegin").value = item.dates["dateStart"];
     }
-    if (item["dateStart"]) {
-      element.querySelector("input").setAttribute("name", "alerte_msg");
-      element.querySelector("input").value = item["alerte_msg"];
-      element.querySelector("label").innerHTML = "Entrer un texte important";
+    if (item.dates["dateEnd"]) {
+      element.querySelector("#dateEnd").value = item.dates["dateEnd"];
     }
-    if (item["dateStart"]) {
-      element.querySelector("input").setAttribute("name", "alerte_msg");
-      element.querySelector("input").value = item["alerte_msg"];
-      element.querySelector("label").innerHTML = "Entrer un texte important";
+    if (item.dates["launchDate"]) {
+      element.querySelector("#dateLaunch").value = item.dates["launchDate"];
     }
   }
 

@@ -17,6 +17,17 @@ events.forEach((list) => {
   const gridText = document.createElement("div");
   gridText.classList.add("grid-text");
 
+  let datesData = list.find((item) => item.dates != undefined).dates;
+  if (datesData["dateStart"]?.length > 0) {
+    const dateDiv = document.createElement("div");
+    dateDiv.classList.add("date");
+    dateDiv.innerHTML = new Date(datesData["dateStart"]).toLocaleDateString(
+      "fr-FR",
+      options
+    );
+    gridInfo.appendChild(dateDiv);
+  }
+
   list.forEach((e) => {
     if (e.img?.length > 0) {
       const imgElement = document.createElement("img");
@@ -44,17 +55,6 @@ events.forEach((list) => {
     //#endregion
 
     //#region INFO GRID WITH BUTTONS
-
-    if (e.dateStart?.length > 0) {
-      const dateDiv = document.createElement("div");
-      dateDiv.classList.add("date");
-      dateDiv.innerHTML = new Date(e.dateStart).toLocaleDateString(
-        "fr-FR",
-        options
-      );
-      gridInfo.appendChild(dateDiv);
-    }
-
     if (e.url_name?.length > 0) {
       const buttonSeeMore = document.createElement("button");
       buttonSeeMore.type = "button";
@@ -94,6 +94,11 @@ archivedEvents.forEach((list) => {
   const gridText = document.createElement("div");
   gridText.classList.add("grid-text");
 
+  const dateDiv = document.createElement("div");
+  dateDiv.style.opacity = "70%";
+  dateDiv.innerHTML = "Évènement terminé";
+  gridInfo.appendChild(dateDiv);
+
   list.forEach((e) => {
     if (e.img?.length > 0) {
       const imgElement = document.createElement("img");
@@ -121,13 +126,6 @@ archivedEvents.forEach((list) => {
     //#endregion
 
     //#region INFO GRID WITH BUTTONS
-
-    if (e.dateStart?.length > 0) {
-      const dateDiv = document.createElement("div");
-      dateDiv.style.opacity = "70%";
-      dateDiv.innerHTML = "Évènement terminé"
-      gridInfo.appendChild(dateDiv);
-    }
 
     //#endregion
   });
