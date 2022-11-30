@@ -141,10 +141,11 @@ function dataFormat(form) {
     const nameInput = element.name;
     let value;
     if (nameInput === "img" || nameInput === "band_img") {
-      value = element.value.replaceAll("C:\\fakepath\\", "").replace(/ /g, '');
+      value = element.value.replaceAll("C:\\fakepath\\", "").replace(/ /g, "");
     } else {
       value = element.value.replaceAll("\n", "<br>");
     }
+
 
     if (
       nameInput === "name" &&
@@ -152,10 +153,11 @@ function dataFormat(form) {
       listInputs[i + 2].name === "colorText" &&
       listInputs[i + 3].name === "colorBg"
     ) {
+      
       myDATA.push({
         customBtn: {
           [listInputs[i].name]: listInputs[i].value,
-          [listInputs[i + 1].name]: listInputs[i + 1].value,
+          [listInputs[i + 1].name]: listInputs[i + 1].value.replace(/ /g, ""),
           [listInputs[i + 2].name]: listInputs[i + 2].value,
           [listInputs[i + 3].name]: listInputs[i + 3].value,
         },
@@ -193,8 +195,8 @@ function dataFormat(form) {
 
       myDATA.push({
         buttons: {
-          [nameInput]: value,
-          [listInputs[i + 1].name]: listInputs[i + 1].value,
+          [nameInput]: value.replace(/ /g, ""),
+          [listInputs[i + 1].name]: listInputs[i + 1].value.replace(/ /g, ""),
         },
       });
 
@@ -267,9 +269,11 @@ async function submitForm(button) {
       })
         .then((res) => {
           if (!res.ok) {
-            //TODO get the res message to make different anser when error
+            if (res.status === 402) alert("L'URL n'est pas conforme !");
             if (res.status === 403)
-              alert("Erreur lors dans l'envoie de l'évènement ! Vérifie bien toutes les informations");
+              alert(
+                "Erreur lors dans l'envoie de l'évènement ! Vérifie bien toutes les informations"
+              );
             if (res.status === 404)
               alert("Évènement inconnu ! Impossible de le modifier.");
           } else alert("Évènement correctement modifié !");
@@ -298,7 +302,7 @@ async function submitForm(button) {
       })
         .then((res) => {
           if (!res.ok) {
-            //TODO get the res message to make different anser when error
+            if (res.status === 402) alert("L'URL n'est pas conforme !");
             if (res.status === 403)
               alert("L'URL de l'évènenement éxiste déjà!");
             if (res.status === 404)
@@ -500,8 +504,10 @@ async function InitElement(element, item) {
   }
 
   if (item["description"]) {
-    
-    element.querySelector("textarea").value = item["description"].replaceAll("<br>", "\n");
+    element.querySelector("textarea").value = item["description"].replaceAll(
+      "<br>",
+      "\n"
+    );
     element.querySelector("label").innerHTML = "Entrer un paragraphe";
   }
 

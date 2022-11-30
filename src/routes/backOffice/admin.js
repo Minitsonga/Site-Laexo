@@ -114,7 +114,7 @@ router.post("/editor", async (req, res) => {
     // if req_Data is a list of item (= event)
     req_Data[0]["url_name"] = req_Data[0]["url_name"].replace(/ /g, "");
 
-    if (req_Data[0]["url_name"].length <= 2) return res.send("Pas bon");
+    if (req_Data[0]["url_name"].length <= 2) return res.sendStatus(403);
 
     savedData.every((element, i) => {
       if (element[0]["url_name"] === req_Data[0]["url_name"]) {
@@ -148,7 +148,7 @@ router.post("/editor/updateEvent", async (req, res) => {
     // if req_Data is a list of item (= event)
     req_Data[0]["url_name"] = req_Data[0]["url_name"].split(" ").join("");
 
-    if (req_Data[0]["url_name"].length <= 2) return res.send("Pas bon");
+    if (req_Data[0]["url_name"].length <= 2) return res.sendStatus(402);
 
     const updatedEvents = savedData;
 
