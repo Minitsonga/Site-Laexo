@@ -58,7 +58,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname);
+    cb(null, file.originalname.replace(/ /g, ''));
   },
 });
 
@@ -100,24 +100,24 @@ router.get("/editor/preview", (req, res) => {
 router.post("/editor", async (req, res) => {
   const savedData = JSON.parse(await getEventsList());
 
-  data = JSON.parse(JSON.stringify(req.body));
+  let req_Data = JSON.parse(JSON.stringify(req.body));
 
-  if (data.value != undefined) {
-    // if data the id of an event)
-    if (!savedData[data.value]) return res.sendStatus(404);
-    savedData.pop(savedData[data.value]);
+  if (req_Data.value != undefined) {
+    // if req_Data the id of an event)
+    if (!savedData[req_Data.value]) return res.sendStatus(404);
+    savedData.pop(savedData[req_Data.value]);
   }
 
   let canSend = true;
 
-  if (data.length > 0) {
-    // if data is a list of item (= event)
-    data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+  if (req_Data.length > 0) {
+    // if req_Data is a list of item (= event)
+    req_Data[0]["url_name"] = req_Data[0]["url_name"].split(" ").join("");
 
-    if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+    if (req_Data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
     savedData.every((element, i) => {
-      if (element[0]["url_name"] === data[0]["url_name"]) {
+      if (element[0]["url_name"] === req_Data[0]["url_name"]) {
         canSend = false;
         res.sendStatus(403);
         return false;
@@ -126,7 +126,7 @@ router.post("/editor", async (req, res) => {
       return true;
     });
 
-    if (canSend) savedData.push(data);
+    if (canSend) savedData.push(req_Data);
   }
 
   if (canSend) {
@@ -141,40 +141,36 @@ router.post("/editor", async (req, res) => {
 router.post("/editor/updateEvent", async (req, res) => {
   const savedData = JSON.parse(await getEventsList());
 
-  data = JSON.parse(JSON.stringify(req.body));
+  let req_Data = JSON.parse(JSON.stringify(req.body));
+  let hasUpdated = false;
 
-  if (data.length > 0) {
-    // if data is a list of item (= event)
-    data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+  if (req_Data.length > 0) {
+    // if req_Data is a list of item (= event)
+    req_Data[0]["url_name"] = req_Data[0]["url_name"].split(" ").join("");
 
-    if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
+    if (req_Data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
     const updatedEvents = savedData;
 
     savedData.every((element, i) => {
-      if (element[0]["url_name"] === data[0]["url_name"]) {
-        updatedEvents[i] = data;
-        canSend = false;
-        res.sendStatus(403);
+      if (element[0]["url_name"] === req_Data[0]["url_name"]) {
+        if (hasUpdated) return res.sendStatus(404);
+        updatedEvents[i] = req_Data;
+        hasUpdated = true;
         return false;
       }
 
       return true;
     });
 
-    console.log(savedData);
-    console.log(updatedEvents);
-  }
-
-  // if (canSend) {
-  //   fs.writeFile("eventList2.json", JSON.stringify(savedData), (err) => {
-  //     if (err) throw err;
-  //     console.log("JSON data editor is saved.");
-  //   });
-  //   res.send("Ok");
-  // }
-
-  res.send("Ok");
+    if (hasUpdated) {
+      fs.writeFile("eventList2.json", JSON.stringify(updatedEvents), (err) => {
+        if (err) throw err;
+        console.log("JSON data editor is saved.");
+      });
+      res.send("Ok");
+    } else return res.sendStatus(404);
+  } else return res.sendStatus(403);
 });
 
 router.post("/editor/getevent", async (req, res) => {

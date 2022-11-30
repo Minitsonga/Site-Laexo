@@ -141,7 +141,7 @@ function dataFormat(form) {
     const nameInput = element.name;
     let value;
     if (nameInput === "img" || nameInput === "band_img") {
-      value = element.value.replaceAll("C:\\fakepath\\", "");
+      value = element.value.replaceAll("C:\\fakepath\\", "").replace(/ /g, '');
     } else {
       value = element.value.replaceAll("\n", "<br>");
     }
@@ -268,6 +268,8 @@ async function submitForm(button) {
         .then((res) => {
           if (!res.ok) {
             //TODO get the res message to make different anser when error
+            if (res.status === 403)
+              alert("Erreur lors dans l'envoie de l'évènement ! Vérifie bien toutes les informations");
             if (res.status === 404)
               alert("Évènement inconnu ! Impossible de le modifier.");
           } else alert("Évènement correctement modifié !");
@@ -392,9 +394,9 @@ async function getIdElement(item, cur_Event) {
     value = "img";
   }
 
-  if (item["bang_img"]) {
+  if (item["band_img"]) {
     element = document.querySelector("#imgSelect");
-    value = "bang_img";
+    value = "band_img";
   }
 
   if (item.buttons != undefined) {
@@ -473,9 +475,9 @@ async function InitElement(element, item) {
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
-  if (item["bang_img"]) {
+  if (item["band_img"]) {
     element.querySelector("input").setAttribute("name", "band_img");
-    element.querySelector("input").files = await getImage(item["bang_img"]);
+    element.querySelector("input").files = await getImage(item["band_img"]);
     element.querySelector("label").innerHTML = "Image Bande (7:3)";
   }
 
@@ -495,6 +497,12 @@ async function InitElement(element, item) {
     element.querySelector("input").setAttribute("name", "alerte_msg");
     element.querySelector("input").value = item["alerte_msg"];
     element.querySelector("label").innerHTML = "Entrer un texte important";
+  }
+
+  if (item["description"]) {
+    
+    element.querySelector("textarea").value = item["description"].replaceAll("<br>", "\n");
+    element.querySelector("label").innerHTML = "Entrer un paragraphe";
   }
 
   if (item.buttons != undefined) {

@@ -8,23 +8,30 @@ router.get("/", async (req, res) => {
   let archivedEvents = [];
 
   events.forEach((event) => {
+    if (event.find((item) => item.dates != undefined) == undefined) return; // if event doesn't have dates => return
+    // if there is dates check if any of them is invalid (we need all of them to be valid)
+
     let { dates } = event.find((item) => item.dates != undefined);
+    
+    if (
+      isNaN(new Date(dates["dateStart"]).getTime()) ||
+      isNaN(new Date(dates["dateEnd"]).getTime()) ||
+      isNaN(new Date(dates["launchDate"]).getTime())
+    )
+      return;
+
     datesList.push(dates["dateStart"]);
 
     if (new Date(dates["launchDate"]).getTime() < Date.now()) {
       if (dates["dateEnd"] == undefined) return;
 
-      if (new Date(dates["dateEnd"]).getTime() + 604800000 <= Date.now()) {
+      if (new Date(dates["dateEnd"]).getTime() <= Date.now()) {
         archivedEvents.push(event);
       } else {
         result.push(event);
       }
     }
   });
-
-  console.log(result);
-
-  console.log(datesList);
 
   datesList.sort((a, b) => {
     return new Date(a) - new Date(b);
@@ -48,9 +55,6 @@ router.get("/", async (req, res) => {
       }
     });
   });
-
-  console.log(sortedEvents);
-
   res.render("pages/events", {
     events: sortedEvents,
     archivedEvents: sortedArchivedEvents,
