@@ -58,7 +58,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname.replace(/ /g, ''));
+    cb(null, file.originalname.replace(/ /g, ""));
   },
 });
 
@@ -83,7 +83,7 @@ router.post("/editor/preview/images", cpUpload, async (req, res) => {
 router.post("/editor/preview", async (req, res) => {
   data = JSON.parse(JSON.stringify(req.body));
 
-  data[0]["url_name"] = data[0]["url_name"].split(" ").join("");
+  data[0]["url_name"] = data[0]["url_name"].replace(/ /g, ""); // Removing space
 
   if (data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
@@ -112,7 +112,7 @@ router.post("/editor", async (req, res) => {
 
   if (req_Data.length > 0) {
     // if req_Data is a list of item (= event)
-    req_Data[0]["url_name"] = req_Data[0]["url_name"].split(" ").join("");
+    req_Data[0]["url_name"] = req_Data[0]["url_name"].replace(/ /g, "");
 
     if (req_Data[0]["url_name"].length <= 2) return res.send("Pas bon");
 
