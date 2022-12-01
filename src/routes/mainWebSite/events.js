@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     // if there is dates check if any of them is invalid (we need all of them to be valid)
 
     let { dates } = event.find((item) => item.dates != undefined);
-    
+
     if (
       isNaN(new Date(dates["dateStart"]).getTime()) ||
       isNaN(new Date(dates["dateEnd"]).getTime()) ||
@@ -77,7 +77,7 @@ router.get("/:eventName", async (req, res) => {
 
   console.log(event);
 
-  if (event != undefined) res.render("pages/eventInfo", { event });
+  if (event.length > 0) res.render("pages/eventInfo", { event });
   else res.redirect("/error");
 });
 

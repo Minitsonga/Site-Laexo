@@ -104,12 +104,8 @@ cur_event.forEach((element) => {
     var alerteText = document.createElement("a");
     alerteDiv.role = "alert";
     alerteDiv.classList.add("alert", "text-center", "fw-bold");
-    alerteText.classList.add("alert-link");
-    alerteText.innerHTML = element["alerte_msg"];
-    //alerteText.href = element["alerte_msg"];
-    alerteText.target = "_blank";
 
-    alerteDiv.innerHTML = element["alerte_msg"] + "<br>Discord : ";
+    alerteDiv.innerHTML = formatText(element["alerte_msg"]);
     alerteDiv.appendChild(alerteText);
     holder.appendChild(alerteDiv);
   }
@@ -125,32 +121,46 @@ cur_event.forEach((element) => {
     var deroulementTextDiv = document.createElement("div");
     deroulementTextDiv.classList.add("description");
 
-    let links = Array.from(
-      element["description"].matchAll(/\[(?<content>[^\[\]]+)\]/g)
-    ).map(({ groups: { content } }) => content);
-    console.log(links);
-
-    let paragraphe = element["description"].replace(
-      /\[(?<content>[^\[\]]+)\]/,
-      ""
-    );
-    //check if string contains text bewteen square brackets
-
-    console.log("coucou je suis la [coucou]".match(/\[(.*?)\]/));
-    // get first text bewteen square brackets
-
-    // get list of all string [blabla] (DONE)
-    // check if there is element [blabla] and check if is == to list[i] do this for every element of list + check if string don't have anymore [blabal]
-    // if case than replace this element by <a class="alert-link" href="list[i]"> list[i] </a>
-
-    links.forEach((e) => {
-
-
-
-    });
-    
-    deroulementTextDiv.innerHTML = paragraphe;
+    deroulementTextDiv.innerHTML = formatText(element["description"]);
     holder.appendChild(deroulementTextDiv);
     holder.appendChild(document.createElement("br"));
   }
 });
+
+function formatText(text) {
+  let paragraphe = text;
+
+  //#region Handling dark blue links
+  let links = Array.from(paragraphe.matchAll(/\[(?<content>[^\[\]]+)\]/g)).map(
+    ({ groups: { content } }) => content
+  );
+
+  links.forEach((e) => {
+    if (paragraphe.match(/\[(.*?)\]/) === undefined) return;
+    if (paragraphe.match(/\[(.*?)\]/)[1] === e) {
+      paragraphe = paragraphe.replace(
+        paragraphe.match(/\[(.*?)\]/)[0],
+        `<a class="alert-link" href="${e}"> ${e}</a>`
+      );
+    }
+  });
+  //#endregion
+
+  //#region Handling light blue text
+  let blueText = Array.from(
+    paragraphe.matchAll(/\{(?<content>[^\{\}]+)\}/g)
+  ).map(({ groups: { content } }) => content);
+
+  blueText.forEach((e) => {
+    if (paragraphe.match(/\{(.*?)\}/) === undefined) return;
+    if (paragraphe.match(/\{(.*?)\}/)[1] === e) {
+      paragraphe = paragraphe.replace(
+        paragraphe.match(/\{(.*?)\}/)[0],
+        `<span> ${e}</span>`
+      );
+    }
+  });
+  //#endregion
+
+  return paragraphe;
+}
