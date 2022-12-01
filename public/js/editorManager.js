@@ -140,12 +140,12 @@ function dataFormat(form) {
     const element = listInputs[i];
     const nameInput = element.name;
     let value;
+
     if (nameInput === "img" || nameInput === "band_img") {
       value = element.value.replaceAll("C:\\fakepath\\", "").replace(/ /g, "");
     } else {
       value = element.value.replaceAll("\n", "<br>");
     }
-
 
     if (
       nameInput === "name" &&

@@ -124,7 +124,32 @@ cur_event.forEach((element) => {
   if (element["description"]?.length > 0) {
     var deroulementTextDiv = document.createElement("div");
     deroulementTextDiv.classList.add("description");
-    deroulementTextDiv.innerHTML = element["description"];
+
+    let links = Array.from(
+      element["description"].matchAll(/\[(?<content>[^\[\]]+)\]/g)
+    ).map(({ groups: { content } }) => content);
+    console.log(links);
+
+    let paragraphe = element["description"].replace(
+      /\[(?<content>[^\[\]]+)\]/,
+      ""
+    );
+    //check if string contains text bewteen square brackets
+
+    console.log("coucou je suis la [coucou]".match(/\[(.*?)\]/));
+    // get first text bewteen square brackets
+
+    // get list of all string [blabla] (DONE)
+    // check if there is element [blabla] and check if is == to list[i] do this for every element of list + check if string don't have anymore [blabal]
+    // if case than replace this element by <a class="alert-link" href="list[i]"> list[i] </a>
+
+    links.forEach((e) => {
+
+
+
+    });
+    
+    deroulementTextDiv.innerHTML = paragraphe;
     holder.appendChild(deroulementTextDiv);
     holder.appendChild(document.createElement("br"));
   }
