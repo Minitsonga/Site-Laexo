@@ -63,7 +63,6 @@ button:focus {
 
 .row {
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .modal {
@@ -72,6 +71,11 @@ button:focus {
 
 .form-floating>label {
     margin-left: 5px;
+}
+
+input[type="text"], input[type="url"], textarea
+{
+    font-size:15px !important;
 }
 
 @media (min-width:575px) {

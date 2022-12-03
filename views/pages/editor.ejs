@@ -44,6 +44,7 @@
                       </label>
                     </div>
                   </div>
+                  
                   <!-- <div class="form-group col-sm-4 flex-column d-flex">
                     <div class="form-floating">
                       <select id="selectType" class="form-select" id="floatingSelect" aria-label="Type d'évènement">
@@ -153,28 +154,28 @@
                   </div>
                 </div>
 
-                <div class="form-group col-sm-12 flex-column d-flex justify-content-center mx-auto hide"
+                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide"
                   id="customButtonSelect">
-                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
-                    <div class="form-group col-sm-3 flex-column d-flex justify-content-center mx-auto">
+                  <div class="row justify-content-between" id="reduce">
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
                         <input type="text" name="name" class="form-control inputData"
                           placeholder="Entrer le titre du bouton" id="btnName"></input>
-                        <label for="btnName">Entrer le titre du bouton</label>
+                        <label for="btnName">Titre</label>
                       </div>
                     </div>
-                    <div class="form-group col-sm-3 flex-column d-flex justify-content-center mx-auto">
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
                         <input type="url" name="url" class="form-control inputData" placeholder="Entrer une url"
                           id="urlInput"></input>
-                        <label for="urlInput">Entrer une url</label>
+                        <label for="urlInput">Lien</label>
                       </div>
                     </div>
                     <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
                       <div class="form-floating">
                         <input type="color" name="colorText" class="form-control inputData"
                           placeholder="Couleur du text" id="colorTxtInput"></input>
-                        <label for="colorTxtInput">Text</label>
+                        <label for="colorTxtInput">Texte</label>
                       </div>
                     </div>
                     <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
@@ -329,7 +330,7 @@
 
       <%- include('../templates/footer'); %>
 
-      <script src="/js/editorManager.js"></script>
+        <script src="/js/editorManager.js"></script>
 
 </body>
 

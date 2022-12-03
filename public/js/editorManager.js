@@ -102,11 +102,8 @@ validateBtn.addEventListener("click", () => {
   curElement.removeAttribute("id");
 
   curElement.classList.add("form-group", "flex-column", "d-flex");
-  if (value == "img" || value == "img_band")
+  if (value === "img" || value === "img_band")
     curElement.style = "align-items:start;";
-
-  if (value == "customButton")
-    curElement.setAttribute("id", "customButtonHolder");
 
   let div = document.createElement("div");
   div.id = "reduce";
@@ -153,7 +150,6 @@ function dataFormat(form) {
       listInputs[i + 2].name === "colorText" &&
       listInputs[i + 3].name === "colorBg"
     ) {
-      
       myDATA.push({
         customBtn: {
           [listInputs[i].name]: listInputs[i].value,
@@ -465,9 +461,6 @@ function copyElement(element, value) {
   curElement.classList.add("form-group", "flex-column", "d-flex");
   if (value == "img" || value == "band_img")
     curElement.style = "align-items:start;";
-
-  if (value == "customButton")
-    curElement.setAttribute("id", "customButtonHolder");
 
   return curElement;
 }
