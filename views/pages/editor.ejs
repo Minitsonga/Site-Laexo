@@ -20,7 +20,10 @@
         <div class="row d-flex justify-content-center">
           <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             <div class="card">
-              <h5 class="text-center mb-4">Crée ta propre page d'évènement</h5>
+              <h5 class="text-center mb-4">Crée ta propre page d'évènement </h5>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#helpModal">
+                <i class="bi bi-info-circle"></i>
+              </a>
               <form class="form-card" action="" method="post" enctype="multipart/form-data" id="mainForm">
                 <div class="row justify-content-between text-left">
                   <div class="form-group col-sm-6 flex-column d-flex">
@@ -271,6 +274,23 @@
         </div>
       </div>
 
+      <div class="modal fade" id="helpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5>Plus d'informations</h5>
+              <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal"
+                aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+              <h6>Utilise [] sur un lien pour le mettre en gras et bleu foncé et {} sur du text pour le mettre en bleu
+                clair</h6>
+              <p>Exemple : Bonjour aller sur notre discord [https://liendemondiscord] c'est {important} d'y être</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="modal fade" id="planningForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="planningFormLabel" aria-hidden="true">
@@ -296,21 +316,22 @@
                   </div>
 
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    onclick="planningSubmit()">Modifier</button>
-                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  onclick="planningSubmit()">Modifier</button>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-
       <%- include('../templates/footer'); %>
 
-        <script src="/js/editorManager.js"></script>
+      <script src="/js/editorManager.js"></script>
 
 </body>
+
 
 </html>
