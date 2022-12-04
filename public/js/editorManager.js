@@ -241,7 +241,7 @@ async function submitForm(button) {
     const myDATA = dataFormat(form);
 
     if (
-      window.confirm("Veux tu modifier cette évènement si il existe déjà ?")
+      window.confirm("Veux tu modifier cette évènement si il existe ? \n(Appuie sur annuler pour créer un nouvelle évènement)")
     ) {
       console.log(myDATA);
 
