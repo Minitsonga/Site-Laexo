@@ -1,1 +1,100 @@
-[[{"url_name":"lcup2v2"},{"title":"LCUP 2v2"},{"subtitle":"Il s’agit d’un tournoi Rocket League 2vs2 qui aura lieu le week-end du 29 et 30 Octobre 2022. Un cash prize de 150 € sera à partager entre les trois premiers."},{"img":"LCUP-mini.jpg"},{"band_img":"LCUP-Affiche-3000x1000.jpg"},{"buttons":{"inscription":"https://docs.google.com/forms/d/e/1FAIpQLSfe3WPh8lLR6vRm5nvjr16rpZJ-zK4cNAntDLPQ13J0XtXZQw/viewform","reglement":"https://docs.google.com/document/d/1gJ1k2TrAb8sF9wgwPcNqHXDy78easjXwpAm6FPqZSI8/edit"}},{"alerte_msg":"Pour toutes inscriptions, présence obligatoire sur le discord ! Discord : https://discord.com/invite/tPPnPhb"},{"small_Title":"PRESENTATION"},{"description":"Il s’agit d’un tournoi Rocket League 2vs2 qui aura lieu le week-end du 29 et 30 Octobre 2022.<br><br>Ce tournoi débutera le samedi avec des matchs de poules suivi d’un bracket à simple élimination pour les vainqueurs des poules.<br>8 Poules de 8 équipes. Les quatres premières équipes de chaque poule passent en phase finale.<br><br>Un cash prize de 150 € sera à partager entre les trois premiers.<br><br>- 1ère place : 100 €<br>- 2ème place : 40 €<br>- 3ème place: 10€<br><br>Ce tournoi pourra être suivi en direct sur twitch. https://twitch.tv/laexo"},{"small_Title":"DEROULEMENT"},{"description":"64 équipes seront réparties de manière aléatoire au sein de 8 poules de 8 équipes.<br>Il y aura deux sessions le samedi. C'est-à-dire que les poules de 1 à 4 joueront de 14h à 16h30 et les poules 5 à 8 joueront de 17h à 19h30.<br>Chaque poule dispose de 8 équipes. Chaque équipe doit affronter les sept autres pour terminer cette phase de poule. Les matchs se déroulent en BO1.<br>Tous les matchs de la poule seront décomposés en 7 rounds distincts. C'est-à-dire que toutes les équipes doivent attendre que les autres matchs en cours soient terminés pour passer au suivant. Les logs de connexion seront inconnus de tous tant que des matchs sont encore en cours.<br><br>A l'issue de tous les matchs de poule, les équipes ayant gagnées le plus de matchs seront en tête du classement. Si égalité il y a, les matchs gagnés contre les autres équipes égalitaires seront pris en compte. Dans la situation où il y a toujours impossibilité de départager les équipes. La différence de buts inscrits/encaissés permettra de trancher.<br>Les logs des matchs seront envoyés plus ou moins simultanément à toutes les équipes à travers un channel discord propre à chaque groupe réunissant les 8 équipes de la poule. Les logs changeront bien évidemment à chaque tour.<br><br>Ensuite le dimanche, place à la phase finale !<br>Cette phase débutera avec 32 équipes. Elle sera décomposée en 5 étapes sur un bracket à éliminations directes.<br>Seizièmes -> Huitièmes -> Quarts -> Demis -> Finale.<br>Toutes les étapes se déroulent en BO3 à l’unique exception des Demis et de la Finale qui quant à elles se déroulent en BO5.<br>Tous les seizièmes, les huitièmes et les quarts se joueront d’un seul coup. En revanche les deux demis se joueront l’une après l’autre. La phase et le tournoi se conclura par la Finale.<br>Les logs des matchs seront envoyés au cas par cas aux capitaines d’équipe. Même principe que pour la phase de poule au niveau de l’enchaînement des matchs. Par exemple, les huitièmes démarrent une fois que tous les matchs de seizième sont terminés et ainsi de suite."},{"dates":{"dateStart":"2022-10-28","dateEnd":"2022-11-10","launchDate":"2022-11-17"}}],[{"url_name":"react"},{"title":"Live React"},{"small_Title":"Coucou"},{"subtitle":"C'est juste un petit test de rien pour voir "},{"alerte_msg":"C'est juste un petit test de rien pour voir "},{"dates":{"dateStart":"2022-11-29","dateEnd":"2022-12-01","launchDate":"2022-11-30"}},{"img":"ChatTssuKii.jpg"}],[{"url_name":"Test"},{"title":"Je suis un test"},{"customBtn":{"name":"CLIQUE SUR MOI","url":"Nouvelle url","colorText":"#11ff00","colorBg":"#000000"}},{"dates":{"dateStart":"2022-02-28","dateEnd":"2022-11-30","launchDate":"2022-11-01"}},{"img":"ChatTssuKii3.jpg"}],[{"url_name":"test"},{"title":"Ce ci est un test"},{"customBtn":{"name":"sheesh","url":"https://www.linkedin.com/in/juvdm/","colorText":"#ff0000","colorBg":"#000000"}},{"dates":{"dateStart":"2022-11-09","dateEnd":"2022-12-11","launchDate":"2022-11-17"}},{"alerte_msg":"Vous devez rejoindre le discord : [https://www.linkedin.com/in/juvdm/]"},{"description":"Coucou on est {500 sur la chaine} merci beaucoup pour votre fidelité"}]]
+[
+    [
+        {
+            "url_name": "lcup2v2"
+        },
+        {
+            "title": "LCUP 2v2"
+        },
+        {
+            "subtitle": "Il s’agit d’un tournoi Rocket League 2vs2 qui aura lieu le week-end du 29 et 30 Octobre 2022. Un cash prize de 150 € sera à partager entre les trois premiers."
+        },
+        {
+            "img": "LCUP-mini.jpg"
+        },
+        {
+            "band_img": "LCUP-Affiche-3000x1000.jpg"
+        },
+        {
+            "buttons": {
+                "inscription": "https://docs.google.com/forms/d/e/1FAIpQLSfe3WPh8lLR6vRm5nvjr16rpZJ-zK4cNAntDLPQ13J0XtXZQw/viewform",
+                "reglement": "https://docs.google.com/document/d/1gJ1k2TrAb8sF9wgwPcNqHXDy78easjXwpAm6FPqZSI8/edit"
+            }
+        },
+        {
+            "alerte_msg": "Pour toutes inscriptions, présence obligatoire sur le discord ! Discord : https://discord.com/invite/tPPnPhb"
+        },
+        {
+            "small_Title": "PRESENTATION"
+        },
+        {
+            "description": "Il s’agit d’un tournoi Rocket League 2vs2 qui aura lieu le week-end du 29 et 30 Octobre 2022.<br><br>Ce tournoi débutera le samedi avec des matchs de poules suivi d’un bracket à simple élimination pour les vainqueurs des poules.<br>8 Poules de 8 équipes. Les quatres premières équipes de chaque poule passent en phase finale.<br><br>Un cash prize de 150 € sera à partager entre les trois premiers.<br><br>- 1ère place : 100 €<br>- 2ème place : 40 €<br>- 3ème place: 10€<br><br>Ce tournoi pourra être suivi en direct sur twitch. https://twitch.tv/laexo"
+        },
+        {
+            "small_Title": "DEROULEMENT"
+        },
+        {
+            "description": "64 équipes seront réparties de manière aléatoire au sein de 8 poules de 8 équipes.<br>Il y aura deux sessions le samedi. C'est-à-dire que les poules de 1 à 4 joueront de 14h à 16h30 et les poules 5 à 8 joueront de 17h à 19h30.<br>Chaque poule dispose de 8 équipes. Chaque équipe doit affronter les sept autres pour terminer cette phase de poule. Les matchs se déroulent en BO1.<br>Tous les matchs de la poule seront décomposés en 7 rounds distincts. C'est-à-dire que toutes les équipes doivent attendre que les autres matchs en cours soient terminés pour passer au suivant. Les logs de connexion seront inconnus de tous tant que des matchs sont encore en cours.<br><br>A l'issue de tous les matchs de poule, les équipes ayant gagnées le plus de matchs seront en tête du classement. Si égalité il y a, les matchs gagnés contre les autres équipes égalitaires seront pris en compte. Dans la situation où il y a toujours impossibilité de départager les équipes. La différence de buts inscrits/encaissés permettra de trancher.<br>Les logs des matchs seront envoyés plus ou moins simultanément à toutes les équipes à travers un channel discord propre à chaque groupe réunissant les 8 équipes de la poule. Les logs changeront bien évidemment à chaque tour.<br><br>Ensuite le dimanche, place à la phase finale !<br>Cette phase débutera avec 32 équipes. Elle sera décomposée en 5 étapes sur un bracket à éliminations directes.<br>Seizièmes -> Huitièmes -> Quarts -> Demis -> Finale.<br>Toutes les étapes se déroulent en BO3 à l’unique exception des Demis et de la Finale qui quant à elles se déroulent en BO5.<br>Tous les seizièmes, les huitièmes et les quarts se joueront d’un seul coup. En revanche les deux demis se joueront l’une après l’autre. La phase et le tournoi se conclura par la Finale.<br>Les logs des matchs seront envoyés au cas par cas aux capitaines d’équipe. Même principe que pour la phase de poule au niveau de l’enchaînement des matchs. Par exemple, les huitièmes démarrent une fois que tous les matchs de seizième sont terminés et ainsi de suite."
+        },
+        {
+            "dates": {
+                "dateStart": "2022-10-28",
+                "dateEnd": "2022-11-10",
+                "launchDate": "2022-11-17"
+            }
+        }
+    ],
+    [
+        {
+            "url_name": "react"
+        },
+        {
+            "title": "Live React"
+        },
+        {
+            "small_Title": "Coucou"
+        },
+        {
+            "subtitle": "C'est juste un petit test de rien pour voir "
+        },
+        {
+            "alerte_msg": "C'est juste un petit test de rien pour voir "
+        },
+        {
+            "dates": {
+                "dateStart": "2022-11-29",
+                "dateEnd": "2022-12-01",
+                "launchDate": "2022-11-30"
+            }
+        },
+        {
+            "img": "ChatTssuKii.jpg"
+        }
+    ],
+    [
+        {
+            "url_name": "Test"
+        },
+        {
+            "title": "Je suis un test"
+        },
+        {
+            "customBtn": {
+                "name": "CLIQUE SUR MOI",
+                "url": "Nouvelle url",
+                "colorText": "#11ff00",
+                "colorBg": "#000000"
+            }
+        },
+        {
+            "dates": {
+                "dateStart": "2022-02-28",
+                "dateEnd": "2022-11-30",
+                "launchDate": "2022-11-01"
+            }
+        },
+        {
+            "img": "ChatTssuKii3.jpg"
+        }
+    ]
+]

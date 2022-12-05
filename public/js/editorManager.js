@@ -211,7 +211,8 @@ async function previewForm(button) {
   const form = button.closest("#mainForm");
   const myDATA = dataFormat(form);
 
-  if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
+  if (myDATA[0]["url_name"].split(" ").join("").length <= 2)
+    return alert("L'URL de l'évènement doit avoir plus de 3 caractères !");
 
   await fetch("/admin/editor/preview/images", {
     method: "POST",
@@ -230,6 +231,10 @@ async function previewForm(button) {
     body: JSON.stringify(myDATA),
   })
     .then((res) => {
+      if (!res.ok) {
+        if (res.status == 404)
+          alert("L'URL de l'évènement doit avoir plus de 3 caractères !");
+      }
       console.log("done", res);
     })
     .catch((err) => console.log(err));
@@ -240,12 +245,15 @@ async function submitForm(button) {
     const form = button.closest("#mainForm");
     const myDATA = dataFormat(form);
 
+    if (myDATA[0]["url_name"].split(" ").join("").length <= 2)
+      return alert("L'URL de l'évènement doit avoir plus de 3 caractères !");
+
     if (
-      window.confirm("Veux tu modifier cette évènement si il existe ? \n(Appuie sur annuler pour créer un nouvelle évènement)")
+      window.confirm(
+        "Veux tu modifier cette évènement si il existe ? \n(Appuie sur annuler pour créer un nouvelle évènement)"
+      )
     ) {
       console.log(myDATA);
-
-      if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
       await fetch("/admin/editor/preview/images", {
         method: "POST",
