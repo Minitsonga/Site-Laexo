@@ -280,7 +280,10 @@ async function submitForm(button) {
               );
             if (res.status === 404)
               alert("Évènement inconnu ! Impossible de le modifier.");
-          } else alert("Évènement correctement modifié !");
+          } else {
+            alert("Évènement correctement modifié !");
+            window.open(`${location.origin + "/events"}`, "_blank").focus();
+          }
         })
         .catch((err) => console.log(err));
     } else {
@@ -311,7 +314,11 @@ async function submitForm(button) {
               alert("L'URL de l'évènenement éxiste déjà!");
             if (res.status === 404)
               alert("Évènement inconnu ! Impossible de le supprimer.");
-          } else alert("Évènement correctement ajouté !");
+          } else {
+            alert("Évènement correctement ajouté !");
+
+            window.open(`${location.origin + "/events"}`, "_blank").focus();
+          }
         })
         .catch((err) => console.log(err));
     }
