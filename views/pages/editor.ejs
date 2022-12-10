@@ -1,9 +1,15 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
   <%- include('../templates/headerGlobal'); %>
     <link rel="stylesheet" href="/css/editor.css">
     <title>editor - Laexo.tv</title>
+    <script>
+      let listEvents = JSON.parse(
+        `<%- JSON.stringify(data)%>`
+      );
+    </script>
 </head>
 
 <body class="bg-dark-laexo" onload="">
@@ -14,97 +20,319 @@
         <div class="row d-flex justify-content-center">
           <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             <div class="card">
-              <h5 class="text-center mb-4">Crée ta propre page d'évènement</h5>
-              <form class="form-card" onsubmit="event.preventDefault()">
-
-
+              <h5 class="text-center mb-4">Crée ta propre page d'évènement </h5>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#helpModal">
+                <i class="bi bi-info-circle"></i>
+              </a>
+              <form class="form-card" action="" method="post" enctype="multipart/form-data" id="mainForm">
                 <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label class="form-control-label px-3">
-                      Nom de l'URL<span class="text-danger"> *</span>
-                    </label>
-                    <input type="text" id="fname" name="fname" placeholder="Entrer le nom de la page">
-                  </div>
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label class="form-control-label px-3">
-                      Titre de l'évènement<span class="text-danger"> *</span>
-                    </label>
-                    <input type="text" id="fname" name="fname" placeholder="Entrer un titre">
-                  </div>
-                  <div class="form-group col-sm-4 flex-column d-flex">
-                    <label for="selectType" class="form-label">
-                      Type de l'évènement<span class="text-danger"> *</span>
-                    </label>
-                    <select id="selectType" class="form-select">
-                      <option selected>Tournoi</option>
-                      <option>Live</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group col-sm-6 flex-column d-flex" style="margin: auto;">
-                  <label class="form-control-label px-3">
-                    Mini Description<span class="text-danger"> *</span>
-                  </label>
-                  <textarea type="textarea" id="lname" name="lname"
-                    placeholder="Entrer un petit description"></textarea>
-                </div>
-                <div class="row justify-content-between text-left">
-
                   <div class="form-group col-sm-6 flex-column d-flex">
-                    <label for="file" class="form-control-label px-3">Miniture<span class="text-danger">
-                        *</span></label> <input type="file" class="input-file" id="minia" name="minia" placeholder="">
+                    <div class="form-floating">
+                      <input type="text" class="form-control inputData" id="urlName" name="url_name"
+                        placeholder="Entrer le nom de la page">
+                      <label class="form-control-label px-3" for="urlName">
+                        Nom de l'URL<span class="text-danger"> *</span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone
-                      number<span class="text-danger"> *</span></label> <input type="text" id="mob" name="mob"
-                      placeholder=""> </div>
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <div class="form-floating">
+                      <input type="text" class="form-control inputData" id="TitleMain" name="title"
+                        placeholder="Entrer le Titre de l'évènement">
+                      <label class="form-control-label px-3" for="TitleMain">
+                        Titre de l'évènement<span class="text-danger"> *</span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <!-- <div class="form-group col-sm-4 flex-column d-flex">
+                    <div class="form-floating">
+                      <select id="selectType" class="form-select" id="floatingSelect" aria-label="Type d'évènement">
+                        <option selected>Tournoi</option>
+                        <option>Live</option>
+                      </select>
+                      <label for="selectType" class="form-label">Type de l'évènement<span class="text-danger">
+                          *</span></label>
+                    </div>
+                  </div> -->
                 </div>
 
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Job
-                      title<span class="text-danger"> *</span></label> <input type="text" id="job" name="job"
-                      placeholder=""> </div>
-                </div>
-
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-12 flex-column d-flex">
-                    <label class="form-control-label px-3">What would you be using Flinks for?
-                      <span class="text-danger"> *</span>
-                    </label>
-                    <input type="text" id="ans" name="ans" placeholder="">
+                <div class="row justify-content-center">
+                  <div class="form-group col-sm-1 flex-column d-flex items-center">
+                    <button type="button" class="btn btn-success" style="width: 45px;" data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"><strong>+</strong></button>
                   </div>
                 </div>
 
-                <div class="row justify-content-end">
-
-                  <div class="form-group col-sm-6">
-                    <button type="submit" class="btn-block btn-primary">Valider la page</button>
+                <div class="row justify-content-center">
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <button type="button" class="btn btn-secondary" onclick="previewForm(this)">Preview</button>
                   </div>
-
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <button type="button" class="btn btn-primary" onclick="submitForm(this)">Valider</button>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#planningForm">Modifier
+              Planning</button>
+          </div>
+
+          <div class="d-flex justify-content-center mt-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventsManager">Gérer
+              les évènements</button>
+          </div>
         </div>
       </div>
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Nouvel élément</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row justify-content-between">
+                <div class="form-group col-sm-3 flex-column d-flex justify-content-center">
+                  <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid">
+                      <option selected value="img" for="imgSelect" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">Image
+                        Miniature (7:3)</option>
+                      <option value="img_band" for="imgSelect">Image Bande (7:3)</option>
+                      <option value="title" for="textSelect">Titre</option>
+                      <option value="subtitle" for="textSelect">Petit Texte</option>
+                      <option value="textZone" for="textZoneSelect">Grand Texte</option>
+                      <option value="alerteTxt" for="textSelect">Texte important</option>
+                      <option value="customButton" for="customButtonSelect">Bouton Personnalisé</option>
+                      <option value="inscription" for="urlButtonSelect">Lien inscription</option>
+                      <option value="reglement" for="urlButtonSelect">Lien règlement</option>
+
+                      <option value="date" for="dateSelect">Date</option>
+                    </select>
+                    <label for="floatingSelectGrid">Type d'élément</label>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="imgSelect">
+
+                  <label class="custom-file" for="formFile">Image Miniature (7:3)</label>
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <input class="form-control inputData custom-input" type="file"
+                      accept="image/png, image/jpg, image/jpeg" id="formFile" name="img">
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; transform: scale(0.5);"><strong>X</strong></button>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide" id="textSelect">
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <input class="form-control inputData" type="text" id="fname" name="fname" placeholder="Titre">
+                      <label for="fname" style="margin-left: 10px;">Titre</label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide"
+                  id="textZoneSelect">
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <textarea class="form-control inputData" placeholder="Entre un paragraphe" id="floatingTextarea2"
+                        name="description" style="height: 100px"></textarea>
+                      <label for="floatingTextarea2">Entrer un grand texte</label>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide"
+                  id="customButtonSelect">
+                  <div class="row justify-content-between" id="reduce">
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="text" name="name" class="form-control inputData"
+                          placeholder="Entrer le titre du bouton" id="btnName"></input>
+                        <label for="btnName">Titre</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="url" name="url" class="form-control inputData" placeholder="Entrer une url"
+                          id="urlInput"></input>
+                        <label for="urlInput">Lien</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="color" name="colorText" class="form-control inputData"
+                          placeholder="Couleur du text" id="colorTxtInput"></input>
+                        <label for="colorTxtInput">Texte</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-2 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="color" name="colorBg" class="form-control inputData" placeholder="Couleur du fond"
+                          id="colorBgInput"></input>
+                        <label for="colorInput">Fond</label>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto hide"
+                  id="urlButtonSelect">
+                  <div class="row justify-content-between" style="flex-wrap: nowrap; width: 100%;">
+                    <div class="form-floating">
+                      <input type="url" name="name" class="form-control inputData"
+                        placeholder="Entrer le titre du bouton" id="btnName"></input>
+                      <label for="btnName">Entrer le titre du bouton</label>
+                    </div>
+
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-8 flex-column d-flex justify-content-center mx-auto hide" id="dateSelect">
+                  <div class="row justify-content-between" id="reduce">
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="date" name="dateStart" class="form-control inputData" placeholder="Date de debut"
+                          id="dateBegin"></input>
+                        <label for="dateBegin">Date de debut</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+                      <div class="form-floating">
+                        <input type="date" name="dateEnd" class="form-control inputData" placeholder="Date de fin"
+                          id="dateEnd"></input>
+                        <label for="dateEnd">Date de fin</label>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4 flex-column d-flex justify-content-center mx-auto">
+
+                      <div class="form-floating">
+                        <input type="date" name="launchDate" class="form-control inputData"
+                          placeholder="Date de lancement" id="dateLaunch"></input>
+                        <label for="dateLaunch">Date de lancement</label>
+                      </div>
+
+
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="deleteElement(this)"
+                      style="width : 50px; height: 50px; transform: scale(0.5); "><strong>X</strong></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-primary validate" data-bs-dismiss="modal">Valider</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="eventsManager" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="eventsManagerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <form action="/admin/editor/eventsManager" method="delete" id="eventToDelete">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eventsManagerLabel">Choisissez l'évènement a supprimer</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                  <label class="custom-file" for="floatingSelectGridEvents">Choix de l'évènements</label>
+                  <select class="form-select" id="floatingSelectGridEvents">
+                  </select>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                  onclick="deleteEvent()">Supprimer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  onclick="modifyEvent()">Modifier</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="helpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5>Plus d'informations</h5>
+              <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal"
+                aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+              <h6>Utilise [] sur un lien pour le mettre en gras et bleu foncé et {} sur du text pour le mettre en bleu
+                clair</h6>
+              <p>Exemple : Bonjour aller sur notre discord [https://liendemondiscord] c'est {important} d'y être</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="planningForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="planningFormLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <form action="/admin/editor/planning" method="post" id="planningModif">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="planningFormLabel">Modifier le planning</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                    <label class="custom-file" for="planningFile">Planning PC</label>
+                    <input class="form-control custom-input" type="file" accept="image/png" id="planningFile"
+                      name="planning" onchange="fileValidation(this)">
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex justify-content-center mx-auto">
+                    <label class="custom-file" for="planning2File">Planning Mobile</label>
+                    <input class="form-control custom-input" type="file" accept="image/png" id="planning2File"
+                      name="planning2" onchange="fileValidation(this)">
+                  </div>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                  onclick="planningSubmit()">Modifier</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <%- include('../templates/footer'); %>
 
-        <style>
-          .row {
-            margin-top: 20px;
-            margin-bottom: 20px;
-          }
-
-          .label-file {
-            cursor: pointer;
-            color: #00b1ca;
-            font-weight: bold;
-          }
-
-          .label-file:hover {
-            color: #25a5c4;
-          }
-        </style>
+        <script src="/js/editorManager.js"></script>
 
 </body>
+
 
 </html>

@@ -1,18 +1,19 @@
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
 const routes = require("./src/routes/routes.js");
 const axios = require("axios").default;
 const http = require("http").Server(app);
 
+const bodyParser = require("body-parser");
 const session = require("express-session");
 const crypto = require("crypto");
 const name = "braitsch";
-var hash = crypto.createHash("md5").update(name).digest("hex");
+let hash = crypto.createHash("sha512").update(name).digest("hex");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// Configure body-parser to parse incoming request bodies
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

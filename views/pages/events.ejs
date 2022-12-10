@@ -10,15 +10,32 @@
   <%- include('../templates/svgIcons'); %>
     <%- include('../templates/navbar'); %>
 
+
+
       <div id="holder" class="mx-auto container my-5" style="text-align: center">
 
       </div>
 
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#archived" role="button" aria-expanded="false"
+        aria-controls="archived"
+        style=" display: block;margin-left: auto;margin-right: auto; min-width: 180px; max-width: 15%; margin-top: 75px; margin-bottom: 75px;">
+        Voir les évènements précédent
+      </a>
+
+      <div id="archived" class="mx-auto collapse container my-5" style="text-align: center">
+
+      </div>
+
       <%- include('../templates/footer'); %>
+
         <script>
-          var events = JSON.parse(
+          const events = JSON.parse(
             `<%- JSON.stringify(events)%>`
           );
+          const archivedEvents = JSON.parse(
+            `<%- JSON.stringify(archivedEvents)%>`
+          );
+
         </script>
 
         <script src="/js/loadEvents.js"></script>

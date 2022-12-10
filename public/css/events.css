@@ -139,7 +139,6 @@
 
 
 }
-
 .btn-laexo:hover,
 .btn-laexo:focus {
     background-color: #0aa2de;
@@ -158,4 +157,17 @@
     background-color: #1dbbfa;
     outline: #1dbbfa;
     color: black;
+}
+
+.btn-laexo-darkBlue {
+    background-color: #0c6efd;
+    outline: #0c6efd;
+    color: white;
+}
+
+.btn-laexo-darkBlue:hover,
+.btn-laexo-darkBlue:focus {
+    background-color: #277bfa;
+    outline: #277bfa;
+    color: white;
 }
