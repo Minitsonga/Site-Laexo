@@ -384,21 +384,6 @@ async function modifyEvent() {
   console.log(event);
   console.log(select.options[0].getAttribute("for"));
 
-  fileList = [];
-
-  event.forEach(async (item) => {
-    if (item["img"]) {
-      let file = await getImage(item["img"]);
-
-      fileList[file[0].name] = file;
-    }
-    if (item["band_img"]) {
-      let file = await getImage(item["band_img"]);
-      fileList["caca"] = file;
-    }
-  });
-
-
   event.forEach((item) => getIdElement(item, event));
 }
 
@@ -465,7 +450,7 @@ async function getIdElement(item, cur_Event) {
   await InitElement(copyElement(element, value, cur_Event), item);
 }
 
-async function getImage(pathName) {
+function getImage(pathName) {
   const img = fetch("/img/" + pathName, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -501,13 +486,14 @@ async function InitElement(element, item) {
 
   if (item["img"]) {
     element.querySelector("input").setAttribute("name", "img");
-    //element.querySelector("input").files = await getImage(item["img"]);
+
+    const imageUrl = location.origin + "/img/" + item["img"];
+    element.querySelector("input").files = getImage(item["img"]);
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
   if (item["band_img"]) {
     element.querySelector("input").setAttribute("name", "band_img");
-
 
     //element.querySelector("input").files = await getImage(item["band_img"]);
     element.querySelector("label").innerHTML = "Image Bande (7:3)";

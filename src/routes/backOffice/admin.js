@@ -32,25 +32,25 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/editor", async (req, res) => {
-  if (req.session.loggedin) {
-    const dataEvents = JSON.parse(await getEventsList());
-    let eventsInfos = [];
-    dataEvents.forEach((element, i) => {
-      let title = "";
-      element.forEach((e) => {
-        if (element[0]["url_name"]?.length > 0) {
-          if (e["title"]?.length > 0) title = e["title"];
-        }
-      });
-
-      eventsInfos.push({ id: i, title });
+  //if (req.session.loggedin) {
+  const dataEvents = JSON.parse(await getEventsList());
+  let eventsInfos = [];
+  dataEvents.forEach((element, i) => {
+    let title = "";
+    element.forEach((e) => {
+      if (element[0]["url_name"]?.length > 0) {
+        if (e["title"]?.length > 0) title = e["title"];
+      }
     });
 
-    res.render("pages/editor", { data: eventsInfos });
-  } else {
-    
-    res.redirect("/admin/login");
-  }
+    eventsInfos.push({ id: i, title });
+  });
+
+  res.render("pages/editor", { data: eventsInfos });
+  // } else {
+
+  //   res.redirect("/admin/login");
+  // }
 });
 
 const storage = multer.diskStorage({
@@ -84,7 +84,10 @@ router.post("/editor/preview/images", cpUpload, async (req, res) => {
 router.post("/editor/preview", async (req, res) => {
   dataFormPreview = JSON.parse(JSON.stringify(req.body));
 
-  dataFormPreview[0]["url_name"] = dataFormPreview[0]["url_name"].replace(/ /g, ""); // Removing space
+  dataFormPreview[0]["url_name"] = dataFormPreview[0]["url_name"].replace(
+    / /g,
+    ""
+  ); // Removing space
 
   if (dataFormPreview[0]["url_name"].length <= 2) return res.sendStatus(404);
 
@@ -94,7 +97,7 @@ router.post("/editor/preview", async (req, res) => {
 
 router.get("/editor/preview", (req, res) => {
   if (dataFormPreview.length <= 0) return res.redirect("/admin/editor");
-  res.render("pages/preview", { data:dataFormPreview });
+  res.render("pages/preview", { data: dataFormPreview });
   dataFormPreview = [];
 });
 
