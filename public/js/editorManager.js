@@ -450,8 +450,8 @@ async function getIdElement(item, cur_Event) {
   await InitElement(copyElement(element, value, cur_Event), item);
 }
 
-function getImage(pathName) {
-  const img = fetch("/img/" + pathName, {
+async function getImage(pathName) {
+  const img = await fetch("/img/" + pathName, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
@@ -486,9 +486,7 @@ async function InitElement(element, item) {
 
   if (item["img"]) {
     element.querySelector("input").setAttribute("name", "img");
-
-    const imageUrl = location.origin + "/img/" + item["img"];
-    element.querySelector("input").files = getImage(item["img"]);
+    // element.querySelector("input").files = await getImage(item["img"]);
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
@@ -583,5 +581,14 @@ async function InitElement(element, item) {
 
   div.appendChild(element);
 
+ 
+
   form.insertBefore(div, form.children[form.children.length - 2]);
+
+  if (item["img"]) {
+    form.querySelector("input[name=img]").files = await getImage(item["img"]);
+  }
+  if (item["band_img"]) {
+    form.querySelector("input[name=band_img]").files = await getImage(item["band_img"]);
+  }
 }
