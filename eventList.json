@@ -17,24 +17,6 @@
       "twitch": "https://twitch.tv/laexo",
       "discord": "https://discord.com/invite/tPPnPhb"
     }
-  },
-  {
-    "url_name": "react",
-    "title": "Live React",
-    "subtitle": "Voici une description grande de taille pour tester la taille maximale d'une description au niveau de la page event mais aussi pour savoir comment placer le texte de facon la plus optimal et jolie meme si je ne suis pas tres beau",
-    "img": "LCUP-Affiche-350x150.jpg",
-    "band_img": "BanniereTwitterV1.png",
-    "date": "30 Janvier 2023",
-    "launchDate": "4 novembre 2022",
-    "presentation": "Il s’agit d’un tournoi 2vs2 qui aura lieu le week end du 10 Avril 2021.<br>Ce tournoi débutera le samedi avec des matchs de poules suivi d’un bracket à simple élimination pour les vainqueurs des poules.<br>Un cash prize de 100 € sera à partager entre les deux finalistes.<br>1ère place : 70 €<br>2ème place : 30 €<br>Ce tournoi pourra être suivi en direct sur twitch.<br>Lien twitch : https://twitch.tv/laexo",
-    "deroulement": "96 équipes seront réparties de manière aléatoire au sein de 16 poules de 6 équipes.<br><br>5 matchs en BO3 seront donc disputés le Samedi 10 Avril pour chacune des équipes.<br>Les 2 premières de la poule passent au bracket pour la phase finale qui se déroulera le dimanche à partir de 14h.<br>Rendez vous le Samedi à 13h30 dans le channel #debut-tournoi pour un brief avant les poules. Et dimanche à 13h30 pour un brief avant la phase finale. <br>Nous insistons sur la présence obligatoire de tous les participants sur le serveur discord de Laexo, ainsi nous pourrons nous assurer du bon déroulement du tournoi et avoir une meilleure réactivité face aux éventuels problèmes rencontrés.<br>Les phases de poule et phase finale se déroulent en BO3 jusqu'à la finale qui quant à elle se déroule en BO5 .",
-    "alerte_msg": "Pour toute inscription, presence obligatoire sur le discord !",
-    "alerte_msg_wlink": "Pour toute inscription, presence obligatoire sur le discord !",
-    "inscription": "Unendroi",
-    "reglement": "Uneqdoi",
-    "links":  {
-      "twitch": "https://twitch.tv/laexo",
-      "discord": "https://twitch.tv/laexo"
-    }
+    
   }
 ]

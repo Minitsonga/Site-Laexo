@@ -79,7 +79,7 @@ html {
     transition-duration: .15s;
 }
 
-.cat-link:not(.selected):hover:after {
+.cat-link:not(.active):hover:after {
     color: #ffffff;
     transform: scaleX(1);
     transform-origin: center;

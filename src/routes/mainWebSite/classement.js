@@ -396,10 +396,10 @@ async function getLeaderboard() {
   console.log("Check Finished");
 }
 
-//getLeaderboard();
+getLeaderboard();
 
 setInterval(() => {
-  //getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
+  getLeaderboard(); // Every 5 min Get data and check there is any new user to get his pp.
 }, "300000");
 
 setInterval(() => {
