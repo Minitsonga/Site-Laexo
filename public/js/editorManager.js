@@ -362,6 +362,7 @@ function deleteEvent() {
   }
 }
 
+let fileList = [];
 async function modifyEvent() {
   // envoyé nom de l'event recherché et renvoi l'event
 
@@ -382,6 +383,21 @@ async function modifyEvent() {
 
   console.log(event);
   console.log(select.options[0].getAttribute("for"));
+
+  fileList = [];
+
+  event.forEach(async (item) => {
+    if (item["img"]) {
+      let file = await getImage(item["img"]);
+
+      fileList[file[0].name] = file;
+    }
+    if (item["band_img"]) {
+      let file = await getImage(item["band_img"]);
+      fileList["caca"] = file;
+    }
+  });
+
 
   event.forEach((item) => getIdElement(item, event));
 }
@@ -481,15 +497,19 @@ function copyElement(element, value) {
 }
 
 async function InitElement(element, item) {
+  // Pour ajouter l'image il faut faire une liste de file avant meme le getElement
+
   if (item["img"]) {
     element.querySelector("input").setAttribute("name", "img");
-    element.querySelector("input").files = await getImage(item["img"]);
+    //element.querySelector("input").files = await getImage(item["img"]);
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
   if (item["band_img"]) {
     element.querySelector("input").setAttribute("name", "band_img");
-    element.querySelector("input").files = await getImage(item["band_img"]);
+
+
+    //element.querySelector("input").files = await getImage(item["band_img"]);
     element.querySelector("label").innerHTML = "Image Bande (7:3)";
   }
 
