@@ -588,6 +588,7 @@ async function InitElement(element, item) {
   if (item["img"]) {
     form.querySelector("input[name=img]").files = await getImage(item["img"]);
   }
+  //TODO try to load multiple imgs / for now we can only load 1 image
   if (item["band_img"]) {
     form.querySelector("input[name=band_img]").files = await getImage(item["band_img"]);
   }
