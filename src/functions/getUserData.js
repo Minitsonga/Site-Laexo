@@ -25,7 +25,7 @@ async function getUserDatas() {
       });
 
     //Check if token is still valide (if login exist = true)
-    console.log("validate", token_validation);
+    //console.log("validate", token_validation);
     if (token_validation == undefined || token_validation.login == undefined) {
       user_data = {};
       process.env.GET_TOKEN = "";
@@ -48,7 +48,7 @@ async function getUserDatas() {
       .request(options)
       .then((res) => (user_data = res.data.data[0]))
       .catch(function (error) {});
-    console.log("end");
+    //console.log("end");
   }
 }
 

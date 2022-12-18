@@ -186,7 +186,7 @@ function dataFormat(form) {
         i + 1 < listInputs.length &&
         listInputs[i + 1].name === "inscription")
     ) {
-      console.log(nameInput);
+      //console.log(nameInput);
       if (myDATA.find((element) => element.buttons) != undefined) continue;
 
       myDATA.push({
@@ -253,7 +253,7 @@ async function submitForm(button) {
         "Veux tu modifier cette évènement si il existe ? \n(Appuie sur annuler pour créer un nouvelle évènement)"
       )
     ) {
-      console.log(myDATA);
+      //console.log(myDATA);
 
       await fetch("/admin/editor/preview/images", {
         method: "POST",
@@ -287,7 +287,7 @@ async function submitForm(button) {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log(myDATA);
+      //console.log(myDATA);
 
       if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
@@ -460,7 +460,7 @@ async function getImage(pathName) {
     .then((res) => res.blob())
     .then((img) => {
       const myFile = new File([img], pathName, { type: img.type });
-      console.log(myFile);
+      //console.log(myFile);
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(myFile);
       return dataTransfer.files;
