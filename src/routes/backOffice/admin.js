@@ -32,25 +32,24 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/editor", async (req, res) => {
-  //if (req.session.loggedin) {
-  const dataEvents = JSON.parse(await getEventsList());
-  let eventsInfos = [];
-  dataEvents.forEach((element, i) => {
-    let title = "";
-    element.forEach((e) => {
-      if (element[0]["url_name"]?.length > 0) {
-        if (e["title"]?.length > 0) title = e["title"];
-      }
+  if (req.session.loggedin) {
+    const dataEvents = JSON.parse(await getEventsList());
+    let eventsInfos = [];
+    dataEvents.forEach((element, i) => {
+      let title = "";
+      element.forEach((e) => {
+        if (element[0]["url_name"]?.length > 0) {
+          if (e["title"]?.length > 0) title = e["title"];
+        }
+      });
+
+      eventsInfos.push({ id: i, title });
     });
 
-    eventsInfos.push({ id: i, title });
-  });
-
-  res.render("pages/editor", { data: eventsInfos });
-  // } else {
-
-  //   res.redirect("/admin/login");
-  // }
+    res.render("pages/editor", { data: eventsInfos });
+  } else {
+    res.redirect("/admin/login");
+  }
 });
 
 const storage = multer.diskStorage({
