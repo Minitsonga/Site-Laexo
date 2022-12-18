@@ -26,7 +26,7 @@ cur_event.forEach((element) => {
   }
 
   if (element["buttons"]) {
-    console.log(element["buttons"]);
+    //console.log(element["buttons"]);
     var buttonHolder = document.createElement("div");
     buttonHolder.classList.add("buttons-holder");
 
@@ -75,7 +75,7 @@ cur_event.forEach((element) => {
   if (element["customBtn"] != undefined) {
     var buttonHolder = document.createElement("div");
     buttonHolder.classList.add("buttons-holder");
-    console.log(element["customBtn"]["url"].length);
+    //console.log(element["customBtn"]["url"].length);
     if (
       element["customBtn"]["name"].length > 0 &&
       element["customBtn"]["url"].length > 0

@@ -186,7 +186,7 @@ function dataFormat(form) {
         i + 1 < listInputs.length &&
         listInputs[i + 1].name === "inscription")
     ) {
-      console.log(nameInput);
+      //console.log(nameInput);
       if (myDATA.find((element) => element.buttons) != undefined) continue;
 
       myDATA.push({
@@ -253,7 +253,7 @@ async function submitForm(button) {
         "Veux tu modifier cette évènement si il existe ? \n(Appuie sur annuler pour créer un nouvelle évènement)"
       )
     ) {
-      console.log(myDATA);
+      //console.log(myDATA);
 
       await fetch("/admin/editor/preview/images", {
         method: "POST",
@@ -287,7 +287,7 @@ async function submitForm(button) {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log(myDATA);
+      //console.log(myDATA);
 
       if (myDATA[0]["url_name"].split(" ").join("").length <= 2) return;
 
@@ -362,6 +362,7 @@ function deleteEvent() {
   }
 }
 
+let fileList = [];
 async function modifyEvent() {
   // envoyé nom de l'event recherché et renvoi l'event
 
@@ -450,7 +451,7 @@ async function getIdElement(item, cur_Event) {
 }
 
 async function getImage(pathName) {
-  const img = fetch("/img/" + pathName, {
+  const img = await fetch("/img/" + pathName, {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
@@ -458,8 +459,8 @@ async function getImage(pathName) {
   })
     .then((res) => res.blob())
     .then((img) => {
-      const myFile = new File(["imgdata"], pathName, { type: img.type });
-      console.log(myFile);
+      const myFile = new File([img], pathName, { type: img.type });
+      //console.log(myFile);
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(myFile);
       return dataTransfer.files;
@@ -481,15 +482,19 @@ function copyElement(element, value) {
 }
 
 async function InitElement(element, item) {
+  // Pour ajouter l'image il faut faire une liste de file avant meme le getElement
+
   if (item["img"]) {
     element.querySelector("input").setAttribute("name", "img");
-    element.querySelector("input").files = await getImage(item["img"]);
+    // element.querySelector("input").files = await getImage(item["img"]);
     element.querySelector("label").innerHTML = "Image Miniature (7:3)";
   }
 
   if (item["band_img"]) {
     element.querySelector("input").setAttribute("name", "band_img");
-    element.querySelector("input").files = await getImage(item["band_img"]);
+    element.querySelector("input").setAttribute("alt", item["band_img"]);
+
+    //element.querySelector("input").files = await getImage(item["band_img"]);
     element.querySelector("label").innerHTML = "Image Bande (7:3)";
   }
 
@@ -578,4 +583,22 @@ async function InitElement(element, item) {
   div.appendChild(element);
 
   form.insertBefore(div, form.children[form.children.length - 2]);
+
+  if (item["img"]) {
+    form.querySelector("input[name=img]").files = await getImage(item["img"]);
+  }
+  //TODO try to load multiple imgs / for now we can only load 1 image
+  if (item["band_img"]) {
+    console.log(item["band_img"]);
+    let inputBands = form.querySelectorAll("input[name=band_img]");
+    let cur_Input;
+    for (let i = 0; i < inputBands.length; i++) {
+      if (inputBands[i].getAttribute("alt") === item["band_img"]) {
+        cur_Input = inputBands[i];
+        break;
+      }
+    }
+
+    cur_Input.files = await getImage(item["band_img"]);
+  }
 }

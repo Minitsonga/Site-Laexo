@@ -48,7 +48,6 @@ router.get("/editor", async (req, res) => {
 
     res.render("pages/editor", { data: eventsInfos });
   } else {
-    
     res.redirect("/admin/login");
   }
 });
@@ -59,6 +58,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    //console.log(file);
     cb(null, file.originalname.replace(/ /g, ""));
   },
 });
@@ -84,7 +84,10 @@ router.post("/editor/preview/images", cpUpload, async (req, res) => {
 router.post("/editor/preview", async (req, res) => {
   dataFormPreview = JSON.parse(JSON.stringify(req.body));
 
-  dataFormPreview[0]["url_name"] = dataFormPreview[0]["url_name"].replace(/ /g, ""); // Removing space
+  dataFormPreview[0]["url_name"] = dataFormPreview[0]["url_name"].replace(
+    / /g,
+    ""
+  ); // Removing space
 
   if (dataFormPreview[0]["url_name"].length <= 2) return res.sendStatus(404);
 
@@ -94,7 +97,7 @@ router.post("/editor/preview", async (req, res) => {
 
 router.get("/editor/preview", (req, res) => {
   if (dataFormPreview.length <= 0) return res.redirect("/admin/editor");
-  res.render("pages/preview", { data:dataFormPreview });
+  res.render("pages/preview", { data: dataFormPreview });
   dataFormPreview = [];
 });
 
@@ -180,7 +183,7 @@ router.post("/editor/getevent", async (req, res) => {
 
   if (reqEvent.value != undefined) {
     // if data the id of an event)
-    console.log(eventData[reqEvent.value]);
+    //console.log(eventData[reqEvent.value]);
     res.send(eventData[reqEvent.value]);
   }
 });
