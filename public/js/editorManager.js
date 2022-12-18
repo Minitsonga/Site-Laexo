@@ -459,7 +459,7 @@ async function getImage(pathName) {
   })
     .then((res) => res.blob())
     .then((img) => {
-      const myFile = new File(["imgdata"], pathName, { type: img.type });
+      const myFile = new File([img], pathName, { type: img.type });
       console.log(myFile);
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(myFile);
@@ -492,6 +492,7 @@ async function InitElement(element, item) {
 
   if (item["band_img"]) {
     element.querySelector("input").setAttribute("name", "band_img");
+    element.querySelector("input").setAttribute("alt", item["band_img"]);
 
     //element.querySelector("input").files = await getImage(item["band_img"]);
     element.querySelector("label").innerHTML = "Image Bande (7:3)";
@@ -581,8 +582,6 @@ async function InitElement(element, item) {
 
   div.appendChild(element);
 
- 
-
   form.insertBefore(div, form.children[form.children.length - 2]);
 
   if (item["img"]) {
@@ -590,6 +589,16 @@ async function InitElement(element, item) {
   }
   //TODO try to load multiple imgs / for now we can only load 1 image
   if (item["band_img"]) {
-    form.querySelector("input[name=band_img]").files = await getImage(item["band_img"]);
+    console.log(item["band_img"]);
+    let inputBands = form.querySelectorAll("input[name=band_img]");
+    let cur_Input;
+    for (let i = 0; i < inputBands.length; i++) {
+      if (inputBands[i].getAttribute("alt") === item["band_img"]) {
+        cur_Input = inputBands[i];
+        break;
+      }
+    }
+
+    cur_Input.files = await getImage(item["band_img"]);
   }
 }

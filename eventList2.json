@@ -31,20 +31,5 @@
     {
       "description": "64 équipes seront réparties de manière aléatoire au sein de {8 poules de 8 équipes.}<br>Il y aura deux sessions le samedi. C'est-à-dire que les poules de 1 à 4 joueront de 14h à 16h30 et les poules 5 à 8 joueront de 17h à 19h30.<br>Chaque poule dispose de 8 équipes. Chaque équipe doit affronter les sept autres pour terminer cette phase de poule. {Les matchs se déroulent en BO1}.<br>Tous les matchs de la poule seront décomposés en 7 rounds distincts. C'est-à-dire que toutes les équipes doivent attendre que les autres matchs en cours soient terminés pour passer au suivant. Les logs de connexion seront inconnus de tous tant que des matchs sont encore en cours.<br><br>A l'issue de tous les matchs de poule, {les équipes ayant gagnées le plus de matchs seront en tête du classement}. Si égalité il y a, les matchs gagnés contre les autres équipes égalitaires seront pris en compte. Dans la situation où il y a toujours impossibilité de départager les équipes. La différence de buts inscrits/encaissés permettra de trancher.<br>Les logs des matchs seront envoyés plus ou moins simultanément à toutes les équipes à travers un channel discord propre à chaque groupe réunissant les 8 équipes de la poule. Les logs changeront bien évidemment à chaque tour.<br><br>Ensuite le dimanche, place à la phase finale !<br>Cette phase débutera avec 32 équipes. Elle sera décomposée en 5 étapes sur {un bracket à éliminations directes}.<br>Seizièmes -> Huitièmes -> Quarts -> Demis -> Finale.<br>Toutes les étapes se déroulent en BO3 à l’unique exception des Demis et de la Finale qui quant à elles se déroulent en BO5.<br>Tous les seizièmes, les huitièmes et les quarts se joueront d’un seul coup. En revanche les deux demis se joueront l’une après l’autre. La phase et le tournoi se conclura par la Finale.<br>Les logs des matchs seront envoyés au cas par cas aux capitaines d’équipe. Même principe que pour la phase de poule au niveau de l’enchaînement des matchs. Par exemple, les huitièmes démarrent une fois que tous les matchs de seizième sont terminés et ainsi de suite."
     }
-  ],
-  [
-    { "url_name": "test" },
-    { "title": "truc much" },
-    { "img": "LCUP-mini.jpg" },
-    { "band_img": "LCUP-bande.jpg" },
-    { "band_img": "planning.png" },
-    { "band_img": "ChatTssuKii.jpg" },
-    {
-      "dates": {
-        "dateStart": "2022-12-09",
-        "dateEnd": "2022-12-11",
-        "launchDate": "2022-12-09"
-      }
-    }
   ]
 ]
