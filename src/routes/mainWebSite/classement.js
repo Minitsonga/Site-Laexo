@@ -19,11 +19,11 @@ async function getLeaderboard() {
 
   //#region Get Setup Leaderboard List from wizebot api
 
-  await axios
-    .get(
-      "https://api.wizebot.tv:8030/v2/laexo/channel_rank.json?include_keys=1"
-    )
-    .then((res) => (leaderboard.rank = res.data.datas));
+  // await axios
+  //   .get(
+  //     "https://api.wizebot.tv:8030/v2/laexo/channel_rank.json?include_keys=1"
+  //   )
+  //   .then((res) => (leaderboard.rank = res.data.datas));
 
   await axios
     .get(
@@ -63,333 +63,333 @@ async function getLeaderboard() {
 
   //#endregion
 
-  if (listPP_LastUpdated.length <= 0) {
-    // need to be <= 0 to work (here is to block while in dev)
+  // if (listPP_LastUpdated.length <= 0) {
+  //   // need to be <= 0 to work (here is to block while in dev)
 
-    let lengthPP = listUserPP.length;
+  //   let lengthPP = listUserPP.length;
 
-    for (let i = 0; i < 50; i++) {
-      const member = leaderboard.rank[i];
+  //   for (let i = 0; i < 50; i++) {
+  //     const member = leaderboard.rank[i];
 
-      let ppUserData = listUserPP.find(
-        (element) => member.viewer_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.viewer_uid == element.user_uid
-      );
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.viewer_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.viewer_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        let img;
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.viewer_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //     if (userUpdated == undefined) {
+  //       let img;
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.viewer_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          listUserPP.push({
-            user_name: member.viewer_name,
-            user_uid: member.viewer_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.viewer_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-        }
+  //       if (ppUserData == undefined) {
+  //         listUserPP.push({
+  //           user_name: member.viewer_name,
+  //           user_uid: member.viewer_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.viewer_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.viewer_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.viewer_uid });
+  //     }
+  //   }
 
-    //#region  Getting img user from Uptime Lists
-    console.log(leaderboard.uptime.week);
-    for (let i = 0; i < leaderboard.uptime.week.length; i++) {
-      const member = leaderboard.uptime.week[i];
+  //   //#region  Getting img user from Uptime Lists
+  //   console.log(leaderboard.uptime.week);
+  //   for (let i = 0; i < leaderboard.uptime.week.length; i++) {
+  //     const member = leaderboard.uptime.week[i];
 
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added uptime week");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated uptime week");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added uptime week");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated uptime week");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    for (let i = 0; i < leaderboard.uptime.month.length; i++) {
-      const member = leaderboard.uptime.month[i];
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //   for (let i = 0; i < leaderboard.uptime.month.length; i++) {
+  //     const member = leaderboard.uptime.month[i];
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added uptime month");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated uptime month");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added uptime month");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated uptime month");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    for (let i = 0; i < leaderboard.uptime.global.length; i++) {
-      const member = leaderboard.uptime.global[i];
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //   for (let i = 0; i < leaderboard.uptime.global.length; i++) {
+  //     const member = leaderboard.uptime.global[i];
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added uptime global");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated uptime global");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added uptime global");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated uptime global");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    //#endregion
+  //   //#endregion
 
-    //#region  Getting img user from Message Lists
+  //   //#region  Getting img user from Message Lists
 
-    for (let i = 0; i < leaderboard.message.week.length; i++) {
-      const member = leaderboard.message.week[i];
+  //   for (let i = 0; i < leaderboard.message.week.length; i++) {
+  //     const member = leaderboard.message.week[i];
 
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added msg week");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated msg week");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added msg week");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated msg week");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    for (let i = 0; i < leaderboard.message.month.length; i++) {
-      const member = leaderboard.message.month[i];
+  //   for (let i = 0; i < leaderboard.message.month.length; i++) {
+  //     const member = leaderboard.message.month[i];
 
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added msg month");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated msg month");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added msg month");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated msg month");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    for (let i = 0; i < leaderboard.message.global.length; i++) {
-      const member = leaderboard.message.global[i];
+  //   for (let i = 0; i < leaderboard.message.global.length; i++) {
+  //     const member = leaderboard.message.global[i];
 
-      let ppUserData = listUserPP.find(
-        (element) => member.user_uid == element.user_uid
-      );
-      let userUpdated = listPP_LastUpdated.find(
-        (element) => member.user_uid == element.user_uid
-      );
+  //     let ppUserData = listUserPP.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
+  //     let userUpdated = listPP_LastUpdated.find(
+  //       (element) => member.user_uid == element.user_uid
+  //     );
 
-      if (userUpdated == undefined) {
-        console.log("user to update", member);
-        let img;
+  //     if (userUpdated == undefined) {
+  //       console.log("user to update", member);
+  //       let img;
 
-        await axios
-          .get(
-            `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
-          )
-          .then(
-            (res) => (img = "https://" + res.request.host + res.request.path)
-          )
-          .catch((e) => {
-            console.log(e);
-            return;
-          });
+  //       await axios
+  //         .get(
+  //           `https://wapi.wizebot.tv/api/avatars/${member.user_name}/sized/300x300`
+  //         )
+  //         .then(
+  //           (res) => (img = "https://" + res.request.host + res.request.path)
+  //         )
+  //         .catch((e) => {
+  //           console.log(e);
+  //           return;
+  //         });
 
-        if (ppUserData == undefined) {
-          console.log("member added msg global");
-          listUserPP.push({
-            user_name: member.user_name,
-            user_uid: member.user_uid,
-            img,
-          });
-        } else {
-          let index = listUserPP.findIndex(
-            (element) => member.user_uid == element.user_uid
-          );
-          listUserPP[index].img = img;
-          console.log("member updated msg global");
-        }
+  //       if (ppUserData == undefined) {
+  //         console.log("member added msg global");
+  //         listUserPP.push({
+  //           user_name: member.user_name,
+  //           user_uid: member.user_uid,
+  //           img,
+  //         });
+  //       } else {
+  //         let index = listUserPP.findIndex(
+  //           (element) => member.user_uid == element.user_uid
+  //         );
+  //         listUserPP[index].img = img;
+  //         console.log("member updated msg global");
+  //       }
 
-        listPP_LastUpdated.push({ user_uid: member.user_uid });
-      }
-    }
+  //       listPP_LastUpdated.push({ user_uid: member.user_uid });
+  //     }
+  //   }
 
-    if (lengthPP < listUserPP.length) {
-      fs.writeFile("img.json", JSON.stringify(listUserPP), (err) => {
-        if (err) throw err;
-        console.log("JSON data is saved.");
-      });
-    }
-  }
+  //   if (lengthPP < listUserPP.length) {
+  //     fs.writeFile("img.json", JSON.stringify(listUserPP), (err) => {
+  //       if (err) throw err;
+  //       console.log("JSON data is saved.");
+  //     });
+  //   }
+  // }
 
   //#endregion
 
