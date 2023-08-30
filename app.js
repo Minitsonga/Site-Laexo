@@ -15,8 +15,8 @@ const name = "braitsch";
 let hash = crypto.createHash("sha512").update(name).digest("hex");
 
 // Configure body-parser to parse incoming request bodies
-app.use(bodyParser.json({ limit: "5mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
