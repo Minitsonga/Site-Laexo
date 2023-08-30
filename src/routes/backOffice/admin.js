@@ -20,7 +20,7 @@ router.post("/login", (req, res) => {
     userName == process.env.ADMIN_ID &&
     password == process.env.ADMIN_PASSWORD
   ) {
-    req.session.loggedin = true;
+    req.session.loggedIn = true;
     visible = false;
     res.redirect("/admin/editor");
   } else {
@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/editor", async (req, res) => {
-  if (req.session.loggedin) {
+  if (req.session.loggedIn) {
     const dataEvents = JSON.parse(await getEventsList());
     let eventsInfos = [];
     dataEvents.forEach((element, i) => {

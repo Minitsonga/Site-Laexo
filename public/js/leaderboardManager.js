@@ -10,20 +10,20 @@ function selectCat(cat) {
     case "uptime":
       document.querySelectorAll(".cat-link")[0].classList.add("active");
       document.querySelectorAll(".cat-link")[1].classList.remove("active");
-      document.querySelectorAll(".cat-link")[2].classList.remove("active");
+      //document.querySelectorAll(".cat-link")[2].classList.remove("active");
       break;
 
     case "message":
       document.querySelectorAll(".cat-link")[0].classList.remove("active");
       document.querySelectorAll(".cat-link")[1].classList.add("active");
-      document.querySelectorAll(".cat-link")[2].classList.remove("active");
+      //document.querySelectorAll(".cat-link")[2].classList.remove("active");
 
       break;
 
     case "rank":
       document.querySelectorAll(".cat-link")[0].classList.remove("active");
       document.querySelectorAll(".cat-link")[1].classList.remove("active");
-      document.querySelectorAll(".cat-link")[2].classList.add("active");
+      //document.querySelectorAll(".cat-link")[2].classList.add("active");
 
       break;
   }
@@ -90,7 +90,7 @@ async function setupTopData() {
 
       switch (category) {
         case "uptime":
-          if(member.value <= 0) return;
+          if (member.value <= 0) return;
           let sec = member.value / 3600;
           let hour = Math.trunc(sec);
 
