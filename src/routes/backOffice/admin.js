@@ -97,6 +97,7 @@ router.post("/editor/preview", async (req, res) => {
 
 router.get("/editor/preview", (req, res) => {
   if (dataFormPreview.length <= 0) return res.redirect("/admin/editor");
+  console.log("Preview loading");
   res.render("pages/preview", { data: dataFormPreview });
   dataFormPreview = [];
 });
